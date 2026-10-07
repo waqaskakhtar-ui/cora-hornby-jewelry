@@ -1,0 +1,102 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    background-color: #F9F8F5;
+    color: #111111;
+    font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  ::selection {
+    background-color: #111111;
+    color: #FAF9F5;
+  }
+}
+
+/* Custom editorial typography utility classes */
+.font-display-grotesk {
+  font-family: 'Syne', 'Plus Jakarta Sans', sans-serif;
+  letter-spacing: -0.05em;
+}
+
+.font-editorial-body {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+.font-editorial-mono {
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.font-editorial-serif {
+  font-family: 'Playfair Display', Georgia, serif;
+}
+
+/* Hide scrollbar for clean horizontal sequences */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Subtle grain overlay for authentic tactile editorial paper feel */
+.editorial-grain {
+  background-image: radial-gradient(rgba(0, 0, 0, 0.03) 1px, transparent 0);
+  background-size: 24px 24px;
+}
+
+/* Annotation pointer line animations */
+@keyframes pulseSubtle {
+  0%, 100% { opacity: 0.8; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.15); }
+}
+
+.annotation-dot {
+  animation: pulseSubtle 3s ease-in-out infinite;
+}
+
+/* Atmospheric Jewelry Glint: light catching minerals and forged metal */
+@keyframes gleamSweep {
+  0% { transform: translateX(-150%) skewX(-25deg); opacity: 0; }
+  20% { opacity: 0.35; }
+  60% { opacity: 0.25; }
+  100% { transform: translateX(250%) skewX(-25deg); opacity: 0; }
+}
+
+.animate-gleam {
+  animation: gleamSweep 1.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Atmospheric Ambient Spotlight */
+.ambient-glow-warm {
+  background: radial-gradient(circle 300px at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(168, 139, 88, 0.08), transparent 70%);
+}
+
+.dark .ambient-glow-warm {
+  background: radial-gradient(circle 350px at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(200, 169, 110, 0.09), transparent 70%);
+}
+
+/* Hairline Editorial Link Underline */
+.editorial-link {
+  position: relative;
+  display: inline-block;
+}
+.editorial-link::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0%;
+  height: 1px;
+  background-color: currentColor;
+  transition: width 0.35s cubic-bezier(0.25, 1, 0.5, 1);
+}
+.editorial-link:hover::after {
+  width: 100%;
+}
+
