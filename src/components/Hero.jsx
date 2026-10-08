@@ -135,7 +135,7 @@ export default function Hero({ onExploreClick, onSelectPiece }) {
           data-cursor-text="INSPECT"
           onMouseMove={handleCenterpieceMouseMove}
           onMouseLeave={handleCenterpieceMouseLeave}
-          className="relative z-10 w-full max-w-[310px] sm:max-w-[400px] md:max-w-[460px] lg:max-w-[530px] mx-auto cursor-pointer group p-4"
+          className="relative z-10 w-full max-w-[270px] xs:max-w-[310px] sm:max-w-[400px] md:max-w-[460px] lg:max-w-[530px] mx-auto cursor-pointer group p-2 sm:p-4"
           onClick={() => onSelectPiece && onSelectPiece({
             name: "African Zebra Jasper & Silver Cube Bracelet",
             category: "Bracelets / Stone & Silver",
@@ -190,29 +190,31 @@ export default function Hero({ onExploreClick, onSelectPiece }) {
             />
           </div>
 
-          {/* 3. FINE-LINE EDITORIAL ANNOTATION */}
+          {/* 3. FINE-LINE EDITORIAL ANNOTATION (Clean non-overlapping badge on mobile, floating callout on desktop) */}
           <div
             ref={annotationRef}
-            className="absolute top-8 sm:top-12 right-0 sm:-right-8 md:-right-16 z-20 pointer-events-auto"
+            className="mt-3 sm:mt-0 sm:absolute sm:top-12 sm:-right-8 md:-right-16 z-20 pointer-events-auto"
           >
-            <div className="relative flex items-start gap-2.5">
+            <div className="relative flex items-center sm:items-start justify-center sm:justify-start gap-2.5">
               <svg 
-                className="w-16 sm:w-24 h-12 stroke-[#111111] dark:stroke-[#FAF9F5] fill-none overflow-visible -scale-x-100 sm:scale-x-100" 
+                className="hidden sm:block w-16 sm:w-24 h-12 stroke-[#111111] dark:stroke-[#FAF9F5] fill-none overflow-visible -scale-x-100 sm:scale-x-100" 
                 viewBox="0 0 100 50"
               >
                 <circle cx="2" cy="44" r="2.5" className="fill-[#111111] dark:fill-[#FAF9F5]" />
                 <path d="M 2 44 L 40 10 L 98 10" strokeWidth="1" />
               </svg>
 
-              <div className="bg-[#FAF9F5]/95 dark:bg-[#1A1917]/95 backdrop-blur-sm px-3 py-2 border border-[#111111]/12 dark:border-white/15 shadow-xs max-w-[200px] transition-all duration-300 group-hover:border-[#A88B58]/60 group-hover:shadow-md">
-                <div className="font-editorial-mono text-[9px] uppercase tracking-[0.16em] text-[#8A867E] dark:text-[#9E9A90]">
-                  AFRICAN ZEBRA JASPER · STERLING
+              <div className="bg-[#FAF9F5]/95 dark:bg-[#1A1917]/95 backdrop-blur-sm px-3.5 py-2 border border-[#111111]/12 dark:border-white/15 shadow-sm max-w-[280px] sm:max-w-[200px] transition-all duration-300 group-hover:border-[#A88B58]/60 group-hover:shadow-md flex items-center justify-between sm:block gap-3">
+                <div className="text-left">
+                  <div className="font-editorial-mono text-[9px] uppercase tracking-[0.16em] text-[#8A867E] dark:text-[#9E9A90]">
+                    AFRICAN ZEBRA JASPER · STERLING
+                  </div>
+                  <div className="font-editorial-mono text-[10px] text-[#111111] dark:text-[#FAF9F5] font-semibold mt-0.5 group-hover:text-[#A88B58] transition-colors">
+                    HANDCRAFTED IN MAINE
+                  </div>
                 </div>
-                <div className="font-editorial-mono text-[10px] text-[#111111] dark:text-[#FAF9F5] font-semibold mt-0.5 group-hover:text-[#A88B58] transition-colors">
-                  HANDCRAFTED IN MAINE
-                </div>
-                <div className="font-editorial-mono text-[9px] text-[#73716B] dark:text-[#C2BCAB]">
-                  $145.00 · ONE OF A KIND
+                <div className="font-editorial-mono text-[10px] text-[#A88B58] dark:text-[#B09462] font-semibold shrink-0 sm:mt-1">
+                  $145.00
                 </div>
               </div>
             </div>
@@ -265,25 +267,25 @@ export default function Hero({ onExploreClick, onSelectPiece }) {
       </div>
 
       {/* Bottom Compositional Tier */}
-      <div className="w-full grid grid-cols-1 md:grid-cols-12 gap-6 items-end pt-3 border-t border-[#111111]/8 dark:border-white/10">
+      <div className="w-full grid grid-cols-1 md:grid-cols-12 gap-6 items-end pt-4 pb-2 border-t border-[#111111]/8 dark:border-white/10 relative z-20">
         
         {/* Left: Editorial Mission & Legacy */}
-        <div ref={textLeftRef} className="md:col-span-5 space-y-1.5">
-          <div className="font-editorial-mono text-[10px] uppercase tracking-[0.2em] text-[#111111] dark:text-[#FAF9F5] font-semibold flex items-center gap-2">
+        <div ref={textLeftRef} className="md:col-span-5 space-y-2">
+          <div className="font-editorial-mono text-[11px] uppercase tracking-[0.2em] text-[#111111] dark:text-[#FAF9F5] font-semibold flex items-center gap-2">
             <span className="w-1.5 h-1.5 bg-[#111111] dark:bg-[#FAF9F5]"></span>
             <span>JEWELRY THAT BECOMES PART OF YOUR STORY</span>
           </div>
-          <p className="text-xs text-[#5E5C57] dark:text-[#9E9A90] leading-relaxed max-w-md font-editorial-body">
+          <p className="text-sm sm:text-base text-[#5E5C57] dark:text-[#A6A49E] leading-relaxed max-w-md font-editorial-body">
             Designed with precision, crafted to endure beyond time and trends. Each piece reflects the quiet elegance of Maine studio craftsmanship and global mineral discovery.
           </p>
         </div>
 
         {/* Center: Brand Legacy Stamp */}
         <div className="md:col-span-4 flex items-center gap-3">
-          <div className="w-8 h-8 rounded-full border border-[#111111]/15 dark:border-white/20 flex items-center justify-center font-editorial-mono text-[9px] font-bold text-[#111111] dark:text-[#FAF9F5]">
+          <div className="w-9 h-9 rounded-full border border-[#111111]/15 dark:border-white/20 flex items-center justify-center font-editorial-mono text-[10px] font-bold text-[#111111] dark:text-[#FAF9F5]">
             CH
           </div>
-          <div className="font-editorial-mono text-[10px] text-[#73716B] dark:text-[#9E9A90] uppercase tracking-wider">
+          <div className="font-editorial-mono text-[11px] text-[#73716B] dark:text-[#9E9A90] uppercase tracking-wider">
             HANDCRAFTED BENCH ARCHIVE <br />
             <span className="text-[#111111] dark:text-[#FAF9F5] font-medium">ONE OF ONE PRODUCTION</span>
           </div>
@@ -291,16 +293,16 @@ export default function Hero({ onExploreClick, onSelectPiece }) {
 
         {/* Right: Direct CTA */}
         <div ref={ctaRef} className="md:col-span-3 flex justify-start md:justify-end items-center gap-4">
-          <span className="text-[10px] font-editorial-mono text-[#8A867E] dark:text-[#7E7A70]">cora / 01</span>
+          <span className="text-xs font-editorial-mono text-[#8A867E] dark:text-[#7E7A70]">cora / 01</span>
           <a
             href="#collection"
             onClick={onExploreClick}
             data-cursor="explore"
             data-cursor-text="DISCOVER"
-            className="group inline-flex items-center gap-2 text-xs font-editorial-mono uppercase tracking-[0.16em] text-[#111111] dark:text-[#FAF9F5] py-1 border-b border-[#111111] dark:border-[#FAF9F5] hover:text-[#A88B58] dark:hover:text-[#A88B58] hover:border-[#A88B58] dark:hover:border-[#A88B58] transition-all font-semibold"
+            className="group inline-flex items-center gap-2 text-xs sm:text-sm font-editorial-mono uppercase tracking-[0.16em] text-[#111111] dark:text-[#FAF9F5] py-1 border-b border-[#111111] dark:border-[#FAF9F5] hover:text-[#A88B58] dark:hover:text-[#A88B58] hover:border-[#A88B58] dark:hover:border-[#A88B58] transition-all font-semibold"
           >
             <span>EXPLORE COLLECTION</span>
-            <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1.5" />
+            <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1.5" />
           </a>
         </div>
 

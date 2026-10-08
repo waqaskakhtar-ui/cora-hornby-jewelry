@@ -31,16 +31,16 @@ export default function BrandStory() {
                 <span>CAPE ELIZABETH, MAINE STUDIO</span>
               </div>
 
-              <p className="text-sm sm:text-base text-[#111111] dark:text-[#FAF9F5] font-editorial-body leading-relaxed">
+              <p className="text-base sm:text-lg text-[#111111] dark:text-[#FAF9F5] font-editorial-body leading-relaxed">
                 Cora Hornby produces handcrafted jewelry designs in various media, including semi-precious stones, Austrian crystals, druzies, metals, leather, and beads.
               </p>
 
-              <p className="text-xs sm:text-sm text-[#5E5C57] dark:text-[#C2BCAB] font-editorial-body leading-relaxed">
+              <p className="text-sm sm:text-base text-[#5E5C57] dark:text-[#C2BCAB] font-editorial-body leading-relaxed">
                 Designs are directly inspired by Cora's world travel—most recently to Peru, the Côte d'Azur, France, Italy, and Spain. Her materials are sourced directly from artisans across Turkey, Israel, China, Guatemala, Africa, Poland, and the United States.
               </p>
 
               {/* Atelier Credentials Matrix */}
-              <div className="pt-4 border-t border-[#111111]/10 dark:border-white/10 grid grid-cols-2 gap-3 font-editorial-mono text-[11px] text-[#73716B] dark:text-[#9E9A90]">
+              <div className="pt-4 border-t border-[#111111]/10 dark:border-white/10 grid grid-cols-2 gap-3 font-editorial-mono text-xs text-[#73716B] dark:text-[#9E9A90]">
                 <div className="flex items-center gap-1.5 group-hover/legacy:text-[#111111] dark:group-hover/legacy:text-[#FAF9F5] transition-colors">
                   <CheckCircle2 className="w-3.5 h-3.5 text-[#B09462]" />
                   <span>100% Bench Forged</span>
@@ -62,13 +62,13 @@ export default function BrandStory() {
 
             {/* Handwritten / Editorial Note Fragment */}
             <div className="pl-5 border-l-2 border-[#111111] dark:border-[#FAF9F5] space-y-1.5 hover:border-[#A88B58] transition-colors">
-              <span className="font-editorial-mono text-[9px] uppercase tracking-widest text-[#8A867E] dark:text-[#9E9A90]">
+              <span className="font-editorial-mono text-[10px] uppercase tracking-widest text-[#8A867E] dark:text-[#9E9A90]">
                 PHILOSOPHY OF HANDWORK
               </span>
-              <p className="font-editorial-serif italic text-base sm:text-lg text-[#111111] dark:text-[#FAF9F5] leading-relaxed">
+              <p className="font-editorial-serif italic text-lg sm:text-xl text-[#111111] dark:text-[#FAF9F5] leading-relaxed">
                 “A piece of jewelry should not feel like an industrial reproduction. It should carry the human trace of the hand that forged it.”
               </p>
-              <div className="font-editorial-mono text-xs text-[#73716B] dark:text-[#9E9A90]">— Cora Hornby</div>
+              <div className="font-editorial-mono text-xs sm:text-sm text-[#73716B] dark:text-[#9E9A90]">— Cora Hornby</div>
             </div>
           </div>
 

@@ -6,9 +6,14 @@
   body {
     background-color: #F9F8F5;
     color: #111111;
-    font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+    font-family: 'Montserrat', system-ui, -apple-system, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+  }
+
+  .dark body {
+    background-color: #0A0909;
+    color: #FAF9F5;
   }
 
   ::selection {
@@ -19,12 +24,12 @@
 
 /* Custom editorial typography utility classes */
 .font-display-grotesk {
-  font-family: 'Syne', 'Plus Jakarta Sans', sans-serif;
+  font-family: 'Syne', 'Montserrat', sans-serif;
   letter-spacing: -0.05em;
 }
 
 .font-editorial-body {
-  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-family: 'Montserrat', sans-serif;
 }
 
 .font-editorial-mono {

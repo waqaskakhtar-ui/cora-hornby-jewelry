@@ -24,7 +24,7 @@ export default function Newsletter() {
             <h2 className="font-display-grotesk text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-[#111111] dark:text-[#FAF9F5] leading-[1.05]">
               Be the first to know about new pieces and private collections.
             </h2>
-            <p className="text-xs sm:text-sm text-[#73716B] dark:text-[#9E9A90] font-editorial-body max-w-lg leading-relaxed">
+            <p className="text-sm sm:text-base text-[#73716B] dark:text-[#9E9A90] font-editorial-body max-w-lg leading-relaxed">
               New works are released directly from the Cape Elizabeth studio in limited, single-edition releases. No spam, only studio updates.
             </p>
           </div>
@@ -44,7 +44,7 @@ export default function Newsletter() {
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="Your email address"
                   required
-                  className="w-full bg-transparent text-sm sm:text-base font-editorial-body text-[#111111] dark:text-[#FAF9F5] placeholder-[#8A867E] dark:placeholder-[#7E7A70] focus:outline-hidden py-1 pr-28"
+                  className="w-full bg-transparent text-base sm:text-lg font-editorial-body text-[#111111] dark:text-[#FAF9F5] placeholder-[#8A867E] dark:placeholder-[#7E7A70] focus:outline-hidden py-1 pr-28"
                 />
                 <button
                   type="submit"

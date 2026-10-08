@@ -89,7 +89,7 @@ export default function CollectionEditorial({ onSelectProduct, onQuickAdd }) {
                 <span className="font-editorial-serif font-normal italic text-[#5E5C57] dark:text-[#A88B58]">Singular Creations</span>
               </h3>
 
-              <p className="text-xs sm:text-sm text-[#5E5C57] dark:text-[#C2BCAB] font-editorial-body leading-relaxed">
+              <p className="text-sm sm:text-base text-[#5E5C57] dark:text-[#C2BCAB] font-editorial-body leading-relaxed">
                 Every piece in this catalog is individually hand-assembled by Cora Hornby in her Cape Elizabeth studio. Stones are hand-selected from lapidaries across Peru, Africa, and Guatemala, mounted without duplicate molds.
               </p>
 
@@ -180,11 +180,11 @@ export default function CollectionEditorial({ onSelectProduct, onQuickAdd }) {
               <div>
                 <h4 
                   onClick={() => onSelectProduct(headlinePiece)}
-                  className="font-display-grotesk text-xl font-bold text-[#111111] dark:text-[#FAF9F5] group-hover:text-[#A88B58] cursor-pointer transition-colors"
+                  className="font-display-grotesk text-xl sm:text-2xl font-bold text-[#111111] dark:text-[#FAF9F5] group-hover:text-[#A88B58] cursor-pointer transition-colors"
                 >
                   {headlinePiece.name}
                 </h4>
-                <div className="font-editorial-mono text-xs text-[#73716B] dark:text-[#9E9A90] mt-0.5">
+                <div className="font-editorial-mono text-xs sm:text-sm text-[#73716B] dark:text-[#9E9A90] mt-0.5">
                   {headlinePiece.material}
                 </div>
               </div>
@@ -270,20 +270,20 @@ export default function CollectionEditorial({ onSelectProduct, onQuickAdd }) {
                 </div>
 
                 {/* Info Block */}
-                <div className="p-4 bg-[#FAF9F5] dark:bg-[#1A1917] border-t border-[#111111]/8 dark:border-white/10 space-y-1">
+                <div className="p-4 bg-[#FAF9F5] dark:bg-[#1A1917] border-t border-[#111111]/8 dark:border-white/10 space-y-1.5">
                   <div className="flex items-baseline justify-between gap-2">
                     <h4 
                       onClick={() => onSelectProduct(product)}
-                      className="font-display-grotesk text-base font-bold text-[#111111] dark:text-[#FAF9F5] truncate cursor-pointer group-hover:text-[#A88B58] transition-colors"
+                      className="font-display-grotesk text-base sm:text-lg font-bold text-[#111111] dark:text-[#FAF9F5] truncate cursor-pointer group-hover:text-[#A88B58] transition-colors"
                     >
                       {product.name}
                     </h4>
-                    <span className="font-editorial-mono text-xs font-semibold text-[#111111] dark:text-[#FAF9F5]">
+                    <span className="font-editorial-mono text-xs sm:text-sm font-semibold text-[#111111] dark:text-[#FAF9F5]">
                       {product.price}
                     </span>
                   </div>
 
-                  <div className="font-editorial-mono text-[10px] text-[#73716B] dark:text-[#9E9A90] truncate">
+                  <div className="font-editorial-mono text-xs text-[#73716B] dark:text-[#9E9A90] truncate">
                     {product.material}
                   </div>
 

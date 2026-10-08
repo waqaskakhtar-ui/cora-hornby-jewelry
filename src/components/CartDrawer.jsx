@@ -42,7 +42,7 @@ export default function CartDrawer({ isOpen, onClose, items, onRemoveItem, onCle
               <span className="font-editorial-mono text-xs uppercase tracking-widest text-[#8A867E] dark:text-[#8E8B83]">
                 YOUR BAG IS EMPTY
               </span>
-              <p className="text-xs text-[#73716B] dark:text-[#A6A49E] max-w-xs font-editorial-body">
+              <p className="text-sm text-[#73716B] dark:text-[#A6A49E] max-w-xs font-editorial-body">
                 Explore the studio archive and discover handcrafted pieces from Maine.
               </p>
             </div>
@@ -54,13 +54,13 @@ export default function CartDrawer({ isOpen, onClose, items, onRemoveItem, onCle
                 </div>
 
                 <div className="flex-1 min-w-0">
-                  <h4 className="font-display-grotesk text-sm font-bold text-[#111111] dark:text-[#FAF9F5] truncate">
+                  <h4 className="font-display-grotesk text-base font-bold text-[#111111] dark:text-[#FAF9F5] truncate">
                     {item.name}
                   </h4>
-                  <div className="font-editorial-mono text-xs text-[#73716B] dark:text-[#A6A49E]">
+                  <div className="font-editorial-mono text-sm font-semibold text-[#111111] dark:text-[#FAF9F5]">
                     {item.price}
                   </div>
-                  <div className="font-editorial-mono text-[9px] uppercase text-[#8A867E] dark:text-[#8E8B83] truncate">
+                  <div className="font-editorial-mono text-[10px] uppercase text-[#8A867E] dark:text-[#8E8B83] truncate">
                     {item.material}
                   </div>
                 </div>

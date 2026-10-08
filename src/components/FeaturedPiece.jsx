@@ -183,10 +183,10 @@ export default function FeaturedPiece({ onSelectPiece }) {
         <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-3 lg:hidden">
           {FEATURED_MASTERPIECE.annotations.map((ann) => (
             <div key={ann.id} className="p-3 bg-[#F2EFE7] dark:bg-[#181715] border border-[#111111]/10 dark:border-white/10">
-              <span className="font-editorial-mono text-[11px] font-bold text-[#111111] dark:text-[#FAF9F5] block">
+              <span className="font-editorial-mono text-xs font-bold text-[#111111] dark:text-[#FAF9F5] block">
                 {ann.number} / {ann.title}
               </span>
-              <p className="text-xs text-[#5E5C57] dark:text-[#C2BCAB] mt-0.5 font-editorial-body leading-relaxed">
+              <p className="text-sm text-[#5E5C57] dark:text-[#C2BCAB] mt-0.5 font-editorial-body leading-relaxed">
                 {ann.detail}
               </p>
             </div>

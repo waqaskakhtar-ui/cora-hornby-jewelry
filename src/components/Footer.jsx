@@ -46,17 +46,17 @@ export default function Footer() {
             <h3 className="font-display-grotesk text-2xl font-bold tracking-tight text-[#111111] dark:text-[#FAF9F5]">
               {BRAND_INFO.name}
             </h3>
-            <p className="text-xs sm:text-sm text-[#73716B] dark:text-[#A6A49E] font-editorial-body max-w-sm leading-relaxed">
+            <p className="text-sm sm:text-base text-[#73716B] dark:text-[#A6A49E] font-editorial-body max-w-sm leading-relaxed">
               Jewelry that becomes part of your story. Handcrafted in Cape Elizabeth, Maine using druzies, Austrian crystals, metals and semi-precious stones inspired by world travel.
             </p>
-            <div className="pt-2 font-editorial-mono text-[11px] text-[#8A867E] dark:text-[#8E8B83]">
+            <div className="pt-2 font-editorial-mono text-xs text-[#8A867E] dark:text-[#8E8B83]">
               Studio: 518 · 469 · 8981 <br />
               Cape Elizabeth, Maine · USA
             </div>
           </div>
 
           {/* Nav Column 1: SHOP */}
-          <div className="col-span-6 sm:col-span-3 lg:col-span-2 space-y-3 font-editorial-mono text-xs">
+          <div className="col-span-6 sm:col-span-3 lg:col-span-2 space-y-3 font-editorial-mono text-xs sm:text-sm">
             <span className="text-[10px] uppercase tracking-[0.2em] text-[#8A867E] dark:text-[#8E8B83] block font-semibold">
               SHOP
             </span>

@@ -36,8 +36,9 @@ export default {
         }
       },
       fontFamily: {
-        sans: ['"Plus Jakarta Sans"', 'system-ui', '-apple-system', 'sans-serif'],
-        display: ['"Syne"', '"Plus Jakarta Sans"', 'sans-serif'],
+        sans: ['"Montserrat"', '"Plus Jakarta Sans"', 'system-ui', '-apple-system', 'sans-serif'],
+        content: ['"Montserrat"', 'sans-serif'],
+        display: ['"Syne"', '"Montserrat"', 'sans-serif'],
         mono: ['"JetBrains Mono"', 'ui-monospace', 'monospace'],
         serif: ['"Playfair Display"', 'Georgia', 'serif']
       },

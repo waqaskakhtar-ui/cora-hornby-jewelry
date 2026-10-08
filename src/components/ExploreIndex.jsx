@@ -21,7 +21,7 @@ export default function ExploreIndex({ onCategorySelect }) {
             </div>
           </div>
 
-          <p className="text-xs sm:text-sm text-[#5E5C57] dark:text-[#C2BCAB] font-editorial-body max-w-lg lg:text-right leading-relaxed">
+          <p className="text-sm sm:text-base text-[#5E5C57] dark:text-[#C2BCAB] font-editorial-body max-w-lg lg:text-right leading-relaxed">
             Every material catches light in its own way — from the raw fire of an uncut geode druzy to the quiet clarity of hand-forged architectural brass.
           </p>
         </div>
@@ -59,7 +59,7 @@ export default function ExploreIndex({ onCategorySelect }) {
                       }`}>
                         {cat.name}
                       </h3>
-                      <p className={`text-xs text-[#73716B] dark:text-[#9E9A90] mt-0.5 font-editorial-mono hidden sm:block transition-all duration-300 ${
+                      <p className={`text-xs sm:text-sm text-[#73716B] dark:text-[#9E9A90] mt-0.5 font-editorial-mono hidden sm:block transition-all duration-300 ${
                         isActive ? 'opacity-100 translate-x-2 text-[#A88B58] dark:text-[#C2BCAB]' : 'opacity-0'
                       }`}>
                         {cat.subtext}

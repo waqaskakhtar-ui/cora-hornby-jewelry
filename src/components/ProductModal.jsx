@@ -83,12 +83,12 @@ export default function ProductModal({ product, onClose, onAddToCart }) {
             </div>
 
             {/* Description */}
-            <p className="text-xs sm:text-sm text-[#5E5C57] dark:text-[#B5B3AC] font-editorial-body leading-relaxed">
+            <p className="text-sm sm:text-base text-[#5E5C57] dark:text-[#B5B3AC] font-editorial-body leading-relaxed">
               {product.description}
             </p>
 
             {/* Technical Specifications */}
-            <div className="space-y-3 pt-4 border-t border-[#111111]/10 dark:border-white/10 font-editorial-mono text-xs">
+            <div className="space-y-3 pt-4 border-t border-[#111111]/10 dark:border-white/10 font-editorial-mono text-xs sm:text-sm">
               <div className="flex justify-between py-1 border-b border-[#111111]/6 dark:border-white/6">
                 <span className="text-[#8A867E] dark:text-[#8E8B83]">MATERIALS</span>
                 <span className="text-[#111111] dark:text-[#FAF9F5] text-right font-medium max-w-[240px] truncate">

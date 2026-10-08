@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import CollectionEditorial from './components/CollectionEditorial';
@@ -22,6 +22,31 @@ export default function App() {
   ]);
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
+
+  // Responsive Dark Mode State with persistence & system preference detection
+  const [isDark, setIsDark] = useState(() => {
+    if (typeof window !== 'undefined') {
+      const saved = localStorage.getItem('cora_theme');
+      if (saved) return saved === 'dark';
+      return window.matchMedia('(prefers-color-scheme: dark)').matches;
+    }
+    return false;
+  });
+
+  useEffect(() => {
+    const root = document.documentElement;
+    if (isDark) {
+      root.classList.add('dark');
+      localStorage.setItem('cora_theme', 'dark');
+    } else {
+      root.classList.remove('dark');
+      localStorage.setItem('cora_theme', 'light');
+    }
+  }, [isDark]);
+
+  const toggleTheme = () => {
+    setIsDark((prev) => !prev);
+  };
 
   const handleAddToCart = (product) => {
     setCartItems((prev) => [...prev, product]);
@@ -72,7 +97,7 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-[#F9F8F5] text-[#111111] font-sans selection:bg-[#111111] selection:text-[#FAF9F5]">
+    <div className={`min-h-screen ${isDark ? 'dark bg-[#0A0909] text-[#FAF9F5]' : 'bg-[#F9F8F5] text-[#111111]'} font-sans selection:bg-[#111111] selection:text-[#FAF9F5] transition-colors duration-300`}>
       
       {/* Ambient Environmental Cursor & Lighting Follower */}
       <EnvironmentalCursor />
@@ -82,6 +107,8 @@ export default function App() {
         cartCount={cartItems.length}
         onOpenCart={() => setIsCartOpen(true)}
         onOpenSearch={() => setIsSearchOpen(true)}
+        isDark={isDark}
+        onToggleTheme={toggleTheme}
       />
 
       <main>

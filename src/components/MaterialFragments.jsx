@@ -82,11 +82,11 @@ export default function MaterialFragments({ onSelectMaterial }) {
                 {current.title}
               </h3>
 
-              <p className="text-xs sm:text-sm text-[#5E5C57] dark:text-[#C2BCAB] font-editorial-body leading-relaxed">
+              <p className="text-sm sm:text-base text-[#5E5C57] dark:text-[#C2BCAB] font-editorial-body leading-relaxed">
                 {current.description}
               </p>
 
-              <div className="pt-3 border-t border-[#111111]/10 dark:border-white/10 flex items-center justify-between font-editorial-mono text-[11px] text-[#73716B] dark:text-[#9E9A90]">
+              <div className="pt-3 border-t border-[#111111]/10 dark:border-white/10 flex items-center justify-between font-editorial-mono text-xs text-[#73716B] dark:text-[#9E9A90]">
                 <span>SOURCED: {current.origin}</span>
                 <span className="text-[#111111] dark:text-[#FAF9F5] font-semibold">100% UNTREATED</span>
               </div>
@@ -97,7 +97,7 @@ export default function MaterialFragments({ onSelectMaterial }) {
         </div>
 
         {/* Interactive Material Selector Strip Below */}
-        <div className="mt-4 grid grid-cols-2 sm:grid-cols-5 gap-2 font-editorial-mono text-xs">
+        <div className="mt-4 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2.5 font-editorial-mono text-xs">
           {MATERIALS_EDITORIAL.map((mat, idx) => (
             <button
               key={mat.word}
@@ -110,8 +110,8 @@ export default function MaterialFragments({ onSelectMaterial }) {
                   : 'bg-[#FAF9F5] dark:bg-[#181715] text-[#73716B] dark:text-[#9E9A90] border-[#111111]/10 dark:border-white/10 hover:border-[#A88B58]/60 hover:text-[#111111] dark:hover:text-[#FAF9F5] hover:shadow-[0_0_15px_rgba(168,139,88,0.12)]'
               }`}
             >
-              <span className="text-[9px] block text-[#8A867E] dark:text-[#7E7A70]">0{idx + 1}</span>
-              <span className="font-bold tracking-wider">{mat.word}</span>
+              <span className="text-[10px] block text-[#8A867E] dark:text-[#7E7A70]">0{idx + 1}</span>
+              <span className="font-bold tracking-wider text-xs sm:text-sm">{mat.word}</span>
             </button>
           ))}
         </div>
