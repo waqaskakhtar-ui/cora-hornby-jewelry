@@ -15,12 +15,12 @@ export default function Navbar({ cartCount, onOpenCart, onOpenSearch, isDark, on
   }, []);
 
   const navLinks = [
-    { label: "Collection", href: "#collection" },
-    { label: "Materials", href: "#materials" },
     { label: "Travels", href: "#travels" },
-    { label: "Index", href: "#index" },
-    { label: "Story", href: "#story" },
-    { label: "Studio", href: "#featured" },
+    { label: "Collections", href: "#collection" },
+    { label: "3-Way Index", href: "#index" },
+    { label: "Customers", href: "#customers" },
+    { label: "Guarantees", href: "#assurances" },
+    { label: "About Cora", href: "#story" },
   ];
 
   return (

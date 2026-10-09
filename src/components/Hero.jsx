@@ -94,19 +94,55 @@ export default function Hero({ onExploreClick, onSelectPiece }) {
       ref={heroRef}
       className="relative min-h-[96svh] lg:min-h-[100svh] w-full bg-[#F7F6F2] dark:bg-[#0F0E0D] text-[#111111] dark:text-[#FAF9F5] pt-24 sm:pt-28 pb-8 px-6 sm:px-10 lg:px-14 flex flex-col justify-between overflow-hidden transition-colors duration-500"
     >
-      {/* Top Header Row */}
-      <div className="w-full flex items-center justify-between text-[11px] font-editorial-mono text-[#73716B] dark:text-[#9E9A90] uppercase tracking-[0.16em] pt-1">
-        <span ref={metaLeftRef} className="text-[#111111] dark:text-[#FAF9F5] font-semibold">
-          CORA HORNBY · EST. 2018
-        </span>
+      {/* Top Header Row with Client Theme */}
+      <div className="w-full flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 text-[11px] font-editorial-mono text-[#73716B] dark:text-[#9E9A90] uppercase tracking-[0.16em] pt-1">
+        <div ref={metaLeftRef} className="flex items-center gap-2">
+          <span className="w-2 h-2 rounded-full bg-[#A88B58]"></span>
+          <span className="text-[#111111] dark:text-[#FAF9F5] font-semibold">
+            CORA HORNBY JEWELRY · TRAVELING THE WORLD FOR INSPIRATION AND MATERIALS
+          </span>
+        </div>
         <div className="hidden sm:flex items-center gap-6">
-          <span className="text-[#8A867E] dark:text-[#7E7A70]">CAPE ELIZABETH, MAINE</span>
-          <span className="text-[#111111] dark:text-[#FAF9F5]">STUDIO ARCHIVE CH-2026</span>
+          <span className="text-[#8A867E] dark:text-[#7E7A70]">CAPE ELIZABETH, MAINE BENCH</span>
+          <span className="text-[#111111] dark:text-[#FAF9F5]">ONE-OF-A-KIND CREATIONS</span>
         </div>
       </div>
 
+      {/* 3-Way Browsing Navigator Bar (Client's Core Taxonomy) */}
+      <div className="w-full flex flex-wrap items-center justify-between gap-2.5 mt-3 pt-2.5 pb-2 border-y border-[#111111]/8 dark:border-white/10 relative z-20 font-editorial-mono text-[10px] uppercase tracking-wider">
+        <span className="text-[#8A867E] dark:text-[#9E9A90] hidden md:inline">
+          EXPLORE 3 WAYS:
+        </span>
+        <div className="flex flex-wrap items-center gap-2">
+          <a
+            href="#travels"
+            className="px-3 py-1 bg-[#FAF9F5] dark:bg-[#1A1917] border border-[#111111]/15 dark:border-white/20 text-[#111111] dark:text-[#FAF9F5] hover:border-[#A88B58] hover:text-[#A88B58] transition-colors flex items-center gap-1.5 shadow-2xs"
+          >
+            <span className="text-[#A88B58] font-bold">01</span>
+            <span>TRAVEL INSPIRATION (8 COUNTRIES)</span>
+          </a>
+          <a
+            href="#collection"
+            className="px-3 py-1 bg-[#FAF9F5] dark:bg-[#1A1917] border border-[#111111]/15 dark:border-white/20 text-[#111111] dark:text-[#FAF9F5] hover:border-[#A88B58] hover:text-[#A88B58] transition-colors flex items-center gap-1.5 shadow-2xs"
+          >
+            <span className="text-[#A88B58] font-bold">02</span>
+            <span>COLLECTIONS (5 LINES)</span>
+          </a>
+          <a
+            href="#index"
+            className="px-3 py-1 bg-[#FAF9F5] dark:bg-[#1A1917] border border-[#111111]/15 dark:border-white/20 text-[#111111] dark:text-[#FAF9F5] hover:border-[#A88B58] hover:text-[#A88B58] transition-colors flex items-center gap-1.5 shadow-2xs"
+          >
+            <span className="text-[#A88B58] font-bold">03</span>
+            <span>PRODUCT TYPES (5 CATEGORIES)</span>
+          </a>
+        </div>
+        <span className="text-[#A88B58] hidden lg:inline">
+          EST. 2018 · STUDIO ARCHIVE
+        </span>
+      </div>
+
       {/* Main Compositional Viewport with Diagonal [CORA] (Top-Left) and [HORNBY] (Bottom-Right) */}
-      <div className="relative w-full flex-1 flex items-center justify-center my-2 min-h-[520px] lg:min-h-[640px]">
+      <div className="relative w-full flex-1 flex items-center justify-center my-2 min-h-[500px] lg:min-h-[620px]">
         
         {/* 1A. [CORA] IN TOP LEFT */}
         <div
@@ -270,24 +306,24 @@ export default function Hero({ onExploreClick, onSelectPiece }) {
       <div className="w-full grid grid-cols-1 md:grid-cols-12 gap-6 items-end pt-4 pb-2 border-t border-[#111111]/8 dark:border-white/10 relative z-20">
         
         {/* Left: Editorial Mission & Legacy */}
-        <div ref={textLeftRef} className="md:col-span-5 space-y-2">
+        <div ref={textLeftRef} className="md:col-span-6 space-y-2">
           <div className="font-editorial-mono text-[11px] uppercase tracking-[0.2em] text-[#111111] dark:text-[#FAF9F5] font-semibold flex items-center gap-2">
-            <span className="w-1.5 h-1.5 bg-[#111111] dark:bg-[#FAF9F5]"></span>
-            <span>JEWELRY THAT BECOMES PART OF YOUR STORY</span>
+            <span className="w-1.5 h-1.5 bg-[#A88B58]"></span>
+            <span>HAND-CRAFTED ON THE COAST OF MAINE</span>
           </div>
-          <p className="text-sm sm:text-base text-[#5E5C57] dark:text-[#A6A49E] leading-relaxed max-w-md font-editorial-body">
-            Designed with precision, crafted to endure beyond time and trends. Each piece reflects the quiet elegance of Maine studio craftsmanship and global mineral discovery.
+          <p className="text-xs sm:text-sm text-[#5E5C57] dark:text-[#A6A49E] leading-relaxed max-w-xl font-editorial-body">
+            Formed at the studio bench using hammered metals, leather, freshwater pearls, semi-precious stones, druzies and crystals. Directly sourcing raw materials like jade in Guatemala and amethyst & citrine in Brazil, shaped by architecture and motifs from Greece to Germany.
           </p>
         </div>
 
         {/* Center: Brand Legacy Stamp */}
-        <div className="md:col-span-4 flex items-center gap-3">
+        <div className="md:col-span-3 flex items-center gap-3">
           <div className="w-9 h-9 rounded-full border border-[#111111]/15 dark:border-white/20 flex items-center justify-center font-editorial-mono text-[10px] font-bold text-[#111111] dark:text-[#FAF9F5]">
             CH
           </div>
-          <div className="font-editorial-mono text-[11px] text-[#73716B] dark:text-[#9E9A90] uppercase tracking-wider">
+          <div className="font-editorial-mono text-[10px] text-[#73716B] dark:text-[#9E9A90] uppercase tracking-wider">
             HANDCRAFTED BENCH ARCHIVE <br />
-            <span className="text-[#111111] dark:text-[#FAF9F5] font-medium">ONE OF ONE PRODUCTION</span>
+            <span className="text-[#111111] dark:text-[#FAF9F5] font-medium">ONE-OF-A-KIND CREATIONS</span>
           </div>
         </div>
 
@@ -295,13 +331,13 @@ export default function Hero({ onExploreClick, onSelectPiece }) {
         <div ref={ctaRef} className="md:col-span-3 flex justify-start md:justify-end items-center gap-4">
           <span className="text-xs font-editorial-mono text-[#8A867E] dark:text-[#7E7A70]">cora / 01</span>
           <a
-            href="#collection"
+            href="#travels"
             onClick={onExploreClick}
             data-cursor="explore"
             data-cursor-text="DISCOVER"
             className="group inline-flex items-center gap-2 text-xs sm:text-sm font-editorial-mono uppercase tracking-[0.16em] text-[#111111] dark:text-[#FAF9F5] py-1 border-b border-[#111111] dark:border-[#FAF9F5] hover:text-[#A88B58] dark:hover:text-[#A88B58] hover:border-[#A88B58] dark:hover:border-[#A88B58] transition-all font-semibold"
           >
-            <span>EXPLORE COLLECTION</span>
+            <span>TRAVEL INSPIRATIONS</span>
             <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1.5" />
           </a>
         </div>

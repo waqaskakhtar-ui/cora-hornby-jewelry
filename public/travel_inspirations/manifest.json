@@ -1,0 +1,354 @@
+{
+  "greece": [
+    {
+      "index": 0,
+      "role": "hero",
+      "alt": "A monastery built on top of a sandstone pillar at Meteora, Greece",
+      "filename": "/travel_inspirations/greece-hero.jpg"
+    },
+    {
+      "index": 1,
+      "role": "pair-1-inspiration",
+      "alt": "Ancient bronze spiral discs and bead strands in a museum case",
+      "filename": "/travel_inspirations/greece-pair-1-inspiration.jpg"
+    },
+    {
+      "index": 2,
+      "role": "pair-1-jewelry",
+      "alt": "Concentric spiral silver pendant on a braided leather cord",
+      "filename": "/travel_inspirations/greece-pair-1-jewelry.jpg"
+    },
+    {
+      "index": 3,
+      "role": "pair-2-inspiration",
+      "alt": "Rows of coiled bronze bracelets displayed in a museum",
+      "filename": "/travel_inspirations/greece-pair-2-inspiration.jpg"
+    },
+    {
+      "index": 4,
+      "role": "pair-2-jewelry",
+      "alt": "Mixed-metal wrapped bangles stacked on a display cone",
+      "filename": "/travel_inspirations/greece-pair-2-jewelry.jpg"
+    },
+    {
+      "index": 5,
+      "role": "pair-3-inspiration",
+      "alt": "An ancient gold-decorated shield with a meander border, lit in a dark museum case",
+      "filename": "/travel_inspirations/greece-pair-3-inspiration.jpg"
+    },
+    {
+      "index": 6,
+      "role": "pair-3-jewelry",
+      "alt": "Silver dome earrings hanging from chain",
+      "filename": "/travel_inspirations/greece-pair-3-jewelry.jpg"
+    }
+  ],
+  "namibia": [
+    {
+      "index": 0,
+      "role": "hero",
+      "alt": "Mural of a young woman in a mask flexing her arm, Cape Town",
+      "filename": "/travel_inspirations/namibia-hero.jpg"
+    },
+    {
+      "index": 1,
+      "role": "pair-1-inspiration",
+      "alt": "Dead tree in Deadvlei, Namibia",
+      "filename": "/travel_inspirations/namibia-pair-1-inspiration.jpg"
+    },
+    {
+      "index": 2,
+      "role": "pair-1-jewelry",
+      "alt": "Long dark bone earrings wrapped in brass wire",
+      "filename": "/travel_inspirations/namibia-pair-1-jewelry.jpg"
+    },
+    {
+      "index": 3,
+      "role": "pair-2-inspiration",
+      "alt": "Woman wearing a python around her shoulders",
+      "filename": "/travel_inspirations/namibia-pair-2-inspiration.jpg"
+    },
+    {
+      "index": 4,
+      "role": "pair-2-jewelry",
+      "alt": "Snake-head clasp on a dark leather necklace",
+      "filename": "/travel_inspirations/namibia-pair-2-jewelry.jpg"
+    },
+    {
+      "index": 5,
+      "role": "pair-3-inspiration",
+      "alt": "Strands of African glass and bone trade beads in a wooden bowl",
+      "filename": "/travel_inspirations/namibia-pair-3-inspiration.jpg"
+    },
+    {
+      "index": 6,
+      "role": "pair-3-jewelry",
+      "alt": "Bone bead necklace and earrings set with brass accents",
+      "filename": "/travel_inspirations/namibia-pair-3-jewelry.jpg"
+    }
+  ],
+  "brazil": [
+    {
+      "index": 0,
+      "role": "hero",
+      "alt": "Wave-patterned pavement on Copacabana beach",
+      "filename": "/travel_inspirations/brazil-hero.jpg"
+    },
+    {
+      "index": 1,
+      "role": "pair-1-inspiration",
+      "alt": "Brass hand-shaped handle gripping a wrought-iron door",
+      "filename": "/travel_inspirations/brazil-pair-1-inspiration.jpg"
+    },
+    {
+      "index": 2,
+      "role": "pair-1-jewelry",
+      "alt": "Silver handshake clasp on a dark leather cord necklace",
+      "filename": "/travel_inspirations/brazil-pair-1-jewelry.jpg"
+    },
+    {
+      "index": 3,
+      "role": "pair-2-inspiration",
+      "alt": "A staircase and walls of broken-tile mosaic in blue, green and white",
+      "filename": "/travel_inspirations/brazil-pair-2-inspiration.jpg"
+    },
+    {
+      "index": 4,
+      "role": "pair-2-jewelry",
+      "alt": "Raw amethyst ring wrapped in gold wire",
+      "filename": "/travel_inspirations/brazil-pair-2-jewelry.jpg"
+    },
+    {
+      "index": 5,
+      "role": "pair-3-inspiration",
+      "alt": "Amber beads and silver facets in fringe on a wooden table",
+      "filename": "/travel_inspirations/brazil-pair-3-inspiration.jpg"
+    },
+    {
+      "index": 6,
+      "role": "pair-3-jewelry",
+      "alt": "Raw citrine necklace with silver and gold spacers",
+      "filename": "/travel_inspirations/brazil-pair-3-jewelry.jpg"
+    }
+  ],
+  "guatemala": [
+    {
+      "index": 0,
+      "role": "hero",
+      "alt": "Oil painting of a sun woman and moon woman in Guatemalan textiles",
+      "filename": "/travel_inspirations/guatemala-hero.jpg"
+    },
+    {
+      "index": 1,
+      "role": "pair-1-inspiration",
+      "alt": "Rough jade hearts at the workshop",
+      "filename": "/travel_inspirations/guatemala-pair-1-inspiration.jpg"
+    },
+    {
+      "index": 2,
+      "role": "pair-1-jewelry",
+      "alt": "Bag charms with wire-wrapped stones",
+      "filename": "/travel_inspirations/guatemala-pair-1-jewelry.jpg"
+    },
+    {
+      "index": 3,
+      "role": "pair-2-inspiration",
+      "alt": "Descent from the Cross, life-size figures",
+      "filename": "/travel_inspirations/guatemala-pair-2-inspiration.jpg"
+    },
+    {
+      "index": 4,
+      "role": "pair-2-jewelry",
+      "alt": "Teardrops wrapped in black with silver accent",
+      "filename": "/travel_inspirations/guatemala-pair-2-jewelry.jpg"
+    },
+    {
+      "index": 5,
+      "role": "pair-3-inspiration",
+      "alt": "Teaching a young artisan at the workshop",
+      "filename": "/travel_inspirations/guatemala-pair-3-inspiration.jpg"
+    },
+    {
+      "index": 6,
+      "role": "pair-3-jewelry",
+      "alt": "Hammered half-moons with wire-wrapped jade",
+      "filename": "/travel_inspirations/guatemala-pair-3-jewelry.jpg"
+    }
+  ],
+  "germany": [
+    {
+      "index": 0,
+      "role": "hero",
+      "alt": "East Side Gallery mural on the Berlin Wall",
+      "filename": "/travel_inspirations/germany-hero.jpg"
+    },
+    {
+      "index": 1,
+      "role": "pair-1-inspiration",
+      "alt": "Reichstag Dome, Berlin",
+      "filename": "/travel_inspirations/germany-pair-1-inspiration.jpg"
+    },
+    {
+      "index": 2,
+      "role": "pair-1-jewelry",
+      "alt": "Black &amp; Copper Geometric Drops",
+      "filename": "/travel_inspirations/germany-pair-1-jewelry.jpg"
+    },
+    {
+      "index": 3,
+      "role": "pair-2-inspiration",
+      "alt": "East Side Gallery, Berlin",
+      "filename": "/travel_inspirations/germany-pair-2-inspiration.jpg"
+    },
+    {
+      "index": 4,
+      "role": "pair-2-jewelry",
+      "alt": "Cubist Line-Art Face Earrings",
+      "filename": "/travel_inspirations/germany-pair-2-jewelry.jpg"
+    },
+    {
+      "index": 5,
+      "role": "pair-3-inspiration",
+      "alt": "Rijksmuseum, Amsterdam",
+      "filename": "/travel_inspirations/germany-pair-3-inspiration.jpg"
+    },
+    {
+      "index": 6,
+      "role": "pair-3-jewelry",
+      "alt": "&quot;Be That Girl&quot; Freshwater Pearl Earrings",
+      "filename": "/travel_inspirations/germany-pair-3-jewelry.jpg"
+    }
+  ],
+  "indonesia": [
+    {
+      "index": 0,
+      "role": "hero",
+      "alt": "Portrait in a feathered headdress with a carved shell nose ornament",
+      "filename": "/travel_inspirations/indonesia-hero.jpg"
+    },
+    {
+      "index": 1,
+      "role": "pair-1-inspiration",
+      "alt": "Man in white body paint holding a spear",
+      "filename": "/travel_inspirations/indonesia-pair-1-inspiration.jpg"
+    },
+    {
+      "index": 2,
+      "role": "pair-1-jewelry",
+      "alt": "Concentric disc earrings with a striped blue bead",
+      "filename": "/travel_inspirations/indonesia-pair-1-jewelry.jpg"
+    },
+    {
+      "index": 3,
+      "role": "pair-2-inspiration",
+      "alt": "Carved shield standing in a canoe",
+      "filename": "/travel_inspirations/indonesia-pair-2-inspiration.jpg"
+    },
+    {
+      "index": 4,
+      "role": "pair-2-jewelry",
+      "alt": "Black trapezoid earrings with cream teardrops",
+      "filename": "/travel_inspirations/indonesia-pair-2-jewelry.jpg"
+    },
+    {
+      "index": 5,
+      "role": "pair-3-inspiration",
+      "alt": "Brain coral and branching coral underwater",
+      "filename": "/travel_inspirations/indonesia-pair-3-inspiration.jpg"
+    },
+    {
+      "index": 6,
+      "role": "pair-3-jewelry",
+      "alt": "Brass hoop earrings with a ring of beads",
+      "filename": "/travel_inspirations/indonesia-pair-3-jewelry.jpg"
+    }
+  ],
+  "belize": [
+    {
+      "index": 0,
+      "role": "hero",
+      "alt": "Woman in a striped headwrap, detail from a vintage-style Belize sign",
+      "filename": "/travel_inspirations/belize-hero.jpg"
+    },
+    {
+      "index": 1,
+      "role": "pair-1-inspiration",
+      "alt": "Altun Ha temple steps in stacked stone",
+      "filename": "/travel_inspirations/belize-pair-1-inspiration.jpg"
+    },
+    {
+      "index": 2,
+      "role": "pair-1-jewelry",
+      "alt": "Pyrite cube earrings with gold beads",
+      "filename": "/travel_inspirations/belize-pair-1-jewelry.jpg"
+    },
+    {
+      "index": 3,
+      "role": "pair-2-inspiration",
+      "alt": "Bougainvillea in peach and rose",
+      "filename": "/travel_inspirations/belize-pair-2-inspiration.jpg"
+    },
+    {
+      "index": 4,
+      "role": "pair-2-jewelry",
+      "alt": "Hammered brass leaf earrings with pearl and carnelian",
+      "filename": "/travel_inspirations/belize-pair-2-jewelry.jpg"
+    },
+    {
+      "index": 5,
+      "role": "pair-3-inspiration",
+      "alt": "Cooking class table with spices and produce",
+      "filename": "/travel_inspirations/belize-pair-3-inspiration.jpg"
+    },
+    {
+      "index": 6,
+      "role": "pair-3-jewelry",
+      "alt": "Palm wood and gold-etched black bead bracelet",
+      "filename": "/travel_inspirations/belize-pair-3-jewelry.jpg"
+    }
+  ],
+  "india": [
+    {
+      "index": 0,
+      "role": "hero",
+      "alt": "Man wrapped in orange cloth with an orange turban, looking toward the camera",
+      "filename": "/travel_inspirations/india-hero.jpg"
+    },
+    {
+      "index": 1,
+      "role": "pair-1-inspiration",
+      "alt": "Elephants standing together in shallow water",
+      "filename": "/travel_inspirations/india-pair-1-inspiration.jpg"
+    },
+    {
+      "index": 2,
+      "role": "pair-1-jewelry",
+      "alt": "CoraHornby piece: elephant necklace on a leather cord",
+      "filename": "/travel_inspirations/india-pair-1-jewelry.jpg"
+    },
+    {
+      "index": 3,
+      "role": "pair-2-inspiration",
+      "alt": "India lampwork glass beads in assorted colors and foil patterns",
+      "filename": "/travel_inspirations/india-pair-2-inspiration.jpg"
+    },
+    {
+      "index": 4,
+      "role": "pair-2-jewelry",
+      "alt": "CoraHornby piece: cairn lampwork bead earrings",
+      "filename": "/travel_inspirations/india-pair-2-jewelry.jpg"
+    },
+    {
+      "index": 5,
+      "role": "pair-3-inspiration",
+      "alt": "India travel photo: painted ceiling",
+      "filename": "/travel_inspirations/india-pair-3-inspiration.jpg"
+    },
+    {
+      "index": 6,
+      "role": "pair-3-jewelry",
+      "alt": "CoraHornby piece: teal glass earrings",
+      "filename": "/travel_inspirations/india-pair-3-jewelry.jpg"
+    }
+  ]
+}

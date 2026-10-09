@@ -3,7 +3,9 @@ import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import CollectionEditorial from './components/CollectionEditorial';
 import MaterialFragments from './components/MaterialFragments';
-import WorldTravels from './components/WorldTravels';
+import TravelInspirationSection from './components/TravelInspirationSection';
+import CustomerStories from './components/CustomerStories';
+import StudioAssurances from './components/StudioAssurances';
 import ExploreIndex from './components/ExploreIndex';
 import BrandStory from './components/BrandStory';
 import FeaturedPiece from './components/FeaturedPiece';
@@ -118,39 +120,52 @@ export default function App() {
           onSelectPiece={handleHeroPieceSelect}
         />
 
-        {/* 3. Section 2: Editorial Product Collection */}
+        {/* 3. Section 2: Travel Inspiration Archive (8 Countries & 3 Pairs Each) */}
+        <TravelInspirationSection
+          onSelectProduct={(product) => setSelectedProduct(product)}
+          onQuickAdd={handleAddToCart}
+        />
+
+        {/* 4. Section 3: Curated Collections (5 Official Lines) */}
         <CollectionEditorial
           onSelectProduct={(product) => setSelectedProduct(product)}
           onQuickAdd={handleAddToCart}
         />
 
-        {/* 4. Section 3: Material Fragments Typographic Section */}
+        {/* 5. Section 4: Material Fragments Typographic Section */}
         <MaterialFragments
           onSelectMaterial={(mat) => {
             setIsSearchOpen(true);
           }}
         />
 
-        {/* 5. Section 4: The World Behind the Pieces (Travel Archive) */}
-        <WorldTravels />
-
-        {/* 6. Section 5: Explore by Collection List Index */}
+        {/* 6. Section 5: 3-Way Taxonomy Browsing Index */}
         <ExploreIndex
           onCategorySelect={(cat) => {
             const elem = document.getElementById('collection');
             if (elem) elem.scrollIntoView({ behavior: 'smooth' });
           }}
+          onSelectCountry={(countryId) => {
+            const elem = document.getElementById('travels');
+            if (elem) elem.scrollIntoView({ behavior: 'smooth' });
+          }}
         />
 
-        {/* 7. Section 6: The Story of Cora Hornby */}
+        {/* 7. Section 6: Cora's Customers (Real Etsy Reviews & Photos) */}
+        <CustomerStories />
+
+        {/* 8. Section 7: Studio Assurances (Packaging, Shipping, Guarantees) */}
+        <StudioAssurances />
+
+        {/* 9. Section 8: The Story of Cora Hornby */}
         <BrandStory />
 
-        {/* 8. Section 7: Featured Piece Technical Anatomy */}
+        {/* 10. Section 9: Featured Piece Technical Anatomy */}
         <FeaturedPiece
           onSelectPiece={handleMasterpieceSelect}
         />
 
-        {/* 9. Section 8: Newsletter & Private Collections */}
+        {/* 11. Section 10: Newsletter & Private Collections */}
         <Newsletter />
       </main>
 

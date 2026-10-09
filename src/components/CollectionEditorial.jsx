@@ -7,15 +7,20 @@ export default function CollectionEditorial({ onSelectProduct, onQuickAdd }) {
   const [selectedFilter, setSelectedFilter] = useState('ALL');
 
   const categories = [
-    { label: 'ALL ARCHIVE', key: 'ALL', count: 60 },
-    { label: 'NECKLACES', key: 'Necklaces', count: 24 },
-    { label: 'BRACELETS', key: 'Bracelets', count: 12 },
-    { label: 'EARRINGS', key: 'Earrings', count: 18 },
+    { label: 'ALL ARCHIVE', key: 'ALL', count: PRODUCTS.length },
+    { label: 'MIXED METALS', key: 'Mixed Metals', count: PRODUCTS.filter(p => p.collection === 'Mixed Metals').length },
+    { label: 'GEOMETRICS', key: 'Geometrics', count: PRODUCTS.filter(p => p.collection === 'Geometrics').length },
+    { label: 'MAYAN SOL', key: 'Mayan Sol', count: PRODUCTS.filter(p => p.collection === 'Mayan Sol').length },
+    { label: 'PEARLS', key: 'Pearls', count: PRODUCTS.filter(p => p.collection === 'Pearls').length },
+    { label: 'BLACK IS BACK', key: 'Black is Back', count: PRODUCTS.filter(p => p.collection === 'Black is Back').length },
   ];
 
   const filteredProducts = selectedFilter === 'ALL'
     ? PRODUCTS
-    : PRODUCTS.filter(p => p.category.toLowerCase().includes(selectedFilter.toLowerCase()));
+    : PRODUCTS.filter(p => 
+        (p.collection && p.collection.toLowerCase() === selectedFilter.toLowerCase()) ||
+        (p.category && p.category.toLowerCase().includes(selectedFilter.toLowerCase()))
+      );
 
   const headlinePiece = filteredProducts[0] || PRODUCTS[0];
   const gridPieces = filteredProducts.slice(1);
@@ -41,10 +46,10 @@ export default function CollectionEditorial({ onSelectProduct, onQuickAdd }) {
         <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 pb-8 border-b border-[#111111]/10 dark:border-white/10">
           <div>
             <div className="font-editorial-mono text-[10px] uppercase tracking-[0.22em] text-[#8A867E] dark:text-[#9E9A90]">
-              CATALOG & EDITORIAL LOOKBOOK · 2026 RELEASES
+              THE 5 SIGNATURE COLLECTIONS · MAINE BENCH ARCHIVE
             </div>
             <h2 className="font-display-grotesk text-3xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-[#111111] dark:text-[#FAF9F5] leading-none mt-1">
-              COLLECTED. COMPOSED.
+              CURATED COLLECTIONS
             </h2>
           </div>
 
@@ -90,7 +95,7 @@ export default function CollectionEditorial({ onSelectProduct, onQuickAdd }) {
               </h3>
 
               <p className="text-sm sm:text-base text-[#5E5C57] dark:text-[#C2BCAB] font-editorial-body leading-relaxed">
-                Every piece in this catalog is individually hand-assembled by Cora Hornby in her Cape Elizabeth studio. Stones are hand-selected from lapidaries across Peru, Africa, and Guatemala, mounted without duplicate molds.
+                Every piece in this catalog is individually hand-crafted by Cora Hornby in her coastal Maine studio using hammered metals, leather, freshwater pearls, druzies, and semi-precious stones sourced across Guatemala, Brazil, Greece, and Germany.
               </p>
 
               {/* Atelier Badges */}

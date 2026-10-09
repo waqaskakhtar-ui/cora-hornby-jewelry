@@ -32,11 +32,11 @@ export default function BrandStory() {
               </div>
 
               <p className="text-base sm:text-lg text-[#111111] dark:text-[#FAF9F5] font-editorial-body leading-relaxed">
-                Cora Hornby produces handcrafted jewelry designs in various media, including semi-precious stones, Austrian crystals, druzies, metals, leather, and beads.
+                Cora Hornby produces hand-crafted jewelry designs on the coast of Maine using hammered metals, leather, freshwater pearls, semi-precious stones, druzies, and crystals.
               </p>
 
               <p className="text-sm sm:text-base text-[#5E5C57] dark:text-[#C2BCAB] font-editorial-body leading-relaxed">
-                Designs are directly inspired by Cora's world travel—most recently to Peru, the Côte d'Azur, France, Italy, and Spain. Her materials are sourced directly from artisans across Turkey, Israel, China, Guatemala, Africa, Poland, and the United States.
+                Her work embodies a lifelong journey of traveling the world for inspiration and materials. Some countries are direct sources of raw minerals—such as Guatemala for rare jade, and Brazil for amethyst and citrine. Others are timeless wells of design inspiration—such as ancient spirals and armor in Greece, and Bauhaus architecture in Germany.
               </p>
 
               {/* Atelier Credentials Matrix */}
