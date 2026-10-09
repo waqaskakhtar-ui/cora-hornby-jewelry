@@ -54,65 +54,57 @@ export default function FeaturedPiece({ onSelectPiece }) {
     <section
       id="featured"
       ref={containerRef}
-      className="py-16 lg:py-24 bg-[#F9F8F5] dark:bg-[#121110] text-[#111111] dark:text-[#FAF9F5] border-t border-[#111111]/8 dark:border-white/10 overflow-hidden relative transition-colors duration-500"
+      className="py-20 lg:py-32 bg-[#FAF8F2] dark:bg-[#0C0A09] text-[#12100E] dark:text-[#F7F5EE] border-t border-[#12100E]/8 dark:border-white/10 overflow-hidden relative transition-colors duration-700"
     >
-      <div className="max-w-[1720px] mx-auto px-6 sm:px-10 lg:px-14">
+      <div className="max-w-[1720px] mx-auto px-6 sm:px-10 lg:px-16">
         
-        {/* Editorial Section Header */}
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 pb-8 border-b border-[#111111]/10 dark:border-white/10">
-          <div>
-            <div className="font-editorial-mono text-[10px] uppercase tracking-[0.24em] text-[#8A867E] dark:text-[#9E9A90]">
+        {/* EDITORIAL HEADER */}
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 pb-10 border-b border-[#12100E]/10 dark:border-white/10">
+          <div className="space-y-2">
+            <div className="font-editorial-mono text-[10px] uppercase tracking-[0.3em] text-[#C5A869] font-bold">
               TECHNICAL ANATOMY · ATELIER PIECE OF DISTINCTION
             </div>
-            <h2 className="font-display-grotesk text-3xl sm:text-5xl font-bold tracking-tight text-[#111111] dark:text-[#FAF9F5] mt-1">
+            <h2 className="font-editorial-luxury text-4xl sm:text-6xl font-normal tracking-tight text-[#12100E] dark:text-[#FAF8F2] mt-1">
               The Cleo Architectural Pendant
             </h2>
           </div>
 
-          <div className="text-right">
-            <span className="font-editorial-mono text-sm sm:text-base font-semibold text-[#111111] dark:text-[#FAF9F5] block">
+          <div className="sm:text-right font-editorial-mono">
+            <span className="text-sm sm:text-lg font-bold text-[#C5A869] block">
               $150.00 USD
             </span>
-            <span className="font-editorial-mono text-[10px] uppercase text-[#8A867E] dark:text-[#9E9A90] tracking-widest">
+            <span className="text-[10px] uppercase text-[#78746B] dark:text-[#A8A49C] tracking-widest">
               EDITION: ONE OF ONE
             </span>
           </div>
         </div>
 
-        {/* Featured Visual with Fine-Line Annotations */}
-        <div className="relative mt-8 w-full flex items-center justify-center min-h-[480px] lg:min-h-[580px]">
+        {/* FEATURED VISUAL WITH GLOSSY TECHNICAL ANNOTATIONS */}
+        <div className="relative mt-12 w-full flex items-center justify-center min-h-[480px] lg:min-h-[580px]">
           
-          {/* Main Image Container */}
+          {/* Main Floating Silhouette */}
           <div
             ref={imageWrapperRef}
             data-cursor="inspect"
             data-cursor-text="INSPECT"
-            className="relative w-full max-w-3xl aspect-[16/11] bg-[#F1EFE8] dark:bg-[#181715] border border-[#111111]/8 dark:border-white/10 p-3 shadow-[0_20px_50px_rgba(0,0,0,0.06)] will-change-transform cursor-pointer group transition-all duration-500 hover:border-[#A88B58]/40 hover:shadow-[0_25px_60px_rgba(168,139,88,0.12)]"
+            className="relative w-full max-w-3xl aspect-[16/11] bg-[#F2EFE8] dark:bg-[#161412] p-8 shadow-[0_30px_70px_rgba(0,0,0,0.08)] dark:shadow-[0_30px_80px_rgba(0,0,0,0.8)] will-change-transform cursor-pointer group transition-all duration-700 hover:shadow-[0_35px_80px_rgba(197,168,105,0.18)]"
           >
-            {/* Corner Crosshair Reticles */}
-            <div className="absolute inset-2 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10">
-              <span className="absolute top-1 left-1 text-[11px] font-editorial-mono text-[#A88B58] select-none leading-none">+</span>
-              <span className="absolute top-1 right-1 text-[11px] font-editorial-mono text-[#A88B58] select-none leading-none">+</span>
-              <span className="absolute bottom-1 left-1 text-[11px] font-editorial-mono text-[#A88B58] select-none leading-none">+</span>
-              <span className="absolute bottom-1 right-1 text-[11px] font-editorial-mono text-[#A88B58] select-none leading-none">+</span>
+            {/* Specular Glint Highlight on Hover */}
+            <div className="absolute inset-0 pointer-events-none overflow-hidden opacity-0 group-hover:opacity-100 transition-opacity duration-700">
+              <div className="w-[50%] h-full bg-gradient-to-r from-transparent via-white/35 to-transparent transform -skew-x-25 -translate-x-full group-hover:translate-x-[350%] transition-transform duration-1000 ease-out" />
             </div>
 
-            {/* Light Glint Reflection on Hover */}
-            <div className="absolute inset-0 pointer-events-none overflow-hidden z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-              <div className="w-[50%] h-full bg-gradient-to-r from-transparent via-white/20 dark:via-white/10 to-transparent transform -skew-x-25 -translate-x-full group-hover:translate-x-[250%] transition-transform duration-1000 ease-out" />
-            </div>
-
-            <div className="w-full h-full overflow-hidden bg-[#ECE9DE] dark:bg-[#201F1C]">
+            <div className="w-full h-full overflow-hidden">
               <img
                 src={FEATURED_MASTERPIECE.mainImage}
                 alt={FEATURED_MASTERPIECE.name}
-                className="w-full h-full object-contain filter contrast-[1.04] transition-transform duration-700 ease-out group-hover:scale-105"
+                className="w-full h-full object-contain filter contrast-[1.06] transition-transform duration-700 ease-out group-hover:scale-105"
                 loading="lazy"
               />
             </div>
           </div>
 
-          {/* Floating Editorial Technical Annotations (Desktop View) */}
+          {/* Floating Glossy Technical Annotations (Desktop View) */}
           <div className="hidden lg:block absolute inset-0 pointer-events-none">
             
             {/* Annotation 01: Top Left */}
@@ -120,12 +112,12 @@ export default function FeaturedPiece({ onSelectPiece }) {
               ref={(el) => (annotationsRef.current[0] = el)}
               data-cursor="view"
               data-cursor-text="FORGED"
-              className="absolute top-10 left-12 pointer-events-auto max-w-[220px] bg-[#FAF9F5]/95 dark:bg-[#1C1B18]/95 backdrop-blur-sm p-3 border border-[#111111]/15 dark:border-white/15 shadow-xs transition-all duration-300 hover:border-[#A88B58] hover:shadow-[0_8px_25px_rgba(168,139,88,0.18)] hover:-translate-y-1 cursor-pointer group/ann"
+              className="absolute top-10 left-12 pointer-events-auto max-w-[240px] glossy-card p-4 shadow-md transition-all duration-300 hover:scale-[1.03] cursor-pointer group/ann"
             >
-              <div className="font-editorial-mono text-[9px] text-[#A88B58] font-bold group-hover/ann:tracking-wider transition-all">
+              <div className="font-editorial-mono text-[9px] text-[#C5A869] font-bold tracking-wider">
                 01 / COLD-FORGED BRASS
               </div>
-              <p className="text-[11px] text-[#5E5C57] dark:text-[#C2BCAB] mt-0.5 font-editorial-body leading-relaxed group-hover/ann:text-[#111111] dark:group-hover/ann:text-[#FAF9F5] transition-colors">
+              <p className="text-xs text-[#5E5A54] dark:text-[#B5B0A4] mt-1 font-editorial-body leading-relaxed group-hover/ann:text-[#12100E] dark:group-hover/ann:text-[#FAF8F2] transition-colors">
                 Hand-hammered on the anvil in Cape Elizabeth to produce micro-faceted light play.
               </p>
             </div>
@@ -135,13 +127,13 @@ export default function FeaturedPiece({ onSelectPiece }) {
               ref={(el) => (annotationsRef.current[1] = el)}
               data-cursor="view"
               data-cursor-text="SPACE"
-              className="absolute bottom-10 left-14 pointer-events-auto max-w-[220px] bg-[#FAF9F5]/95 dark:bg-[#1C1B18]/95 backdrop-blur-sm p-3 border border-[#111111]/15 dark:border-white/15 shadow-xs transition-all duration-300 hover:border-[#A88B58] hover:shadow-[0_8px_25px_rgba(168,139,88,0.18)] hover:-translate-y-1 cursor-pointer group/ann"
+              className="absolute bottom-10 left-14 pointer-events-auto max-w-[240px] glossy-card p-4 shadow-md transition-all duration-300 hover:scale-[1.03] cursor-pointer group/ann"
             >
-              <div className="font-editorial-mono text-[9px] text-[#A88B58] font-bold group-hover/ann:tracking-wider transition-all">
+              <div className="font-editorial-mono text-[9px] text-[#C5A869] font-bold tracking-wider">
                 02 / NEGATIVE SPACE
               </div>
-              <p className="text-[11px] text-[#5E5C57] dark:text-[#C2BCAB] mt-0.5 font-editorial-body leading-relaxed group-hover/ann:text-[#111111] dark:group-hover/ann:text-[#FAF9F5] transition-colors">
-                Precision pierced geometric cutout revealing the wearer's skin and textile beneath.
+              <p className="text-xs text-[#5E5A54] dark:text-[#B5B0A4] mt-1 font-editorial-body leading-relaxed group-hover/ann:text-[#12100E] dark:group-hover/ann:text-[#FAF8F2] transition-colors">
+                Precision pierced geometric cutout revealing the wearer's skin and collarbone.
               </p>
             </div>
 
@@ -150,13 +142,13 @@ export default function FeaturedPiece({ onSelectPiece }) {
               ref={(el) => (annotationsRef.current[2] = el)}
               data-cursor="view"
               data-cursor-text="BALANCE"
-              className="absolute top-12 right-12 pointer-events-auto max-w-[220px] bg-[#FAF9F5]/95 dark:bg-[#1C1B18]/95 backdrop-blur-sm p-3 border border-[#111111]/15 dark:border-white/15 shadow-xs transition-all duration-300 hover:border-[#A88B58] hover:shadow-[0_8px_25px_rgba(168,139,88,0.18)] hover:-translate-y-1 cursor-pointer group/ann"
+              className="absolute top-12 right-12 pointer-events-auto max-w-[240px] glossy-card p-4 shadow-md transition-all duration-300 hover:scale-[1.03] cursor-pointer group/ann"
             >
-              <div className="font-editorial-mono text-[9px] text-[#A88B58] font-bold group-hover/ann:tracking-wider transition-all">
+              <div className="font-editorial-mono text-[9px] text-[#C5A869] font-bold tracking-wider">
                 03 / KINETIC BALANCE
               </div>
-              <p className="text-[11px] text-[#5E5C57] dark:text-[#C2BCAB] mt-0.5 font-editorial-body leading-relaxed group-hover/ann:text-[#111111] dark:group-hover/ann:text-[#FAF9F5] transition-colors">
-                Center of gravity engineered for perfect flush rest against the collarbone.
+              <p className="text-xs text-[#5E5A54] dark:text-[#B5B0A4] mt-1 font-editorial-body leading-relaxed group-hover/ann:text-[#12100E] dark:group-hover/ann:text-[#FAF8F2] transition-colors">
+                Center of gravity engineered for perfect flush rest against the collarbone without twisting.
               </p>
             </div>
 
@@ -165,12 +157,12 @@ export default function FeaturedPiece({ onSelectPiece }) {
               ref={(el) => (annotationsRef.current[3] = el)}
               data-cursor="view"
               data-cursor-text="PATINA"
-              className="absolute bottom-10 right-14 pointer-events-auto max-w-[220px] bg-[#FAF9F5]/95 dark:bg-[#1C1B18]/95 backdrop-blur-sm p-3 border border-[#111111]/15 dark:border-white/15 shadow-xs transition-all duration-300 hover:border-[#A88B58] hover:shadow-[0_8px_25px_rgba(168,139,88,0.18)] hover:-translate-y-1 cursor-pointer group/ann"
+              className="absolute bottom-10 right-14 pointer-events-auto max-w-[240px] glossy-card p-4 shadow-md transition-all duration-300 hover:scale-[1.03] cursor-pointer group/ann"
             >
-              <div className="font-editorial-mono text-[9px] text-[#A88B58] font-bold group-hover/ann:tracking-wider transition-all">
+              <div className="font-editorial-mono text-[9px] text-[#C5A869] font-bold tracking-wider">
                 04 / TIMELESS PATINA
               </div>
-              <p className="text-[11px] text-[#5E5C57] dark:text-[#C2BCAB] mt-0.5 font-editorial-body leading-relaxed group-hover/ann:text-[#111111] dark:group-hover/ann:text-[#FAF9F5] transition-colors">
+              <p className="text-xs text-[#5E5A54] dark:text-[#B5B0A4] mt-1 font-editorial-body leading-relaxed group-hover/ann:text-[#12100E] dark:group-hover/ann:text-[#FAF8F2] transition-colors">
                 Unsealed natural brass that deepens in warmth through daily skin contact.
               </p>
             </div>
@@ -180,13 +172,13 @@ export default function FeaturedPiece({ onSelectPiece }) {
         </div>
 
         {/* Mobile Annotations List (Responsive) */}
-        <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-3 lg:hidden">
+        <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-4 lg:hidden">
           {FEATURED_MASTERPIECE.annotations.map((ann) => (
-            <div key={ann.id} className="p-3 bg-[#F2EFE7] dark:bg-[#181715] border border-[#111111]/10 dark:border-white/10">
-              <span className="font-editorial-mono text-xs font-bold text-[#111111] dark:text-[#FAF9F5] block">
+            <div key={ann.id} className="p-4 glossy-card rounded-xs">
+              <span className="font-editorial-mono text-xs font-bold text-[#12100E] dark:text-[#FAF8F2] block">
                 {ann.number} / {ann.title}
               </span>
-              <p className="text-sm text-[#5E5C57] dark:text-[#C2BCAB] mt-0.5 font-editorial-body leading-relaxed">
+              <p className="text-xs text-[#5E5A54] dark:text-[#B5B0A4] mt-1 font-editorial-body leading-relaxed">
                 {ann.detail}
               </p>
             </div>
@@ -194,15 +186,15 @@ export default function FeaturedPiece({ onSelectPiece }) {
         </div>
 
         {/* Bottom Action */}
-        <div className="mt-8 pt-6 border-t border-[#111111]/10 dark:border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <div className="font-editorial-mono text-xs text-[#73716B] dark:text-[#9E9A90]">
+        <div className="mt-12 pt-8 border-t border-[#12100E]/10 dark:border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <div className="font-editorial-mono text-xs text-[#78746B] dark:text-[#A8A49C]">
             ORIGIN: CAPE ELIZABETH, MAINE · ONE-OF-A-KIND CREATION
           </div>
           <button
             onClick={() => onSelectPiece && onSelectPiece(FEATURED_MASTERPIECE)}
             data-cursor="explore"
             data-cursor-text="ACQUIRE"
-            className="px-6 py-3 bg-[#111111] dark:bg-[#FAF9F5] text-[#FAF9F5] dark:text-[#111111] font-editorial-mono text-xs uppercase tracking-[0.18em] hover:bg-[#A88B58] dark:hover:bg-[#A88B58] dark:hover:text-[#FAF9F5] transition-all shadow-md"
+            className="px-6 py-3 rounded-full bg-[#12100E] dark:bg-[#FAF8F2] text-[#FAF8F2] dark:text-[#12100E] font-editorial-mono text-xs uppercase tracking-[0.2em] hover:bg-[#C5A869] dark:hover:bg-[#C5A869] dark:hover:text-[#12100E] transition-all shadow-md font-semibold"
           >
             REQUEST PRIVATE ACQUISITION
           </button>

@@ -71,49 +71,49 @@ export default function ProductModal({ product, onClose, onAddToCart }) {
             
             {/* Header / Taxonomy */}
             <div>
-              <div className="font-editorial-mono text-[10px] uppercase tracking-[0.2em] text-[#8A867E] dark:text-[#8E8B83]">
+              <div className="font-editorial-mono text-[10px] uppercase tracking-[0.25em] text-[#C5A869] font-bold">
                 {product.category} · {product.origin || 'Cape Elizabeth Studio'}
               </div>
-              <h2 className="font-display-grotesk text-2xl sm:text-3xl font-bold text-[#111111] dark:text-[#FAF9F5] mt-1">
+              <h2 className="font-editorial-luxury text-3xl sm:text-4xl font-normal text-[#12100E] dark:text-[#FAF8F2] mt-1">
                 {product.name}
               </h2>
-              <div className="font-editorial-mono text-xl font-semibold text-[#111111] dark:text-[#FAF9F5] mt-2">
+              <div className="font-editorial-mono text-xl font-bold text-[#C5A869] mt-2">
                 {product.price}
               </div>
             </div>
 
             {/* Description */}
-            <p className="text-sm sm:text-base text-[#5E5C57] dark:text-[#B5B3AC] font-editorial-body leading-relaxed">
+            <p className="text-xs sm:text-sm text-[#5E5A54] dark:text-[#B5B0A4] font-editorial-body leading-relaxed">
               {product.description}
             </p>
 
             {/* Technical Specifications */}
-            <div className="space-y-3 pt-4 border-t border-[#111111]/10 dark:border-white/10 font-editorial-mono text-xs sm:text-sm">
-              <div className="flex justify-between py-1 border-b border-[#111111]/6 dark:border-white/6">
-                <span className="text-[#8A867E] dark:text-[#8E8B83]">MATERIALS</span>
-                <span className="text-[#111111] dark:text-[#FAF9F5] text-right font-medium max-w-[240px] truncate">
+            <div className="space-y-3 pt-4 border-t border-[#12100E]/10 dark:border-white/10 font-editorial-mono text-xs">
+              <div className="flex justify-between py-1 border-b border-[#12100E]/6 dark:border-white/6">
+                <span className="text-[#8F8A80]">MATERIALS</span>
+                <span className="text-[#12100E] dark:text-[#FAF8F2] text-right font-medium max-w-[240px] truncate">
                   {product.material}
                 </span>
               </div>
               {product.dimensions && (
-                <div className="flex justify-between py-1 border-b border-[#111111]/6 dark:border-white/6">
-                  <span className="text-[#8A867E] dark:text-[#8E8B83]">DIMENSIONS</span>
-                  <span className="text-[#111111] dark:text-[#FAF9F5] text-right font-medium">
+                <div className="flex justify-between py-1 border-b border-[#12100E]/6 dark:border-white/6">
+                  <span className="text-[#8F8A80]">DIMENSIONS</span>
+                  <span className="text-[#12100E] dark:text-[#FAF8F2] text-right font-medium">
                     {product.dimensions}
                   </span>
                 </div>
               )}
-              <div className="flex justify-between py-1 border-b border-[#111111]/6 dark:border-white/6">
-                <span className="text-[#8A867E] dark:text-[#8E8B83]">ORIGIN</span>
-                <span className="text-[#111111] dark:text-[#FAF9F5] text-right font-medium">
+              <div className="flex justify-between py-1 border-b border-[#12100E]/6 dark:border-white/6">
+                <span className="text-[#8F8A80]">ORIGIN</span>
+                <span className="text-[#12100E] dark:text-[#FAF8F2] text-right font-medium">
                   Cape Elizabeth, Maine
                 </span>
               </div>
             </div>
 
             {/* Studio Guarantee */}
-            <div className="p-3.5 bg-[#EBE9DF]/60 dark:bg-[#1A1918]/70 border border-[#111111]/10 dark:border-white/10 flex items-start gap-2.5 text-[11px] font-editorial-mono text-[#73716B] dark:text-[#A6A49E]">
-              <ShieldCheck className="w-4 h-4 text-[#A88B58] shrink-0 mt-0.5" />
+            <div className="p-3.5 gloss-pill rounded-xs flex items-start gap-2.5 text-[11px] font-editorial-mono text-[#78746B] dark:text-[#A8A49C]">
+              <ShieldCheck className="w-4 h-4 text-[#C5A869] shrink-0 mt-0.5" />
               <span>
                 Each piece is individually assembled by hand by Cora Hornby. Natural variations in minerals make each work singular.
               </span>

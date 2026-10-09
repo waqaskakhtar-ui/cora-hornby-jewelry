@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
-import { ArrowUpRight, Eye, Plus, Award } from 'lucide-react';
-import { PRODUCTS } from '../data/coraData';
+import { ArrowUpRight, Eye, Plus, ShoppingBag, Sparkles, Check } from 'lucide-react';
+import { PRODUCTS, COLLECTIONS } from '../data/coraData';
 
 export default function CollectionEditorial({ onSelectProduct, onQuickAdd }) {
-  const [hoveredId, setHoveredId] = useState(null);
   const [selectedFilter, setSelectedFilter] = useState('ALL');
+  const [hoveredId, setHoveredId] = useState(null);
+  const [addedId, setAddedId] = useState(null);
 
   const categories = [
     { label: 'ALL ARCHIVE', key: 'ALL', count: PRODUCTS.length },
@@ -22,285 +23,332 @@ export default function CollectionEditorial({ onSelectProduct, onQuickAdd }) {
         (p.category && p.category.toLowerCase().includes(selectedFilter.toLowerCase()))
       );
 
-  const headlinePiece = filteredProducts[0] || PRODUCTS[0];
-  const gridPieces = filteredProducts.slice(1);
+  const handleQuickAdd = (p, e) => {
+    e.stopPropagation();
+    if (onQuickAdd) onQuickAdd(p);
+    setAddedId(p.id);
+    setTimeout(() => setAddedId(null), 1800);
+  };
 
   return (
-    <section id="collection" className="py-16 lg:py-20 px-6 sm:px-10 lg:px-14 bg-[#F9F8F5] dark:bg-[#121110] text-[#111111] dark:text-[#FAF9F5] border-t border-[#111111]/8 dark:border-white/10 transition-colors duration-500">
+    <section 
+      id="collection" 
+      className="py-20 lg:py-32 px-6 sm:px-10 lg:px-16 bg-[#FAF8F2] dark:bg-[#0C0A09] text-[#12100E] dark:text-[#F7F5EE] border-t border-[#12100E]/8 dark:border-white/10 transition-colors duration-700 relative overflow-hidden"
+    >
+      {/* Ambient Specular Background Glow */}
+      <div className="absolute top-1/3 left-0 w-[500px] h-[500px] bg-gradient-radial from-[#C5A869]/8 to-transparent rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute bottom-1/4 right-0 w-[600px] h-[600px] bg-gradient-radial from-[#C5A869]/6 to-transparent rounded-full blur-3xl pointer-events-none" />
+
       <div className="max-w-[1720px] mx-auto">
         
-        {/* Heritage Credential Bar */}
-        <div className="flex flex-wrap items-center justify-between gap-4 py-2.5 px-4 mb-8 bg-[#F0EEE6] dark:bg-[#181715] border border-[#111111]/8 dark:border-white/10 font-editorial-mono text-[10px] uppercase tracking-[0.16em] text-[#73716B] dark:text-[#9E9A90]">
-          <div className="flex items-center gap-2 text-[#111111] dark:text-[#FAF9F5] font-semibold">
-            <Award className="w-3.5 h-3.5 text-[#B09462]" />
-            <span>THE CORA HORNBY STUDIO ARCHIVE</span>
-          </div>
-          <div className="flex items-center gap-6">
-            <span className="hidden sm:inline">CAPE ELIZABETH, MAINE BENCH</span>
-            <span>NO DUPLICATE PIECES</span>
-            <span className="hidden md:inline">100% ETHICAL GEMSTONES</span>
-          </div>
-        </div>
-
-        {/* Section Header with Category Switcher */}
-        <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 pb-8 border-b border-[#111111]/10 dark:border-white/10">
-          <div>
-            <div className="font-editorial-mono text-[10px] uppercase tracking-[0.22em] text-[#8A867E] dark:text-[#9E9A90]">
-              THE 5 SIGNATURE COLLECTIONS · MAINE BENCH ARCHIVE
+        {/* EDITORIAL HEADER WITH HAUTE-COUTURE TYPOGRAPHY */}
+        <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-8 pb-12 border-b border-[#12100E]/10 dark:border-white/10">
+          <div className="space-y-3">
+            <div className="font-editorial-mono text-[10px] uppercase tracking-[0.3em] text-[#C5A869] font-bold flex items-center gap-2">
+              <span>✦</span>
+              <span>THE FIVE SIGNATURE LINES · MAINE BENCH WORK</span>
             </div>
-            <h2 className="font-display-grotesk text-3xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-[#111111] dark:text-[#FAF9F5] leading-none mt-1">
-              CURATED COLLECTIONS
+            
+            <h2 className="font-editorial-luxury text-4xl sm:text-6xl lg:text-7xl font-normal tracking-tight text-[#12100E] dark:text-[#FAF8F2] leading-[0.95]">
+              Curated Collections
             </h2>
+
+            <p className="text-xs sm:text-sm text-[#78746B] dark:text-[#A8A49C] font-editorial-body max-w-lg leading-relaxed">
+              No two pieces align on a standard grid, just as no two stones carry identical crystal grain. Each design is individually hand-formed at the anvil in Cape Elizabeth.
+            </p>
           </div>
 
-          {/* Category Tabs */}
-          <div className="flex flex-wrap items-center gap-1.5 p-1 bg-[#EBE9DF]/70 dark:bg-[#1F1E1B] border border-[#111111]/10 dark:border-white/10 rounded-sm">
-            {categories.map((cat) => (
-              <button
-                key={cat.key}
-                onClick={() => setSelectedFilter(cat.key)}
-                className={`text-[10px] font-editorial-mono uppercase tracking-[0.12em] px-3.5 py-1.5 transition-all flex items-center gap-1.5 ${
-                  selectedFilter === cat.key
-                    ? 'bg-[#111111] dark:bg-[#FAF9F5] text-[#FAF9F5] dark:text-[#111111] shadow-xs font-semibold'
-                    : 'text-[#73716B] dark:text-[#9E9A90] hover:text-[#111111] dark:hover:text-[#FAF9F5]'
-                }`}
-              >
-                <span>{cat.label}</span>
-                <span className={`text-[8px] opacity-60`}>
-                  ({cat.count})
-                </span>
-              </button>
-            ))}
+          {/* Minimal Spaced-Out Typographic Taxonomy Selector */}
+          <div className="flex flex-wrap items-center gap-x-6 gap-y-3 font-editorial-mono text-[11px] uppercase tracking-[0.16em]">
+            {categories.map((cat) => {
+              const isSelected = selectedFilter === cat.key;
+              return (
+                <button
+                  key={cat.key}
+                  onClick={() => setSelectedFilter(cat.key)}
+                  className={`group relative py-1 transition-all flex items-baseline gap-1.5 ${
+                    isSelected
+                      ? 'text-[#12100E] dark:text-[#FAF8F2] font-bold'
+                      : 'text-[#8F8A80] dark:text-[#888379] hover:text-[#12100E] dark:hover:text-[#FAF8F2]'
+                  }`}
+                >
+                  <span>{cat.label}</span>
+                  <span className={`text-[8px] font-sans transition-colors ${
+                    isSelected ? 'text-[#C5A869] font-semibold' : 'opacity-40 group-hover:opacity-80'
+                  }`}>
+                    {cat.count}
+                  </span>
+                  {isSelected && (
+                    <span className="absolute bottom-0 inset-x-0 h-[1.5px] bg-[#C5A869]" />
+                  )}
+                </button>
+              );
+            })}
           </div>
         </div>
 
-        {/* TOP ROW: EDITORIAL SPOTLIGHT (TOP-LEFT) + HEADLINE PIECE (TOP-RIGHT) */}
-        <div className="mt-8 grid grid-cols-12 gap-6 lg:gap-8 items-stretch">
+        {/* SCATTERED ASYMMETRICAL EDITORIAL RUNWAY */}
+        <div className="mt-16 space-y-24 sm:space-y-32">
           
-          {/* Top-Left: Editorial Atelier Feature Card */}
-          <div 
-            data-cursor="view"
-            data-cursor-text="ATELIER"
-            className="col-span-12 lg:col-span-5 bg-[#F2EFE8] dark:bg-[#181715] border border-[#111111]/10 dark:border-white/10 p-6 sm:p-8 flex flex-col justify-between shadow-xs transition-all duration-500 hover:border-[#A88B58]/40 hover:shadow-[0_14px_35px_rgba(0,0,0,0.06)] dark:hover:shadow-[0_14px_35px_rgba(168,139,88,0.06)] group/spotlight"
-          >
-            <div className="space-y-4">
-              <div className="flex items-center justify-between font-editorial-mono text-[10px] uppercase tracking-[0.18em] text-[#8A867E] dark:text-[#9E9A90]">
-                <span className="text-[#111111] dark:text-[#FAF9F5] font-semibold group-hover/spotlight:text-[#A88B58] transition-colors">[01 · ATELIER SPOTLIGHT]</span>
-                <span>MAINE STUDIO</span>
-              </div>
+          {/* SECTION ROW 1: Monumental Portrait (Left) + Offset Tall Slender Piece (Right) */}
+          {filteredProducts.length > 0 && (
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-start">
+              
+              {/* Left: Monumental Hero Piece (Wide, Grounded) */}
+              {(() => {
+                const p = filteredProducts[0];
+                const isAdded = addedId === p.id;
+                return (
+                  <div 
+                    onClick={() => onSelectProduct && onSelectProduct(p)}
+                    className="lg:col-span-7 group cursor-pointer space-y-5"
+                  >
+                    {/* Borderless Floating Canvas with Specular Lighting */}
+                    <div className="relative aspect-[4/5] sm:aspect-[16/13] bg-[#F2EFE8] dark:bg-[#161412] overflow-hidden p-6 sm:p-12 shadow-[0_25px_60px_rgba(0,0,0,0.06)] dark:shadow-[0_30px_70px_rgba(0,0,0,0.7)] transition-all duration-700 group-hover:shadow-[0_35px_80px_rgba(197,168,105,0.18)]">
+                      <img
+                        src={p.image}
+                        alt={p.name}
+                        className="w-full h-full object-contain filter contrast-[1.06] transition-transform duration-1000 ease-out group-hover:scale-105"
+                      />
 
-              <h3 className="font-display-grotesk text-2xl sm:text-3xl font-bold text-[#111111] dark:text-[#FAF9F5] leading-tight">
-                Mineral & Metal <br />
-                <span className="font-editorial-serif font-normal italic text-[#5E5C57] dark:text-[#A88B58]">Singular Creations</span>
-              </h3>
+                      {/* Specular Glint Highlight */}
+                      <div className="absolute inset-0 pointer-events-none overflow-hidden opacity-0 group-hover:opacity-100 transition-opacity duration-700">
+                        <div className="w-[50%] h-full bg-gradient-to-r from-transparent via-white/30 to-transparent transform -skew-x-25 -translate-x-full group-hover:translate-x-[350%] transition-transform duration-1000 ease-out" />
+                      </div>
 
-              <p className="text-sm sm:text-base text-[#5E5C57] dark:text-[#C2BCAB] font-editorial-body leading-relaxed">
-                Every piece in this catalog is individually hand-crafted by Cora Hornby in her coastal Maine studio using hammered metals, leather, freshwater pearls, druzies, and semi-precious stones sourced across Guatemala, Brazil, Greece, and Germany.
-              </p>
+                      {/* Floating Specifier Badges */}
+                      <div className="absolute top-4 left-4 gloss-pill px-3 py-1 rounded-full text-[9px] font-editorial-mono uppercase tracking-widest text-[#12100E] dark:text-[#FAF8F2]">
+                        {p.collection || 'ARCHIVE'} · ONE OF ONE
+                      </div>
 
-              {/* Atelier Badges */}
-              <div className="grid grid-cols-2 gap-2 pt-2 font-editorial-mono text-[10px]">
-                <div className="p-2.5 bg-[#FAF9F5] dark:bg-[#201F1C] border border-[#111111]/8 dark:border-white/10 group-hover/spotlight:border-[#A88B58]/30 transition-colors">
-                  <span className="text-[#8A867E] dark:text-[#9E9A90] block text-[8px] uppercase">MATERIAL INTEGRITY</span>
-                  <span className="text-[#111111] dark:text-[#FAF9F5] font-medium">100% UNTREATED</span>
-                </div>
-                <div className="p-2.5 bg-[#FAF9F5] dark:bg-[#201F1C] border border-[#111111]/8 dark:border-white/10 group-hover/spotlight:border-[#A88B58]/30 transition-colors">
-                  <span className="text-[#8A867E] dark:text-[#9E9A90] block text-[8px] uppercase">EDITION RUN</span>
-                  <span className="text-[#111111] dark:text-[#FAF9F5] font-medium">ONE OF ONE</span>
-                </div>
-              </div>
+                      <div className="absolute bottom-4 right-4 gloss-pill px-3 py-1 rounded-full text-[10px] font-editorial-mono font-bold text-[#C5A869]">
+                        {p.price}
+                      </div>
+                    </div>
+
+                    {/* Staggered Floating Metadata */}
+                    <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-3 pt-2">
+                      <div className="space-y-1">
+                        <h3 className="font-editorial-luxury text-2xl sm:text-4xl font-normal text-[#12100E] dark:text-[#FAF8F2] group-hover:text-[#C5A869] transition-colors">
+                          {p.name}
+                        </h3>
+                        <p className="font-editorial-body text-xs sm:text-sm text-[#78746B] dark:text-[#A8A49C] max-w-lg leading-relaxed">
+                          {p.description}
+                        </p>
+                      </div>
+
+                      <button
+                        onClick={(e) => handleQuickAdd(p, e)}
+                        className={`self-start sm:self-auto text-[10px] font-editorial-mono uppercase tracking-widest px-4 py-2 rounded-full transition-all flex items-center gap-2 flex-shrink-0 ${
+                          isAdded
+                            ? 'bg-[#2E5E4E] text-[#FAF8F2]'
+                            : 'bg-[#12100E] dark:bg-[#FAF8F2] text-[#FAF8F2] dark:text-[#12100E] hover:bg-[#C5A869] dark:hover:bg-[#C5A869] hover:text-[#12100E]'
+                        }`}
+                      >
+                        {isAdded ? <Check className="w-3.5 h-3.5" /> : <ShoppingBag className="w-3.5 h-3.5" />}
+                        <span>{isAdded ? 'ADDED' : 'ACQUIRE'}</span>
+                      </button>
+                    </div>
+                  </div>
+                );
+              })()}
+
+              {/* Right: Offset Slender Vertical Piece (Pushed Down, Asymmetrical) */}
+              {filteredProducts.length > 1 && (() => {
+                const p = filteredProducts[1];
+                const isAdded = addedId === p.id;
+                return (
+                  <div 
+                    onClick={() => onSelectProduct && onSelectProduct(p)}
+                    className="lg:col-span-5 lg:pt-28 group cursor-pointer space-y-4"
+                  >
+                    {/* Slender Portrait Aspect Ratio */}
+                    <div className="relative aspect-[3/4] sm:aspect-[9/13] bg-[#EFECE4] dark:bg-[#181614] overflow-hidden p-6 sm:p-10 shadow-[0_20px_50px_rgba(0,0,0,0.05)] dark:shadow-[0_25px_60px_rgba(0,0,0,0.6)] transition-all duration-700 group-hover:shadow-[0_30px_70px_rgba(197,168,105,0.15)]">
+                      <img
+                        src={p.image}
+                        alt={p.name}
+                        className="w-full h-full object-contain filter contrast-[1.05] transition-transform duration-1000 ease-out group-hover:scale-105"
+                      />
+
+                      <div className="absolute top-4 right-4 gloss-pill px-2.5 py-1 rounded-full text-[8px] font-editorial-mono uppercase tracking-widest text-[#12100E] dark:text-[#FAF8F2]">
+                        {p.category}
+                      </div>
+
+                      <div className="absolute bottom-4 left-4 font-editorial-mono text-xs font-bold text-[#C5A869]">
+                        {p.price}
+                      </div>
+                    </div>
+
+                    <div className="space-y-1">
+                      <div className="font-editorial-mono text-[9px] uppercase tracking-widest text-[#C5A869]">
+                        CAPE ELIZABETH STUDIO
+                      </div>
+                      <h4 className="font-editorial-luxury text-xl sm:text-2xl font-normal text-[#12100E] dark:text-[#FAF8F2] group-hover:text-[#C5A869] transition-colors">
+                        {p.name}
+                      </h4>
+                      <p className="font-editorial-body text-xs text-[#78746B] dark:text-[#A8A49C] line-clamp-2">
+                        {p.material}
+                      </p>
+                    </div>
+                  </div>
+                );
+              })()}
+
             </div>
+          )}
 
-            <div className="pt-6 border-t border-[#111111]/10 dark:border-white/10 flex items-center justify-between text-xs font-editorial-mono">
-              <span className="text-[#73716B] dark:text-[#9E9A90]">CURRENT EXHIBIT: 2026 ARCHIVE</span>
-              <span className="text-[#111111] dark:text-[#FAF9F5] font-semibold group-hover/spotlight:text-[#A88B58] transition-colors">CAPE ELIZABETH, ME</span>
-            </div>
-          </div>
-
-          {/* Top-Right: Headline Product Card */}
-          <div 
-            data-cursor="inspect"
-            data-cursor-text="INSPECT"
-            className="col-span-12 lg:col-span-7 bg-[#F0EEE6] dark:bg-[#181715] border border-[#111111]/10 dark:border-white/10 overflow-hidden group flex flex-col justify-between transition-all duration-500 hover:border-[#A88B58]/50 hover:shadow-[0_16px_40px_rgba(0,0,0,0.08)] dark:hover:shadow-[0_16px_40px_rgba(168,139,88,0.08)]"
-            onMouseEnter={() => setHoveredId(headlinePiece.id)}
-            onMouseLeave={() => setHoveredId(null)}
-          >
-            <div 
-              className="relative w-full h-[360px] sm:h-[420px] bg-[#FAF9F5] dark:bg-[#141312] overflow-hidden cursor-pointer"
-              onClick={() => onSelectProduct(headlinePiece)}
-            >
-              {/* Hairline Exhibition Corner Brackets */}
-              <div className="absolute inset-3 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10">
-                <span className="absolute top-0 left-0 w-2.5 h-2.5 border-t border-l border-[#A88B58]"></span>
-                <span className="absolute top-0 right-0 w-2.5 h-2.5 border-t border-r border-[#A88B58]"></span>
-                <span className="absolute bottom-0 left-0 w-2.5 h-2.5 border-b border-l border-[#A88B58]"></span>
-                <span className="absolute bottom-0 right-0 w-2.5 h-2.5 border-b border-r border-[#A88B58]"></span>
-              </div>
-
-              {/* Light Glint Reflection on Hover */}
-              <div className="absolute inset-0 pointer-events-none overflow-hidden z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                <div className="w-[50%] h-full bg-gradient-to-r from-transparent via-white/20 dark:via-white/10 to-transparent transform -skew-x-25 -translate-x-full group-hover:translate-x-[250%] transition-transform duration-1000 ease-out" />
-              </div>
-
-              <img
-                src={hoveredId === headlinePiece.id && headlinePiece.altImage ? headlinePiece.altImage : headlinePiece.image}
-                alt={headlinePiece.name}
-                className="w-full h-full object-contain filter contrast-[1.04] p-4 transition-transform duration-700 ease-out group-hover:scale-[1.03]"
-              />
-
-              <div className="absolute top-3 left-3 bg-[#111111] dark:bg-[#FAF9F5] text-[#FAF9F5] dark:text-[#111111] font-editorial-mono text-[9px] uppercase tracking-widest px-2.5 py-1 z-10 shadow-xs">
-                FEATURED PIECE · {headlinePiece.category}
-              </div>
-
-              <div className="absolute top-3 right-3 bg-[#FAF9F5]/90 dark:bg-[#1A1917]/90 backdrop-blur-xs font-editorial-mono text-xs font-bold text-[#111111] dark:text-[#FAF9F5] px-3 py-1 border border-[#111111]/10 dark:border-white/10 z-10 shadow-xs group-hover:border-[#A88B58]/50 transition-colors">
-                {headlinePiece.price}
-              </div>
-
-              {/* Quick Action Overlay */}
-              <div className="absolute bottom-3 right-3 flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10">
-                <button
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    onSelectProduct(headlinePiece);
-                  }}
-                  className="px-3.5 py-2 bg-[#111111] dark:bg-[#FAF9F5] text-[#FAF9F5] dark:text-[#111111] text-[10px] font-editorial-mono uppercase tracking-widest hover:bg-[#A88B58] dark:hover:bg-[#A88B58] dark:hover:text-[#FAF9F5] transition-all flex items-center gap-1.5 shadow-md"
-                >
-                  <Eye className="w-3 h-3" />
-                  <span>VIEW DETAILS</span>
-                </button>
-                <button
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    onQuickAdd(headlinePiece);
-                  }}
-                  className="px-3.5 py-2 bg-[#FAF9F5] dark:bg-[#201F1C] text-[#111111] dark:text-[#FAF9F5] text-[10px] font-editorial-mono uppercase tracking-widest hover:border-[#A88B58] hover:text-[#A88B58] transition-all border border-[#111111]/15 dark:border-white/20 flex items-center gap-1 shadow-md"
-                >
-                  <Plus className="w-3 h-3" />
-                  <span>ADD TO BAG</span>
-                </button>
-              </div>
-            </div>
-
-            <div className="p-5 bg-[#F7F5EF] dark:bg-[#1A1917] border-t border-[#111111]/8 dark:border-white/10 flex items-baseline justify-between gap-4">
-              <div>
-                <h4 
-                  onClick={() => onSelectProduct(headlinePiece)}
-                  className="font-display-grotesk text-xl sm:text-2xl font-bold text-[#111111] dark:text-[#FAF9F5] group-hover:text-[#A88B58] cursor-pointer transition-colors"
-                >
-                  {headlinePiece.name}
-                </h4>
-                <div className="font-editorial-mono text-xs sm:text-sm text-[#73716B] dark:text-[#9E9A90] mt-0.5">
-                  {headlinePiece.material}
-                </div>
-              </div>
-              <span className="font-editorial-mono text-xs uppercase text-[#8A867E] dark:text-[#9E9A90] shrink-0">
-                {headlinePiece.origin}
+          {/* EDITORIAL INTERLUDE: Standalone Cinematic Pull-Quote Break */}
+          <div className="w-full py-12 sm:py-16 border-y border-[#12100E]/8 dark:border-white/10 relative">
+            <div className="max-w-4xl mx-auto text-center space-y-4">
+              <span className="font-editorial-mono text-[9px] uppercase tracking-[0.3em] text-[#C5A869]">
+                BENCH PRINCIPLE · CORA HORNBY
               </span>
+              <blockquote className="font-editorial-luxury italic text-2xl sm:text-4xl lg:text-5xl font-light text-[#12100E] dark:text-[#FAF8F2] leading-tight">
+                “A piece of jewelry should never feel like an industrial reproduction. It should carry the human cadence of the hands that forged it.”
+              </blockquote>
+              <div className="font-editorial-mono text-[10px] text-[#8F8A80] dark:text-[#888379] uppercase tracking-widest">
+                Direct mineral sourcing · No duplicate molds · Hand-worked metals
+              </div>
             </div>
           </div>
 
-        </div>
+          {/* SECTION ROW 2: Triple Staggered Asymmetry (No horizontal alignment) */}
+          {filteredProducts.length > 2 && (
+            <div className="grid grid-cols-1 md:grid-cols-12 gap-8 lg:gap-14 items-start">
+              
+              {/* Card A: Low Stagger Left */}
+              {(() => {
+                const p = filteredProducts[2];
+                return (
+                  <div 
+                    onClick={() => onSelectProduct && onSelectProduct(p)}
+                    className="md:col-span-4 group cursor-pointer space-y-3"
+                  >
+                    <div className="relative aspect-square bg-[#F2EFE8] dark:bg-[#161412] p-6 shadow-sm overflow-hidden transition-all duration-700 group-hover:shadow-[0_25px_50px_rgba(197,168,105,0.12)]">
+                      <img
+                        src={p.image}
+                        alt={p.name}
+                        className="w-full h-full object-contain filter contrast-[1.05] transition-transform duration-700 group-hover:scale-105"
+                      />
+                      <div className="absolute bottom-3 left-3 text-[9px] font-editorial-mono font-bold text-[#C5A869]">
+                        {p.price}
+                      </div>
+                    </div>
+                    <div>
+                      <h4 className="font-editorial-luxury text-lg font-normal text-[#12100E] dark:text-[#FAF8F2] group-hover:text-[#C5A869] transition-colors">
+                        {p.name}
+                      </h4>
+                      <p className="text-[11px] font-editorial-body text-[#78746B] dark:text-[#A8A49C] line-clamp-1">
+                        {p.material}
+                      </p>
+                    </div>
+                  </div>
+                );
+              })()}
 
-        {/* REST OF CATALOG GRID */}
-        <div className="mt-8 grid grid-cols-12 gap-6 lg:gap-8 items-start">
-          {gridPieces.map((product, idx) => {
-            const isHovered = hoveredId === product.id;
+              {/* Card B: Center Elevated Stagger (Pushed Down by pt-16 lg:pt-24) */}
+              {filteredProducts.length > 3 && (() => {
+                const p = filteredProducts[3];
+                return (
+                  <div 
+                    onClick={() => onSelectProduct && onSelectProduct(p)}
+                    className="md:col-span-4 md:pt-16 lg:pt-24 group cursor-pointer space-y-3"
+                  >
+                    <div className="relative aspect-[3/4] bg-[#EFECE4] dark:bg-[#181614] p-8 shadow-sm overflow-hidden transition-all duration-700 group-hover:shadow-[0_25px_50px_rgba(197,168,105,0.12)]">
+                      <img
+                        src={p.image}
+                        alt={p.name}
+                        className="w-full h-full object-contain filter contrast-[1.05] transition-transform duration-700 group-hover:scale-105"
+                      />
+                      <div className="absolute top-3 right-3 gloss-pill px-2 py-0.5 rounded-full text-[8px] font-editorial-mono uppercase text-[#12100E] dark:text-[#FAF8F2]">
+                        {p.collection}
+                      </div>
+                      <div className="absolute bottom-3 left-3 text-[9px] font-editorial-mono font-bold text-[#C5A869]">
+                        {p.price}
+                      </div>
+                    </div>
+                    <div>
+                      <h4 className="font-editorial-luxury text-lg font-normal text-[#12100E] dark:text-[#FAF8F2] group-hover:text-[#C5A869] transition-colors">
+                        {p.name}
+                      </h4>
+                      <p className="text-[11px] font-editorial-body text-[#78746B] dark:text-[#A8A49C] line-clamp-1">
+                        {p.origin}
+                      </p>
+                    </div>
+                  </div>
+                );
+              })()}
 
-            return (
-              <div
-                key={product.id}
-                data-cursor="inspect"
-                data-cursor-text="INSPECT"
-                className="col-span-12 sm:col-span-6 lg:col-span-4 bg-[#F2EFE8] dark:bg-[#181715] border border-[#111111]/8 dark:border-white/10 overflow-hidden group flex flex-col justify-between transition-all duration-500 hover:border-[#A88B58]/50 hover:shadow-[0_16px_36px_rgba(0,0,0,0.08)] dark:hover:shadow-[0_16px_36px_rgba(168,139,88,0.08)]"
-                onMouseEnter={() => setHoveredId(product.id)}
-                onMouseLeave={() => setHoveredId(null)}
-              >
-                {/* Image Box */}
+              {/* Card C: Right Offset Stagger (Pushed Down by pt-8 lg:pt-12) */}
+              {filteredProducts.length > 4 && (() => {
+                const p = filteredProducts[4];
+                return (
+                  <div 
+                    onClick={() => onSelectProduct && onSelectProduct(p)}
+                    className="md:col-span-4 md:pt-8 lg:pt-12 group cursor-pointer space-y-3"
+                  >
+                    <div className="relative aspect-[4/5] bg-[#F2EFE8] dark:bg-[#161412] p-6 shadow-sm overflow-hidden transition-all duration-700 group-hover:shadow-[0_25px_50px_rgba(197,168,105,0.12)]">
+                      <img
+                        src={p.image}
+                        alt={p.name}
+                        className="w-full h-full object-contain filter contrast-[1.05] transition-transform duration-700 group-hover:scale-105"
+                      />
+                      <div className="absolute bottom-3 left-3 text-[9px] font-editorial-mono font-bold text-[#C5A869]">
+                        {p.price}
+                      </div>
+                    </div>
+                    <div>
+                      <h4 className="font-editorial-luxury text-lg font-normal text-[#12100E] dark:text-[#FAF8F2] group-hover:text-[#C5A869] transition-colors">
+                        {p.name}
+                      </h4>
+                      <p className="text-[11px] font-editorial-body text-[#78746B] dark:text-[#A8A49C] line-clamp-1">
+                        {p.material}
+                      </p>
+                    </div>
+                  </div>
+                );
+              })()}
+
+            </div>
+          )}
+
+          {/* Remaining pieces scattered smoothly */}
+          {filteredProducts.length > 5 && (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 lg:gap-14 pt-8">
+              {filteredProducts.slice(5).map((p, idx) => (
                 <div
-                  className="relative w-full h-[320px] sm:h-[360px] bg-[#FAF9F5] dark:bg-[#141312] overflow-hidden cursor-pointer"
-                  onClick={() => onSelectProduct(product)}
+                  key={p.id}
+                  onClick={() => onSelectProduct && onSelectProduct(p)}
+                  className={`group cursor-pointer space-y-3 ${
+                    idx % 2 === 1 ? 'lg:pt-12' : ''
+                  }`}
                 >
-                  {/* Hairline Exhibition Corner Brackets */}
-                  <div className="absolute inset-3 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10">
-                    <span className="absolute top-0 left-0 w-2.5 h-2.5 border-t border-l border-[#A88B58]"></span>
-                    <span className="absolute top-0 right-0 w-2.5 h-2.5 border-t border-r border-[#A88B58]"></span>
-                    <span className="absolute bottom-0 left-0 w-2.5 h-2.5 border-b border-l border-[#A88B58]"></span>
-                    <span className="absolute bottom-0 right-0 w-2.5 h-2.5 border-b border-r border-[#A88B58]"></span>
+                  <div className="relative aspect-[4/5] bg-[#F2EFE8] dark:bg-[#161412] p-6 overflow-hidden shadow-xs transition-all duration-700 group-hover:shadow-[0_20px_45px_rgba(197,168,105,0.12)]">
+                    <img
+                      src={p.image}
+                      alt={p.name}
+                      className="w-full h-full object-contain filter contrast-[1.05] transition-transform duration-700 group-hover:scale-105"
+                    />
+                    <div className="absolute top-3 left-3 text-[8px] font-editorial-mono uppercase text-[#8F8A80]">
+                      0{idx + 6}
+                    </div>
+                    <div className="absolute bottom-3 right-3 text-[9px] font-editorial-mono font-bold text-[#C5A869]">
+                      {p.price}
+                    </div>
                   </div>
-
-                  {/* Light Glint Reflection on Hover */}
-                  <div className="absolute inset-0 pointer-events-none overflow-hidden z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                    <div className="w-[50%] h-full bg-gradient-to-r from-transparent via-white/20 dark:via-white/10 to-transparent transform -skew-x-25 -translate-x-full group-hover:translate-x-[250%] transition-transform duration-1000 ease-out" />
-                  </div>
-
-                  <img
-                    src={isHovered && product.altImage ? product.altImage : product.image}
-                    alt={product.name}
-                    className="w-full h-full object-cover filter contrast-[1.03] transition-transform duration-700 ease-out group-hover:scale-[1.03]"
-                    loading="lazy"
-                  />
-
-                  {/* Corner Badges */}
-                  <div className="absolute top-3 left-3 bg-[#FAF9F5]/90 dark:bg-[#1A1917]/90 backdrop-blur-xs font-editorial-mono text-[9px] uppercase tracking-widest text-[#111111] dark:text-[#FAF9F5] px-2 py-0.5 border border-[#111111]/10 dark:border-white/10 z-10 shadow-xs">
-                    0{idx + 2} · {product.category}
-                  </div>
-
-                  <div className="absolute top-3 right-3 bg-[#FAF9F5]/90 dark:bg-[#1A1917]/90 backdrop-blur-xs font-editorial-mono text-xs font-semibold text-[#111111] dark:text-[#FAF9F5] px-2.5 py-0.5 border border-[#111111]/10 dark:border-white/10 z-10 shadow-xs group-hover:border-[#A88B58]/50 transition-colors">
-                    {product.price}
-                  </div>
-
-                  {/* Hover Buttons */}
-                  <div className="absolute bottom-3 inset-x-3 flex items-center justify-between opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10">
-                    <button
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        onSelectProduct(product);
-                      }}
-                      className="px-3.5 py-2 bg-[#111111] dark:bg-[#FAF9F5] text-[#FAF9F5] dark:text-[#111111] text-[10px] font-editorial-mono uppercase tracking-widest hover:bg-[#A88B58] dark:hover:bg-[#A88B58] dark:hover:text-[#FAF9F5] transition-all flex items-center gap-1 shadow-md"
-                    >
-                      <Eye className="w-3 h-3" />
-                      <span>VIEW PIECE</span>
-                    </button>
-                    <button
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        onQuickAdd(product);
-                      }}
-                      className="px-3.5 py-2 bg-[#FAF9F5] dark:bg-[#201F1C] text-[#111111] dark:text-[#FAF9F5] text-[10px] font-editorial-mono uppercase tracking-widest hover:border-[#A88B58] hover:text-[#A88B58] transition-all border border-[#111111]/15 dark:border-white/20 flex items-center gap-1 shadow-md"
-                    >
-                      <Plus className="w-3 h-3" />
-                      <span>ADD</span>
-                    </button>
-                  </div>
-                </div>
-
-                {/* Info Block */}
-                <div className="p-4 bg-[#FAF9F5] dark:bg-[#1A1917] border-t border-[#111111]/8 dark:border-white/10 space-y-1.5">
-                  <div className="flex items-baseline justify-between gap-2">
-                    <h4 
-                      onClick={() => onSelectProduct(product)}
-                      className="font-display-grotesk text-base sm:text-lg font-bold text-[#111111] dark:text-[#FAF9F5] truncate cursor-pointer group-hover:text-[#A88B58] transition-colors"
-                    >
-                      {product.name}
+                  <div>
+                    <h4 className="font-editorial-luxury text-lg font-normal text-[#12100E] dark:text-[#FAF8F2] group-hover:text-[#C5A869] transition-colors">
+                      {p.name}
                     </h4>
-                    <span className="font-editorial-mono text-xs sm:text-sm font-semibold text-[#111111] dark:text-[#FAF9F5]">
-                      {product.price}
-                    </span>
-                  </div>
-
-                  <div className="font-editorial-mono text-xs text-[#73716B] dark:text-[#9E9A90] truncate">
-                    {product.material}
-                  </div>
-
-                  <div className="pt-2 flex items-center justify-between text-[9px] font-editorial-mono text-[#8A867E] dark:text-[#7E7A70] border-t border-[#111111]/6 dark:border-white/8">
-                    <span>{product.origin}</span>
-                    <span className="text-[#111111] dark:text-[#FAF9F5]">EDITION 1/1</span>
+                    <p className="text-xs font-editorial-body text-[#78746B] dark:text-[#A8A49C] line-clamp-1">
+                      {p.material}
+                    </p>
                   </div>
                 </div>
+              ))}
+            </div>
+          )}
 
-              </div>
-            );
-          })}
         </div>
 
       </div>

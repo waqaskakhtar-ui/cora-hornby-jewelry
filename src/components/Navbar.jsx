@@ -28,11 +28,11 @@ export default function Navbar({ cartCount, onOpenCart, onOpenSearch, isDark, on
       <header
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
           scrolled
-            ? 'bg-[#F9F8F5]/90 dark:bg-[#0F0E0D]/90 backdrop-blur-md py-3 border-b border-[#111111]/8 dark:border-white/10 shadow-[0_4px_24px_rgba(0,0,0,0.03)]'
-            : 'bg-transparent py-5 border-b border-transparent'
+            ? 'bg-[#FAF8F2]/90 dark:bg-[#0C0A09]/90 backdrop-blur-md py-3.5 border-b border-[#12100E]/8 dark:border-white/10 shadow-[0_4px_24px_rgba(0,0,0,0.03)]'
+            : 'bg-transparent py-6 border-b border-transparent'
         }`}
       >
-        <div className="max-w-[1720px] mx-auto px-6 sm:px-10 lg:px-14 flex items-center justify-between">
+        <div className="max-w-[1720px] mx-auto px-6 sm:px-10 lg:px-16 flex items-center justify-between">
           
           {/* Left: Brand Origin / Identifier */}
           <div className="flex items-center gap-6">
@@ -40,16 +40,16 @@ export default function Navbar({ cartCount, onOpenCart, onOpenSearch, isDark, on
               href="#" 
               className="group flex flex-col items-start text-left"
             >
-              <span className="font-display-grotesk text-xl sm:text-2xl font-bold tracking-tight text-[#111111] dark:text-[#FAF9F5] group-hover:opacity-75 transition-opacity">
+              <span className="font-editorial-luxury text-2xl sm:text-3xl font-normal tracking-tight text-[#12100E] dark:text-[#FAF8F2] group-hover:opacity-75 transition-opacity">
                 {BRAND_INFO.name}
               </span>
-              <span className="font-editorial-mono text-[9px] uppercase tracking-[0.2em] text-[#73716B] dark:text-[#9E9A90]">
+              <span className="font-editorial-mono text-[9px] uppercase tracking-[0.25em] text-[#78746B] dark:text-[#A8A49C]">
                 CAPE ELIZABETH · ME
               </span>
             </a>
 
-            <div className="hidden xl:flex items-center gap-2 pl-6 border-l border-[#111111]/10 dark:border-white/10 text-[#8A867E] dark:text-[#9E9A90] text-[11px] font-editorial-mono">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#111111]/40 dark:bg-white/40"></span>
+            <div className="hidden xl:flex items-center gap-2 pl-6 border-l border-[#12100E]/10 dark:border-white/10 text-[#8F8A80] dark:text-[#888379] text-[11px] font-editorial-mono">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#C5A869]"></span>
               <span>{BRAND_INFO.coordinates}</span>
             </div>
           </div>
@@ -60,7 +60,7 @@ export default function Navbar({ cartCount, onOpenCart, onOpenSearch, isDark, on
               <a
                 key={link.label}
                 href={link.href}
-                className="text-[13px] tracking-[0.04em] text-[#111111]/80 dark:text-[#FAF9F5]/80 hover:text-[#A88B58] dark:hover:text-[#A88B58] font-medium transition-colors relative py-1 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[1px] after:bg-[#A88B58] hover:after:w-full after:transition-all after:duration-300"
+                className="text-[12px] font-editorial-mono uppercase tracking-[0.16em] text-[#12100E]/80 dark:text-[#FAF8F2]/80 hover:text-[#C5A869] dark:hover:text-[#C5A869] font-medium transition-colors relative py-1 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[1px] after:bg-[#C5A869] hover:after:w-full after:transition-all after:duration-300"
               >
                 {link.label}
               </a>
@@ -70,22 +70,22 @@ export default function Navbar({ cartCount, onOpenCart, onOpenSearch, isDark, on
           {/* Right: Actions (Theme Switcher, Search, Bag, Mobile Trigger) */}
           <div className="flex items-center gap-3 sm:gap-5">
             
-            {/* Dark / Light Mode Switcher Button */}
+            {/* Dark / Light Mode Switcher Button (Glossy Sheen) */}
             <button
               onClick={onToggleTheme}
-              className="group relative flex items-center gap-1.5 px-2.5 py-1 text-[11px] font-editorial-mono uppercase tracking-[0.12em] border border-[#111111]/15 dark:border-white/20 bg-[#FAF9F5] dark:bg-[#1A1917] text-[#111111] dark:text-[#FAF9F5] hover:border-[#A88B58] dark:hover:border-[#A88B58] hover:shadow-[0_0_15px_rgba(168,139,88,0.2)] transition-all shadow-xs"
+              className="gloss-pill group relative flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[10px] font-editorial-mono uppercase tracking-[0.14em] text-[#12100E] dark:text-[#FAF8F2] hover:text-[#C5A869] dark:hover:text-[#C5A869] transition-all shadow-xs"
               aria-label="Toggle dark mode"
               title={isDark ? "Switch to Ivory Studio theme" : "Switch to Obsidian Dark theme"}
             >
               {isDark ? (
                 <>
-                  <Sun className="w-3.5 h-3.5 text-[#B09462] group-hover:rotate-45 transition-transform duration-300" />
-                  <span className="hidden sm:inline">IVORY</span>
+                  <Sun className="w-3.5 h-3.5 text-[#C5A869] group-hover:rotate-45 transition-transform duration-300" />
+                  <span className="hidden sm:inline">ALABASTER</span>
                 </>
               ) : (
                 <>
-                  <Moon className="w-3.5 h-3.5 text-[#111111] group-hover:-rotate-12 transition-transform duration-300" />
-                  <span className="hidden sm:inline">DARK</span>
+                  <Moon className="w-3.5 h-3.5 text-[#12100E] group-hover:-rotate-12 transition-transform duration-300" />
+                  <span className="hidden sm:inline">OBSIDIAN</span>
                 </>
               )}
             </button>

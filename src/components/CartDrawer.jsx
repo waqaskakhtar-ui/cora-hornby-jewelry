@@ -12,23 +12,23 @@ export default function CartDrawer({ isOpen, onClose, items, onRemoveItem, onCle
   return (
     <div className="fixed inset-0 z-50 flex justify-end bg-[#111111]/60 dark:bg-black/75 backdrop-blur-xs animate-fade-in">
       <div 
-        className="w-full max-w-md bg-[#FAF9F5] dark:bg-[#121110] h-full shadow-2xl flex flex-col justify-between border-l border-[#111111]/10 dark:border-white/10 overflow-hidden transition-colors duration-300"
+        className="w-full max-w-md bg-[#FAF8F2] dark:bg-[#0C0A09] h-full shadow-2xl flex flex-col justify-between border-l border-[#12100E]/10 dark:border-white/10 overflow-hidden transition-colors duration-500"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Drawer Header */}
-        <div className="p-6 border-b border-[#111111]/10 dark:border-white/10 flex items-center justify-between">
+        <div className="p-6 border-b border-[#12100E]/10 dark:border-white/10 flex items-center justify-between">
           <div>
-            <h3 className="font-display-grotesk text-xl font-bold text-[#111111] dark:text-[#FAF9F5]">
+            <h3 className="font-editorial-luxury text-2xl font-normal text-[#12100E] dark:text-[#FAF8F2]">
               STUDIO BAG
             </h3>
-            <span className="font-editorial-mono text-[10px] uppercase tracking-widest text-[#8A867E] dark:text-[#8E8B83]">
+            <span className="font-editorial-mono text-[10px] uppercase tracking-widest text-[#8F8A80]">
               {items.length} {items.length === 1 ? 'PIECE' : 'PIECES'} SELECTED
             </span>
           </div>
 
           <button
             onClick={onClose}
-            className="p-2 text-[#111111] dark:text-[#FAF9F5] hover:opacity-60 transition-opacity"
+            className="p-2 text-[#12100E] dark:text-[#FAF8F2] hover:opacity-60 transition-opacity"
             aria-label="Close bag drawer"
           >
             <X className="w-5 h-5" />
@@ -36,28 +36,28 @@ export default function CartDrawer({ isOpen, onClose, items, onRemoveItem, onCle
         </div>
 
         {/* Items List */}
-        <div className="p-6 flex-1 overflow-y-auto divide-y divide-[#111111]/8 dark:divide-white/10">
+        <div className="p-6 flex-1 overflow-y-auto divide-y divide-[#12100E]/8 dark:divide-white/10">
           {items.length === 0 ? (
             <div className="h-full flex flex-col items-center justify-center text-center space-y-3 py-16">
-              <span className="font-editorial-mono text-xs uppercase tracking-widest text-[#8A867E] dark:text-[#8E8B83]">
+              <span className="font-editorial-mono text-xs uppercase tracking-widest text-[#8F8A80]">
                 YOUR BAG IS EMPTY
               </span>
-              <p className="text-sm text-[#73716B] dark:text-[#A6A49E] max-w-xs font-editorial-body">
+              <p className="text-xs text-[#78746B] dark:text-[#A8A49C] max-w-xs font-editorial-body">
                 Explore the studio archive and discover handcrafted pieces from Maine.
               </p>
             </div>
           ) : (
             items.map((item, index) => (
               <div key={`${item.id}-${index}`} className="py-4 flex gap-4 items-center">
-                <div className="w-16 h-16 bg-[#F0EEE6] dark:bg-[#1E1D1B] overflow-hidden shrink-0 border border-[#111111]/8 dark:border-white/10">
-                  <img src={item.image} alt={item.name} className="w-full h-full object-cover" />
+                <div className="w-16 h-16 bg-[#F2EFE8] dark:bg-[#161412] overflow-hidden shrink-0">
+                  <img src={item.image} alt={item.name} className="w-full h-full object-contain" />
                 </div>
 
                 <div className="flex-1 min-w-0">
-                  <h4 className="font-display-grotesk text-base font-bold text-[#111111] dark:text-[#FAF9F5] truncate">
+                  <h4 className="font-editorial-luxury text-lg font-normal text-[#12100E] dark:text-[#FAF8F2] truncate">
                     {item.name}
                   </h4>
-                  <div className="font-editorial-mono text-sm font-semibold text-[#111111] dark:text-[#FAF9F5]">
+                  <div className="font-editorial-mono text-sm font-bold text-[#C5A869]">
                     {item.price}
                   </div>
                   <div className="font-editorial-mono text-[10px] uppercase text-[#8A867E] dark:text-[#8E8B83] truncate">

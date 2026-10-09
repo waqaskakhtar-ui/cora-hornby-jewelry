@@ -1,150 +1,110 @@
 import React from 'react';
-import { Package, Truck, ShieldCheck, CheckCircle2, Gift, RefreshCw } from 'lucide-react';
+import { Package, Truck, ShieldCheck, CheckCircle2, Gift, RefreshCw, Sparkles } from 'lucide-react';
 import { STUDIO_ASSURANCES } from '../data/coraData';
 
 export default function StudioAssurances() {
   const { packaging, shipping, guarantees } = STUDIO_ASSURANCES;
 
+  const pillars = [
+    {
+      number: '01',
+      tag: 'PACKAGING',
+      icon: Gift,
+      title: packaging.title,
+      subtitle: packaging.subtitle,
+      description: packaging.description,
+      features: packaging.features
+    },
+    {
+      number: '02',
+      tag: 'DISPATCH',
+      icon: Truck,
+      title: shipping.title,
+      subtitle: shipping.subtitle,
+      description: shipping.description,
+      features: shipping.features
+    },
+    {
+      number: '03',
+      tag: 'PEACE OF MIND',
+      icon: RefreshCw,
+      title: guarantees.title,
+      subtitle: guarantees.subtitle,
+      description: guarantees.description,
+      features: guarantees.features
+    }
+  ];
+
   return (
-    <section id="assurances" className="py-16 lg:py-24 bg-[#FAF9F5] dark:bg-[#121110] text-[#111111] dark:text-[#FAF9F5] border-t border-[#111111]/8 dark:border-white/10 transition-colors duration-500">
-      <div className="max-w-[1720px] mx-auto px-6 sm:px-10 lg:px-14">
+    <section 
+      id="assurances" 
+      className="py-20 lg:py-32 bg-[#F5F2EA] dark:bg-[#080706] text-[#12100E] dark:text-[#F7F5EE] border-t border-[#12100E]/8 dark:border-white/10 transition-colors duration-700 relative overflow-hidden"
+    >
+      <div className="max-w-[1720px] mx-auto px-6 sm:px-10 lg:px-16">
         
-        {/* Section Header */}
-        <div className="space-y-3 pb-8 border-b border-[#111111]/10 dark:border-white/10 max-w-3xl">
-          <div className="font-editorial-mono text-[10px] uppercase tracking-[0.25em] text-[#A88B58] font-semibold flex items-center gap-2">
-            <ShieldCheck className="w-4 h-4 text-[#A88B58]" />
+        {/* EDITORIAL HEADER */}
+        <div className="max-w-3xl space-y-3 pb-12 border-b border-[#12100E]/10 dark:border-white/10">
+          <div className="font-editorial-mono text-[10px] uppercase tracking-[0.3em] text-[#C5A869] font-bold flex items-center gap-2">
+            <ShieldCheck className="w-3.5 h-3.5" />
             <span>STUDIO ASSURANCES & COLLECTOR CARE</span>
           </div>
 
-          <h2 className="font-display-grotesk text-3xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-[#111111] dark:text-[#FAF9F5] leading-none">
-            Packaging, Shipping & Guarantees
+          <h2 className="font-editorial-luxury text-4xl sm:text-6xl lg:text-7xl font-normal tracking-tight text-[#12100E] dark:text-[#FAF8F2] leading-none">
+            Care Beyond the Bench
           </h2>
 
-          <p className="text-sm sm:text-base text-[#5E5C57] dark:text-[#B5B0A4] font-editorial-body leading-relaxed">
-            Every piece leaves our Cape Elizabeth, Maine studio prepared for a lifetime of wear. From our custom logo gift boxes to guaranteed USPS insured transit and full money-back returns.
+          <p className="font-editorial-serif italic text-base sm:text-xl text-[#78746B] dark:text-[#C5A869]">
+            From our debossed logo gift boxes to fully insured USPS Priority shipping and a 100% money-back guarantee.
           </p>
         </div>
 
-        {/* 3 Pillars Grid */}
-        <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-8">
-          
-          {/* Pillar 1: Packaging */}
-          <div className="bg-[#F2EFE8] dark:bg-[#181715] border border-[#111111]/10 dark:border-white/10 p-6 sm:p-8 flex flex-col justify-between shadow-xs transition-all duration-300 hover:border-[#A88B58]/40 hover:shadow-[0_12px_30px_rgba(0,0,0,0.06)] group">
-            <div className="space-y-4">
-              <div className="w-10 h-10 rounded-full bg-[#111111] dark:bg-[#FAF9F5] text-[#FAF9F5] dark:text-[#111111] flex items-center justify-center">
-                <Gift className="w-5 h-5" />
-              </div>
+        {/* ARCHITECTURAL TRIPTYCH: Generous Whitespace, Floating Columns */}
+        <div className="mt-16 grid grid-cols-1 lg:grid-cols-3 gap-12 lg:gap-16">
+          {pillars.map((p) => {
+            const Icon = p.icon;
+            return (
+              <div 
+                key={p.number}
+                className="space-y-6 group"
+              >
+                {/* Minimal Top Identification */}
+                <div className="flex items-center justify-between font-editorial-mono text-[10px] text-[#8F8A80] dark:text-[#888379] uppercase tracking-widest pb-3 border-b border-[#12100E]/8 dark:border-white/10">
+                  <span className="text-[#C5A869] font-bold text-sm font-editorial-luxury">{p.number}</span>
+                  <span>{p.tag}</span>
+                </div>
 
-              <div>
-                <span className="font-editorial-mono text-[9px] uppercase tracking-widest text-[#A88B58] block">
-                  01 / PRESENTATION
-                </span>
-                <h3 className="font-display-grotesk text-2xl font-bold text-[#111111] dark:text-[#FAF9F5] mt-0.5">
-                  {packaging.title}
-                </h3>
-                <span className="text-xs font-editorial-mono text-[#73716B] dark:text-[#9E9A90] block mt-1">
-                  {packaging.subtitle}
-                </span>
-              </div>
-
-              <p className="text-xs sm:text-sm text-[#5E5C57] dark:text-[#C2BCAB] font-editorial-body leading-relaxed">
-                {packaging.description}
-              </p>
-
-              <div className="pt-2 space-y-2 border-t border-[#111111]/8 dark:border-white/10 font-editorial-mono text-xs">
-                {packaging.features.map((feat, i) => (
-                  <div key={i} className="flex items-start gap-2 text-[#4A4742] dark:text-[#D4D0C7]">
-                    <CheckCircle2 className="w-3.5 h-3.5 text-[#B09462] flex-shrink-0 mt-0.5" />
-                    <span>{feat}</span>
+                {/* Pillar Typography */}
+                <div className="space-y-1">
+                  <h3 className="font-editorial-luxury text-2xl sm:text-3xl font-normal text-[#12100E] dark:text-[#FAF8F2] group-hover:text-[#C5A869] transition-colors">
+                    {p.title}
+                  </h3>
+                  <div className="font-editorial-mono text-[10px] text-[#8F8A80] dark:text-[#888379] uppercase tracking-wider">
+                    {p.subtitle}
                   </div>
-                ))}
+                </div>
+
+                <p className="font-editorial-body text-xs sm:text-sm text-[#5E5A54] dark:text-[#B5B0A4] leading-relaxed">
+                  {p.description}
+                </p>
+
+                {/* Features List */}
+                <div className="space-y-2 pt-2 font-editorial-mono text-[11px] text-[#78746B] dark:text-[#A8A49C]">
+                  {p.features.map((feat, i) => (
+                    <div key={i} className="flex items-start gap-2.5">
+                      <span className="text-[#C5A869] mt-0.5">✦</span>
+                      <span>{feat}</span>
+                    </div>
+                  ))}
+                </div>
               </div>
-            </div>
+            );
+          })}
+        </div>
 
-            <div className="mt-6 pt-4 border-t border-[#111111]/8 dark:border-white/10 font-editorial-mono text-[10px] text-[#8A867E] dark:text-[#7E7A70] flex items-center justify-between">
-              <span>CUSTOM LOGO BOX</span>
-              <span className="text-[#111111] dark:text-[#FAF9F5] font-semibold">GIFT-READY</span>
-            </div>
-          </div>
-
-          {/* Pillar 2: Shipping */}
-          <div className="bg-[#F2EFE8] dark:bg-[#181715] border border-[#111111]/10 dark:border-white/10 p-6 sm:p-8 flex flex-col justify-between shadow-xs transition-all duration-300 hover:border-[#A88B58]/40 hover:shadow-[0_12px_30px_rgba(0,0,0,0.06)] group">
-            <div className="space-y-4">
-              <div className="w-10 h-10 rounded-full bg-[#111111] dark:bg-[#FAF9F5] text-[#FAF9F5] dark:text-[#111111] flex items-center justify-center">
-                <Truck className="w-5 h-5" />
-              </div>
-
-              <div>
-                <span className="font-editorial-mono text-[9px] uppercase tracking-widest text-[#A88B58] block">
-                  02 / FULFILLMENT
-                </span>
-                <h3 className="font-display-grotesk text-2xl font-bold text-[#111111] dark:text-[#FAF9F5] mt-0.5">
-                  {shipping.title}
-                </h3>
-                <span className="text-xs font-editorial-mono text-[#73716B] dark:text-[#9E9A90] block mt-1">
-                  {shipping.subtitle}
-                </span>
-              </div>
-
-              <p className="text-xs sm:text-sm text-[#5E5C57] dark:text-[#C2BCAB] font-editorial-body leading-relaxed">
-                {shipping.description}
-              </p>
-
-              <div className="pt-2 space-y-2 border-t border-[#111111]/8 dark:border-white/10 font-editorial-mono text-xs">
-                {shipping.features.map((feat, i) => (
-                  <div key={i} className="flex items-start gap-2 text-[#4A4742] dark:text-[#D4D0C7]">
-                    <CheckCircle2 className="w-3.5 h-3.5 text-[#B09462] flex-shrink-0 mt-0.5" />
-                    <span>{feat}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            <div className="mt-6 pt-4 border-t border-[#111111]/8 dark:border-white/10 font-editorial-mono text-[10px] text-[#8A867E] dark:text-[#7E7A70] flex items-center justify-between">
-              <span>USPS PRIORITY DISPATCH</span>
-              <span className="text-[#111111] dark:text-[#FAF9F5] font-semibold">1-2 DAYS BENCH OUT</span>
-            </div>
-          </div>
-
-          {/* Pillar 3: Guarantees */}
-          <div className="bg-[#F2EFE8] dark:bg-[#181715] border border-[#111111]/10 dark:border-white/10 p-6 sm:p-8 flex flex-col justify-between shadow-xs transition-all duration-300 hover:border-[#A88B58]/40 hover:shadow-[0_12px_30px_rgba(0,0,0,0.06)] group">
-            <div className="space-y-4">
-              <div className="w-10 h-10 rounded-full bg-[#111111] dark:bg-[#FAF9F5] text-[#FAF9F5] dark:text-[#111111] flex items-center justify-center">
-                <RefreshCw className="w-5 h-5" />
-              </div>
-
-              <div>
-                <span className="font-editorial-mono text-[9px] uppercase tracking-widest text-[#A88B58] block">
-                  03 / PEACE OF MIND
-                </span>
-                <h3 className="font-display-grotesk text-2xl font-bold text-[#111111] dark:text-[#FAF9F5] mt-0.5">
-                  {guarantees.title}
-                </h3>
-                <span className="text-xs font-editorial-mono text-[#73716B] dark:text-[#9E9A90] block mt-1">
-                  {guarantees.subtitle}
-                </span>
-              </div>
-
-              <p className="text-xs sm:text-sm text-[#5E5C57] dark:text-[#C2BCAB] font-editorial-body leading-relaxed">
-                {guarantees.description}
-              </p>
-
-              <div className="pt-2 space-y-2 border-t border-[#111111]/8 dark:border-white/10 font-editorial-mono text-xs">
-                {guarantees.features.map((feat, i) => (
-                  <div key={i} className="flex items-start gap-2 text-[#4A4742] dark:text-[#D4D0C7]">
-                    <CheckCircle2 className="w-3.5 h-3.5 text-[#B09462] flex-shrink-0 mt-0.5" />
-                    <span>{feat}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            <div className="mt-6 pt-4 border-t border-[#111111]/8 dark:border-white/10 font-editorial-mono text-[10px] text-[#8A867E] dark:text-[#7E7A70] flex items-center justify-between">
-              <span>30-DAY MONEY BACK</span>
-              <span className="text-[#111111] dark:text-[#FAF9F5] font-semibold">100% ASSURANCE</span>
-            </div>
-          </div>
-
+        {/* Studio Provenance Sign-Off */}
+        <div className="mt-16 pt-8 border-t border-[#12100E]/10 dark:border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4 font-editorial-mono text-[10px] text-[#8F8A80] dark:text-[#888379] uppercase tracking-widest">
+          <div>CAPE ELIZABETH STUDIO · MAINE COAST</div>
+          <div className="text-[#12100E] dark:text-[#FAF8F2] font-semibold">100% MONEY-BACK PROMISE ON ALL COLLECTOR ACQUISITIONS</div>
         </div>
 
       </div>

@@ -34,16 +34,16 @@ export default function Footer() {
   return (
     <footer
       ref={footerRef}
-      className="bg-[#FAF9F5] dark:bg-[#0A0909] border-t border-[#111111]/10 dark:border-white/10 pt-16 pb-0 overflow-hidden relative transition-colors duration-300"
+      className="bg-[#FAF8F2] dark:bg-[#060505] border-t border-[#12100E]/10 dark:border-white/10 pt-20 pb-0 overflow-hidden relative transition-colors duration-700"
     >
-      <div className="max-w-[1720px] mx-auto px-6 sm:px-10 lg:px-14">
+      <div className="max-w-[1720px] mx-auto px-6 sm:px-10 lg:px-16">
         
-        {/* Upper Footer Columns (Directly modeled on the reference screenshot) */}
-        <div className="grid grid-cols-12 gap-8 lg:gap-12 pb-14 border-b border-[#111111]/8 dark:border-white/10">
+        {/* Upper Footer Columns */}
+        <div className="grid grid-cols-12 gap-8 lg:gap-12 pb-16 border-b border-[#12100E]/8 dark:border-white/10">
           
           {/* Brand Info */}
           <div className="col-span-12 lg:col-span-4 space-y-4">
-            <h3 className="font-display-grotesk text-2xl font-bold tracking-tight text-[#111111] dark:text-[#FAF9F5]">
+            <h3 className="font-editorial-luxury text-3xl font-normal tracking-tight text-[#12100E] dark:text-[#FAF8F2]">
               {BRAND_INFO.name}
             </h3>
             <p className="text-sm sm:text-base text-[#73716B] dark:text-[#A6A49E] font-editorial-body max-w-sm leading-relaxed">
@@ -131,7 +131,7 @@ export default function Footer() {
         ref={wordmarkRef}
         className="w-full overflow-hidden select-none pointer-events-none mt-6 sm:mt-10 -mb-6 sm:-mb-10 lg:-mb-16"
       >
-        <div className="font-display-grotesk font-black text-[#111111] dark:text-[#FAF9F5]/90 text-[17vw] leading-[0.75] tracking-[-0.06em] whitespace-nowrap uppercase opacity-[0.98]">
+        <div className="font-editorial-luxury italic font-light text-[#12100E] dark:text-[#FAF8F2]/90 text-[18vw] leading-[0.75] tracking-tight whitespace-nowrap uppercase opacity-[0.96]">
           cora hornby atelier
         </div>
       </div>

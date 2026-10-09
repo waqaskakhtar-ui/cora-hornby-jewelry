@@ -99,7 +99,7 @@ export default function App() {
   };
 
   return (
-    <div className={`min-h-screen ${isDark ? 'dark bg-[#0A0909] text-[#FAF9F5]' : 'bg-[#F9F8F5] text-[#111111]'} font-sans selection:bg-[#111111] selection:text-[#FAF9F5] transition-colors duration-300`}>
+    <div className={`min-h-screen ${isDark ? 'dark bg-[#0C0A09] text-[#FAF8F2]' : 'bg-[#FAF8F2] text-[#12100E]'} font-sans selection:bg-[#C5A869] selection:text-[#0C0A09] transition-colors duration-700`}>
       
       {/* Ambient Environmental Cursor & Lighting Follower */}
       <EnvironmentalCursor />
