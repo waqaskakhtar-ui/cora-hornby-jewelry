@@ -1,26 +1,34 @@
 import React, { useState, useEffect } from 'react';
-import { Search, ShoppingBag, Menu, X, Sun, Moon } from 'lucide-react';
-import { BRAND_INFO } from '../data/coraData';
+import { Link, useLocation } from 'react-router-dom';
+import { Search, ShoppingBag, Menu, X, Sun, Moon, Compass, Sparkles, Grid } from 'lucide-react';
+import { BRAND_INFO, TRAVEL_DESTINATIONS, COLLECTIONS, PRODUCT_CATEGORIES } from '../data/coraData';
 
 export default function Navbar({ cartCount, onOpenCart, onOpenSearch, isDark, onToggleTheme }) {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const location = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 40);
+      setScrolled(window.scrollY > 30);
     };
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Close mobile menu on route change
+  useEffect(() => {
+    setMobileMenuOpen(false);
+  }, [location.pathname]);
+
   const navLinks = [
-    { label: "Travels", href: "#travels" },
-    { label: "Collections", href: "#collection" },
-    { label: "3-Way Index", href: "#index" },
-    { label: "Customers", href: "#customers" },
-    { label: "Guarantees", href: "#assurances" },
-    { label: "About Cora", href: "#story" },
+    { label: "Home", href: "/" },
+    { label: "Travel Inspiration", href: "/travel" },
+    { label: "Collections", href: "/collections" },
+    { label: "Shop", href: "/shop" },
+    { label: "Customers", href: "/customers" },
+    { label: "Story", href: "/story" },
+    { label: "Packaging & Guarantees", href: "/packaging-and-shipping" },
   ];
 
   return (
@@ -28,94 +36,107 @@ export default function Navbar({ cartCount, onOpenCart, onOpenSearch, isDark, on
       <header
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
           scrolled
-            ? 'bg-[#FAF8F2]/90 dark:bg-[#0C0A09]/90 backdrop-blur-md py-3.5 border-b border-[#12100E]/8 dark:border-white/10 shadow-[0_4px_24px_rgba(0,0,0,0.03)]'
-            : 'bg-transparent py-6 border-b border-transparent'
+            ? 'bg-[#FAF9F5]/90 dark:bg-[#0A0909]/90 backdrop-blur-md py-3.5 border-b border-[#111111]/8 dark:border-white/10 shadow-[0_4px_25px_rgba(0,0,0,0.03)]'
+            : 'bg-[#FAF9F5]/60 dark:bg-[#0A0909]/60 backdrop-blur-xs py-4 border-b border-transparent'
         }`}
       >
-        <div className="max-w-[1720px] mx-auto px-6 sm:px-10 lg:px-16 flex items-center justify-between">
+        <div className="max-w-[1720px] mx-auto px-6 sm:px-10 lg:px-14 flex items-center justify-between">
           
           {/* Left: Brand Origin / Identifier */}
           <div className="flex items-center gap-6">
-            <a 
-              href="#" 
+            <Link 
+              to="/" 
               className="group flex flex-col items-start text-left"
             >
-              <span className="font-editorial-luxury text-2xl sm:text-3xl font-normal tracking-tight text-[#12100E] dark:text-[#FAF8F2] group-hover:opacity-75 transition-opacity">
+              <span className="font-editorial-heading text-xl sm:text-2xl font-bold tracking-tight text-[#111111] dark:text-[#FAF9F5] group-hover:text-[#A88B58] transition-colors">
                 {BRAND_INFO.name}
               </span>
-              <span className="font-editorial-mono text-[9px] uppercase tracking-[0.25em] text-[#78746B] dark:text-[#A8A49C]">
-                CAPE ELIZABETH · ME
+              <span className="font-editorial-mono text-[9px] uppercase tracking-[0.22em] text-[#73716B] dark:text-[#9E9A90]">
+                CAPE ELIZABETH · MAINE
               </span>
-            </a>
+            </Link>
 
-            <div className="hidden xl:flex items-center gap-2 pl-6 border-l border-[#12100E]/10 dark:border-white/10 text-[#8F8A80] dark:text-[#888379] text-[11px] font-editorial-mono">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#C5A869]"></span>
-              <span>{BRAND_INFO.coordinates}</span>
+            <div className="hidden xl:flex items-center gap-2 pl-6 border-l border-[#111111]/10 dark:border-white/10 text-[#8A867E] dark:text-[#9E9A90] text-[10px] font-editorial-mono">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#A88B58]"></span>
+              <span>EST. 2018 · STUDIO BENCH</span>
             </div>
           </div>
 
-          {/* Center: Minimal Editorial Navigation */}
-          <nav className="hidden md:flex items-center gap-8 lg:gap-10">
-            {navLinks.map((link) => (
-              <a
-                key={link.label}
-                href={link.href}
-                className="text-[12px] font-editorial-mono uppercase tracking-[0.16em] text-[#12100E]/80 dark:text-[#FAF8F2]/80 hover:text-[#C5A869] dark:hover:text-[#C5A869] font-medium transition-colors relative py-1 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[1px] after:bg-[#C5A869] hover:after:w-full after:transition-all after:duration-300"
-              >
-                {link.label}
-              </a>
-            ))}
+          {/* Center: Luxury Editorial Multi-Page Navigation */}
+          <nav className="hidden lg:flex items-center gap-7 xl:gap-9">
+            {navLinks.map((link) => {
+              const isActive = link.href === '/' 
+                ? location.pathname === '/' 
+                : location.pathname.startsWith(link.href);
+
+              return (
+                <Link
+                  key={link.label}
+                  to={link.href}
+                  className={`text-[12px] font-editorial-mono uppercase tracking-[0.14em] py-1 transition-all relative ${
+                    isActive
+                      ? 'text-[#111111] dark:text-[#FAF9F5] font-semibold after:content-[\'\'] after:absolute after:bottom-0 after:left-0 after:w-full after:h-[1.5px] after:bg-[#A88B58]'
+                      : 'text-[#6B6862] dark:text-[#9E9A90] hover:text-[#111111] dark:hover:text-[#FAF9F5]'
+                  }`}
+                >
+                  {link.label}
+                </Link>
+              );
+            })}
           </nav>
 
           {/* Right: Actions (Theme Switcher, Search, Bag, Mobile Trigger) */}
-          <div className="flex items-center gap-3 sm:gap-5">
+          <div className="flex items-center gap-3 sm:gap-4">
             
-            {/* Dark / Light Mode Switcher Button (Glossy Sheen) */}
+            {/* Dark / Ivory Theme Switcher Button */}
             <button
               onClick={onToggleTheme}
-              className="gloss-pill group relative flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[10px] font-editorial-mono uppercase tracking-[0.14em] text-[#12100E] dark:text-[#FAF8F2] hover:text-[#C5A869] dark:hover:text-[#C5A869] transition-all shadow-xs"
+              className="group relative flex items-center gap-1.5 px-2.5 py-1 text-[10px] font-editorial-mono uppercase tracking-[0.14em] border border-[#111111]/15 dark:border-white/20 bg-[#FAF9F5] dark:bg-[#1A1917] text-[#111111] dark:text-[#FAF9F5] hover:border-[#A88B58] dark:hover:border-[#A88B58] transition-all shadow-2xs"
               aria-label="Toggle dark mode"
               title={isDark ? "Switch to Ivory Studio theme" : "Switch to Obsidian Dark theme"}
             >
               {isDark ? (
                 <>
-                  <Sun className="w-3.5 h-3.5 text-[#C5A869] group-hover:rotate-45 transition-transform duration-300" />
-                  <span className="hidden sm:inline">ALABASTER</span>
+                  <Sun className="w-3.5 h-3.5 text-[#B09462] group-hover:rotate-45 transition-transform duration-300" />
+                  <span className="hidden sm:inline">IVORY</span>
                 </>
               ) : (
                 <>
-                  <Moon className="w-3.5 h-3.5 text-[#12100E] group-hover:-rotate-12 transition-transform duration-300" />
-                  <span className="hidden sm:inline">OBSIDIAN</span>
+                  <Moon className="w-3.5 h-3.5 text-[#111111] group-hover:-rotate-12 transition-transform duration-300" />
+                  <span className="hidden sm:inline">DARK</span>
                 </>
               )}
             </button>
 
+            {/* Global Search Button */}
             <button
               onClick={onOpenSearch}
-              className="text-[12px] font-editorial-mono uppercase tracking-[0.12em] text-[#111111]/75 dark:text-[#FAF9F5]/75 hover:text-[#A88B58] dark:hover:text-[#A88B58] flex items-center gap-1.5 py-1 transition-colors group"
+              className="p-2 text-[#111111]/80 dark:text-[#FAF9F5]/80 hover:text-[#A88B58] dark:hover:text-[#A88B58] transition-colors"
               aria-label="Search Collection"
+              title="Search Archive"
             >
-              <Search className="w-3.5 h-3.5 group-hover:scale-110 transition-transform" />
-              <span className="hidden sm:inline">Search</span>
+              <Search className="w-4 h-4" />
             </button>
 
+            {/* Cart Drawer Trigger */}
             <button
               onClick={onOpenCart}
-              className="group relative flex items-center gap-2 text-[12px] font-editorial-mono uppercase tracking-[0.12em] text-[#111111] dark:text-[#FAF9F5] hover:text-[#A88B58] dark:hover:text-[#A88B58] py-1 transition-colors"
+              className="relative p-2 text-[#111111]/80 dark:text-[#FAF9F5]/80 hover:text-[#A88B58] dark:hover:text-[#A88B58] transition-colors flex items-center gap-1.5"
               aria-label="View Shopping Bag"
             >
-              <ShoppingBag className="w-3.5 h-3.5 transition-transform group-hover:scale-110 group-hover:text-[#A88B58]" />
-              <span>Bag</span>
-              <span className="inline-flex items-center justify-center w-4 h-4 rounded-full bg-[#111111] dark:bg-[#FAF9F5] text-[#FAF9F5] dark:text-[#111111] text-[10px] font-sans font-semibold group-hover:bg-[#A88B58] group-hover:text-white transition-colors">
-                {cartCount}
-              </span>
+              <ShoppingBag className="w-4 h-4" />
+              {cartCount > 0 && (
+                <span className="min-w-[16px] h-[16px] px-1 rounded-full bg-[#111111] dark:bg-[#FAF9F5] text-[#FAF9F5] dark:text-[#111111] text-[9px] font-editorial-mono font-bold flex items-center justify-center">
+                  {cartCount}
+                </span>
+              )}
             </button>
 
-            {/* Mobile Menu Button */}
+            {/* Mobile Menu Toggle Button */}
             <button
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="md:hidden p-2 text-[#111111] dark:text-[#FAF9F5] hover:opacity-75 transition-opacity"
-              aria-label="Toggle navigation menu"
+              onClick={() => setMobileMenuOpen((prev) => !prev)}
+              className="p-2 lg:hidden text-[#111111] dark:text-[#FAF9F5]"
+              aria-label="Toggle mobile menu"
             >
               {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
             </button>
@@ -126,40 +147,54 @@ export default function Navbar({ cartCount, onOpenCart, onOpenSearch, isDark, on
 
       {/* Mobile Drawer Navigation */}
       {mobileMenuOpen && (
-        <div className="fixed inset-0 z-40 bg-[#F9F8F5] dark:bg-[#0F0E0D] pt-28 px-8 flex flex-col justify-between pb-12 md:hidden animate-fade-in text-[#111111] dark:text-[#FAF9F5]">
+        <div className="fixed inset-0 z-40 bg-[#FAF9F5] dark:bg-[#0A0909] pt-24 px-6 flex flex-col justify-between pb-10 lg:hidden text-[#111111] dark:text-[#FAF9F5] overflow-y-auto animate-fade-in">
           <div className="space-y-6">
             <div className="flex items-center justify-between border-b border-[#111111]/10 dark:border-white/10 pb-3">
-              <span className="font-editorial-mono text-[11px] uppercase tracking-widest text-[#8A867E] dark:text-[#9E9A90]">
-                Studio Navigation
+              <span className="font-editorial-mono text-[10px] uppercase tracking-widest text-[#73716B] dark:text-[#9E9A90]">
+                STUDIO DIRECTORY
               </span>
               <button
                 onClick={onToggleTheme}
                 className="flex items-center gap-1.5 text-xs font-editorial-mono px-3 py-1 border border-[#111111]/15 dark:border-white/20"
               >
                 {isDark ? <Sun className="w-3.5 h-3.5 text-[#B09462]" /> : <Moon className="w-3.5 h-3.5" />}
-                <span>{isDark ? "IVORY MODE" : "DARK MODE"}</span>
+                <span>{isDark ? "IVORY" : "DARK"}</span>
               </button>
             </div>
 
-            <nav className="flex flex-col gap-5">
+            <nav className="flex flex-col gap-4">
               {navLinks.map((link, idx) => (
-                <a
+                <Link
                   key={link.label}
-                  href={link.href}
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="font-display-grotesk text-3xl font-bold text-[#111111] dark:text-[#FAF9F5] flex items-center justify-between"
+                  to={link.href}
+                  className="font-editorial-heading text-2xl font-bold text-[#111111] dark:text-[#FAF9F5] hover:text-[#A88B58] flex items-center justify-between py-1 border-b border-[#111111]/5 dark:border-white/5"
                 >
                   <span>{link.label}</span>
-                  <span className="font-editorial-mono text-sm text-[#8A867E]">0{idx + 1}</span>
-                </a>
+                  <span className="font-editorial-mono text-xs text-[#8A867E]">0{idx + 1}</span>
+                </Link>
               ))}
             </nav>
+
+            {/* Quick Directory Links */}
+            <div className="pt-2 grid grid-cols-2 gap-2 font-editorial-mono text-[10px] uppercase">
+              <Link to="/travel/greece" className="p-2 bg-[#EFECE4] dark:bg-[#181715] text-[#5E5C57] dark:text-[#B5B0A4]">
+                ✦ Greece (Inspiration)
+              </Link>
+              <Link to="/travel/guatemala" className="p-2 bg-[#EFECE4] dark:bg-[#181715] text-[#5E5C57] dark:text-[#B5B0A4]">
+                ✦ Guatemala (Jade)
+              </Link>
+              <Link to="/travel/brazil" className="p-2 bg-[#EFECE4] dark:bg-[#181715] text-[#5E5C57] dark:text-[#B5B0A4]">
+                ✦ Brazil (Citrine)
+              </Link>
+              <Link to="/travel/germany" className="p-2 bg-[#EFECE4] dark:bg-[#181715] text-[#5E5C57] dark:text-[#B5B0A4]">
+                ✦ Germany (Bauhaus)
+              </Link>
+            </div>
           </div>
 
-          <div className="pt-8 border-t border-[#111111]/10 dark:border-white/10 space-y-2 font-editorial-mono text-xs text-[#73716B] dark:text-[#9E9A90]">
-            <div>Cape Elizabeth, Maine · USA</div>
+          <div className="pt-6 border-t border-[#111111]/10 dark:border-white/10 space-y-1 font-editorial-mono text-xs text-[#73716B] dark:text-[#9E9A90]">
+            <div>Cape Elizabeth, Maine · Hand-Crafted Bench</div>
             <div>{BRAND_INFO.contact.email}</div>
-            <div>{BRAND_INFO.contact.phone}</div>
           </div>
         </div>
       )}

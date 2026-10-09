@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { X, Search, ArrowRight } from 'lucide-react';
 import { PRODUCTS } from '../data/coraData';
 
 export default function SearchModal({ isOpen, onClose, onSelectProduct }) {
+  const navigate = useNavigate();
   if (!isOpen) return null;
 
   const [query, setQuery] = useState('');
@@ -15,28 +17,28 @@ export default function SearchModal({ isOpen, onClose, onSelectProduct }) {
       });
 
   return (
-    <div className="fixed inset-0 z-50 flex items-start justify-center pt-20 px-4 sm:px-6 bg-[#0C0A09]/75 dark:bg-black/85 backdrop-blur-md animate-fade-in">
+    <div className="fixed inset-0 z-50 flex items-start justify-center pt-20 px-4 sm:px-6 bg-[#111111]/70 dark:bg-black/80 backdrop-blur-sm animate-fade-in">
       <div 
-        className="w-full max-w-3xl bg-[#FAF8F2] dark:bg-[#0C0A09] border border-[#12100E]/15 dark:border-white/15 shadow-2xl overflow-hidden p-6 sm:p-10 transition-colors duration-500"
+        className="w-full max-w-3xl bg-[#FAF9F5] dark:bg-[#121110] border border-[#111111]/15 dark:border-white/15 shadow-2xl overflow-hidden p-6 sm:p-10 transition-colors duration-300"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Search Input Bar */}
-        <div className="flex items-center justify-between pb-6 border-b border-[#12100E]/15 dark:border-white/15">
+        <div className="flex items-center justify-between pb-6 border-b border-[#111111]/15 dark:border-white/15">
           <div className="flex items-center gap-3 flex-1">
-            <Search className="w-5 h-5 text-[#C5A869]" />
+            <Search className="w-5 h-5 text-[#8A867E] dark:text-[#8E8B83]" />
             <input
               type="text"
               autoFocus
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               placeholder="Search pieces, stones (druzy, brass, jade, citrine)..."
-              className="w-full bg-transparent font-editorial-luxury text-xl sm:text-2xl text-[#12100E] dark:text-[#FAF8F2] placeholder-[#8F8A80] dark:placeholder-[#7E7A70] focus:outline-hidden"
+              className="w-full bg-transparent font-display-grotesk text-xl sm:text-2xl text-[#111111] dark:text-[#FAF9F5] placeholder-[#8A867E] dark:placeholder-[#8E8B83] focus:outline-hidden"
             />
           </div>
 
           <button
             onClick={onClose}
-            className="p-2 text-[#12100E] dark:text-[#FAF8F2] hover:opacity-60 transition-opacity ml-4"
+            className="p-2 text-[#111111] dark:text-[#FAF9F5] hover:opacity-60 transition-opacity ml-4"
             aria-label="Close search"
           >
             <X className="w-5 h-5" />
@@ -72,7 +74,8 @@ export default function SearchModal({ isOpen, onClose, onSelectProduct }) {
               <div
                 key={item.id}
                 onClick={() => {
-                  onSelectProduct(item);
+                  navigate(`/product/${item.id}`);
+                  if (onSelectProduct) onSelectProduct(item);
                   onClose();
                 }}
                 className="group flex items-center justify-between p-3 hover:bg-[#F2EFE8] dark:hover:bg-[#1A1918] cursor-pointer transition-colors border border-transparent hover:border-[#111111]/8 dark:hover:border-white/10"

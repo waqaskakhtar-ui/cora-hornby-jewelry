@@ -1,21 +1,31 @@
 import React, { useState, useEffect } from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+
+// Core UI Chrome
 import Navbar from './components/Navbar';
-import Hero from './components/Hero';
-import CollectionEditorial from './components/CollectionEditorial';
-import MaterialFragments from './components/MaterialFragments';
-import TravelInspirationSection from './components/TravelInspirationSection';
-import CustomerStories from './components/CustomerStories';
-import StudioAssurances from './components/StudioAssurances';
-import ExploreIndex from './components/ExploreIndex';
-import BrandStory from './components/BrandStory';
-import FeaturedPiece from './components/FeaturedPiece';
-import Newsletter from './components/Newsletter';
 import Footer from './components/Footer';
+import ScrollToTop from './components/ScrollToTop';
 import ProductModal from './components/ProductModal';
 import CartDrawer from './components/CartDrawer';
 import SearchModal from './components/SearchModal';
 import EnvironmentalCursor from './components/EnvironmentalCursor';
-import { PRODUCTS, FEATURED_MASTERPIECE } from './data/coraData';
+
+// Data Layer
+import { PRODUCTS } from './data/coraData';
+
+// Route Pages
+import HomePage from './pages/HomePage';
+import TravelHubPage from './pages/TravelHubPage';
+import CountryDetailPage from './pages/CountryDetailPage';
+import CollectionsHubPage from './pages/CollectionsHubPage';
+import CollectionDetailPage from './pages/CollectionDetailPage';
+import ShopHubPage from './pages/ShopHubPage';
+import ShopCategoryPage from './pages/ShopCategoryPage';
+import ProductDetailPage from './pages/ProductDetailPage';
+import CustomersPage from './pages/CustomersPage';
+import AboutPage from './pages/AboutPage';
+import PackagingShippingPage from './pages/PackagingShippingPage';
+import GuaranteesPage from './pages/GuaranteesPage';
 
 export default function App() {
   const [selectedProduct, setSelectedProduct] = useState(null);
@@ -51,6 +61,7 @@ export default function App() {
   };
 
   const handleAddToCart = (product) => {
+    if (!product) return;
     setCartItems((prev) => [...prev, product]);
   };
 
@@ -58,141 +69,165 @@ export default function App() {
     setCartItems((prev) => prev.filter((_, i) => i !== index));
   };
 
-  const handleExploreClick = (e) => {
-    e.preventDefault();
-    const elem = document.getElementById('collection');
-    if (elem) {
-      elem.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
-
-  const handleHeroPieceSelect = (piece) => {
-    // Map hero piece to product modal
-    const matched = PRODUCTS.find((p) => p.name.includes(piece.name) || piece.name.includes(p.name)) || {
-      id: piece.id,
-      name: piece.name,
-      category: piece.category,
-      material: piece.material,
-      price: piece.price,
-      origin: piece.origin,
-      description: `Signature work by Cora Hornby. ${piece.annotation}. Produced in Cape Elizabeth, Maine.`,
-      image: piece.mainImage,
-      altImage: piece.supportingImage1,
-      modelImage: piece.supportingImage2
-    };
-    setSelectedProduct(matched);
-  };
-
-  const handleMasterpieceSelect = () => {
-    setSelectedProduct({
-      id: 'cleo-masterpiece',
-      name: FEATURED_MASTERPIECE.name,
-      category: 'Masterpiece · Edition of One',
-      material: 'Cold-forged hammered brass, precision pierced geometry',
-      price: FEATURED_MASTERPIECE.price,
-      origin: 'Cape Elizabeth, Maine Studio',
-      description: 'The Cleo Architectural Pendant explores tension between negative space and solid hammered metal. Individually cold-worked on an antique anvil.',
-      image: FEATURED_MASTERPIECE.mainImage,
-      altImage: PRODUCTS[0].altImage,
-      modelImage: PRODUCTS[0].modelImage
-    });
-  };
-
   return (
-    <div className={`min-h-screen ${isDark ? 'dark bg-[#0C0A09] text-[#FAF8F2]' : 'bg-[#FAF8F2] text-[#12100E]'} font-sans selection:bg-[#C5A869] selection:text-[#0C0A09] transition-colors duration-700`}>
-      
-      {/* Ambient Environmental Cursor & Lighting Follower */}
-      <EnvironmentalCursor />
+    <BrowserRouter>
+      <div className={`min-h-screen ${isDark ? 'dark bg-[#0A0909] text-[#FAF9F5]' : 'bg-[#FAF9F5] text-[#111111]'} font-sans selection:bg-[#111111] selection:text-[#FAF9F5] dark:selection:bg-[#FAF9F5] dark:selection:text-[#111111] transition-colors duration-500`}>
+        
+        {/* Scroll Restorer on Route Change */}
+        <ScrollToTop />
 
-      {/* 1. Sticky Minimal Navbar */}
-      <Navbar
-        cartCount={cartItems.length}
-        onOpenCart={() => setIsCartOpen(true)}
-        onOpenSearch={() => setIsSearchOpen(true)}
-        isDark={isDark}
-        onToggleTheme={toggleTheme}
-      />
+        {/* Ambient Environmental Cursor & Lighting Follower */}
+        <EnvironmentalCursor />
 
-      <main>
-        {/* 2. Hero Section with Giant Typography + Jewelry Overlap */}
-        <Hero
-          onExploreClick={handleExploreClick}
-          onSelectPiece={handleHeroPieceSelect}
+        {/* Sticky Minimal Navbar */}
+        <Navbar
+          cartCount={cartItems.length}
+          onOpenCart={() => setIsCartOpen(true)}
+          onOpenSearch={() => setIsSearchOpen(true)}
+          isDark={isDark}
+          onToggleTheme={toggleTheme}
         />
 
-        {/* 3. Section 2: Travel Inspiration Archive (8 Countries & 3 Pairs Each) */}
-        <TravelInspirationSection
-          onSelectProduct={(product) => setSelectedProduct(product)}
-          onQuickAdd={handleAddToCart}
+        {/* Multi-Page Routes */}
+        <main className="min-h-screen">
+          <Routes>
+            {/* 1. Home / Landing Editorial Spread */}
+            <Route 
+              path="/" 
+              element={
+                <HomePage 
+                  onQuickAdd={handleAddToCart} 
+                  onSelectProduct={(p) => setSelectedProduct(p)} 
+                />
+              } 
+            />
+
+            {/* 2. Travel Inspiration Archive (8 Countries) */}
+            <Route 
+              path="/travel" 
+              element={<TravelHubPage />} 
+            />
+            <Route 
+              path="/travel/:countryId" 
+              element={
+                <CountryDetailPage 
+                  onQuickAdd={handleAddToCart} 
+                  onSelectProduct={(p) => setSelectedProduct(p)} 
+                />
+              } 
+            />
+
+            {/* 3. Curated Collections (5 Signature Lines) */}
+            <Route 
+              path="/collections" 
+              element={<CollectionsHubPage />} 
+            />
+            <Route 
+              path="/collections/:collectionSlug" 
+              element={
+                <CollectionDetailPage 
+                  onQuickAdd={handleAddToCart} 
+                  onSelectProduct={(p) => setSelectedProduct(p)} 
+                />
+              } 
+            />
+
+            {/* 4. Shop by Product Taxonomy & PDP */}
+            <Route 
+              path="/shop" 
+              element={
+                <ShopHubPage 
+                  onQuickAdd={handleAddToCart} 
+                  onSelectProduct={(p) => setSelectedProduct(p)} 
+                />
+              } 
+            />
+            <Route 
+              path="/shop/:categorySlug" 
+              element={
+                <ShopCategoryPage 
+                  onQuickAdd={handleAddToCart} 
+                  onSelectProduct={(p) => setSelectedProduct(p)} 
+                />
+              } 
+            />
+            <Route 
+              path="/product/:productId" 
+              element={
+                <ProductDetailPage 
+                  onQuickAdd={handleAddToCart} 
+                />
+              } 
+            />
+
+            {/* 5. Cora's Customers (Asymmetrical Masonry & Etsy Reviews) */}
+            <Route 
+              path="/customers" 
+              element={<CustomersPage />} 
+            />
+
+            {/* 6. Brand & Support Pages */}
+            <Route 
+              path="/story" 
+              element={<AboutPage />} 
+            />
+            <Route 
+              path="/about" 
+              element={<AboutPage />} 
+            />
+            <Route 
+              path="/packaging-and-shipping" 
+              element={<PackagingShippingPage />} 
+            />
+            <Route 
+              path="/packaging" 
+              element={<PackagingShippingPage />} 
+            />
+            <Route 
+              path="/guarantees" 
+              element={<GuaranteesPage />} 
+            />
+
+            {/* Fallback to Home */}
+            <Route 
+              path="*" 
+              element={
+                <HomePage 
+                  onQuickAdd={handleAddToCart} 
+                  onSelectProduct={(p) => setSelectedProduct(p)} 
+                />
+              } 
+            />
+          </Routes>
+        </main>
+
+        {/* Global Footer with Oversized Bottom Signature Wordmark */}
+        <Footer />
+
+        {/* Quick-View Product Modal */}
+        <ProductModal
+          product={selectedProduct}
+          onClose={() => setSelectedProduct(null)}
+          onAddToCart={handleAddToCart}
         />
 
-        {/* 4. Section 3: Curated Collections (5 Official Lines) */}
-        <CollectionEditorial
-          onSelectProduct={(product) => setSelectedProduct(product)}
-          onQuickAdd={handleAddToCart}
+        {/* Studio Cart Drawer */}
+        <CartDrawer
+          isOpen={isCartOpen}
+          onClose={() => setIsCartOpen(false)}
+          items={cartItems}
+          onRemoveItem={handleRemoveFromCart}
+          onClearCart={() => setCartItems([])}
         />
 
-        {/* 5. Section 4: Material Fragments Typographic Section */}
-        <MaterialFragments
-          onSelectMaterial={(mat) => {
-            setIsSearchOpen(true);
-          }}
+        {/* Omnipresent Archival Search Modal */}
+        <SearchModal
+          isOpen={isSearchOpen}
+          onClose={() => setIsSearchOpen(false)}
+          onSelectProduct={(p) => setSelectedProduct(p)}
         />
 
-        {/* 6. Section 5: 3-Way Taxonomy Browsing Index */}
-        <ExploreIndex
-          onCategorySelect={(cat) => {
-            const elem = document.getElementById('collection');
-            if (elem) elem.scrollIntoView({ behavior: 'smooth' });
-          }}
-          onSelectCountry={(countryId) => {
-            const elem = document.getElementById('travels');
-            if (elem) elem.scrollIntoView({ behavior: 'smooth' });
-          }}
-        />
-
-        {/* 7. Section 6: Cora's Customers (Real Etsy Reviews & Photos) */}
-        <CustomerStories />
-
-        {/* 8. Section 7: Studio Assurances (Packaging, Shipping, Guarantees) */}
-        <StudioAssurances />
-
-        {/* 9. Section 8: The Story of Cora Hornby */}
-        <BrandStory />
-
-        {/* 10. Section 9: Featured Piece Technical Anatomy */}
-        <FeaturedPiece
-          onSelectPiece={handleMasterpieceSelect}
-        />
-
-        {/* 11. Section 10: Newsletter & Private Collections */}
-        <Newsletter />
-      </main>
-
-      {/* 10. Section 9: Footer with Oversized Bottom Signature Wordmark */}
-      <Footer />
-
-      {/* Interactive Drawers & Modals */}
-      <ProductModal
-        product={selectedProduct}
-        onClose={() => setSelectedProduct(null)}
-        onAddToCart={handleAddToCart}
-      />
-
-      <CartDrawer
-        isOpen={isCartOpen}
-        onClose={() => setIsCartOpen(false)}
-        items={cartItems}
-        onRemoveItem={handleRemoveFromCart}
-        onClearCart={() => setCartItems([])}
-      />
-
-      <SearchModal
-        isOpen={isSearchOpen}
-        onClose={() => setIsSearchOpen(false)}
-        onSelectProduct={(p) => setSelectedProduct(p)}
-      />
-
-    </div>
+      </div>
+    </BrowserRouter>
   );
 }

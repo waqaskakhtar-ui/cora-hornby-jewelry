@@ -20,6 +20,7 @@ export default function TravelInspirationSection({ onSelectProduct, onQuickAdd }
   };
 
   const handlePieceClick = (pair) => {
+    // Find matching product in catalog
     const matched = PRODUCTS.find((p) => 
       p.name.toLowerCase().includes(pair.title.toLowerCase()) || 
       pair.title.toLowerCase().includes(p.name.toLowerCase()) ||
@@ -65,380 +66,287 @@ export default function TravelInspirationSection({ onSelectProduct, onQuickAdd }
   };
 
   return (
-    <section 
-      id="travels" 
-      className="py-20 lg:py-32 bg-[#F5F2EA] dark:bg-[#080706] text-[#12100E] dark:text-[#F7F5EE] border-t border-[#12100E]/8 dark:border-white/10 transition-colors duration-700 relative overflow-hidden"
-    >
-      {/* Glossy Atmospheric Illumination */}
-      <div className="absolute top-1/4 right-0 w-[700px] h-[700px] bg-gradient-radial from-[#C5A869]/8 to-transparent rounded-full blur-3xl pointer-events-none" />
-
-      <div className="max-w-[1720px] mx-auto px-6 sm:px-10 lg:px-16">
+    <section id="travels" className="py-16 lg:py-24 bg-[#F5F3EC] dark:bg-[#0E0D0C] text-[#111111] dark:text-[#FAF9F5] border-t border-[#111111]/8 dark:border-white/10 transition-colors duration-500 overflow-hidden">
+      <div className="max-w-[1720px] mx-auto px-6 sm:px-10 lg:px-14">
         
-        {/* SECTION HEADER: MAGAZINE EDITORIAL ESSAY OPENING */}
-        <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-8 pb-10 border-b border-[#12100E]/10 dark:border-white/10">
-          <div className="space-y-4 max-w-4xl">
-            <div className="font-editorial-mono text-[10px] uppercase tracking-[0.3em] text-[#C5A869] font-bold flex items-center gap-2">
-              <Compass className="w-3.5 h-3.5 text-[#C5A869]" />
-              <span>EXPEDITION ARCHIVE · 8 COUNTRIES VISITED</span>
+        {/* Section Header */}
+        <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 pb-8 border-b border-[#111111]/12 dark:border-white/10">
+          <div className="space-y-3 max-w-3xl">
+            <div className="font-editorial-mono text-[10px] uppercase tracking-[0.22em] text-[#A88B58] flex items-center gap-2 font-semibold">
+              <Compass className="w-4 h-4 text-[#A88B58]" />
+              <span>THE TRAVEL INSPIRATION ARCHIVE · 8 COUNTRIES</span>
             </div>
             
-            <h2 className="font-editorial-luxury text-4xl sm:text-6xl lg:text-7xl font-normal tracking-tight text-[#12100E] dark:text-[#FAF8F2] leading-[0.94]">
-              Traveling the World for <br />
-              <span className="italic text-[#78746B] dark:text-[#C5A869]">Inspiration and Materials</span>
+            <h2 className="font-display-grotesk text-3xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-[#111111] dark:text-[#FAF9F5] leading-[0.98]">
+              Traveling the World for Inspiration and Materials
             </h2>
-
-            <p className="text-sm sm:text-base text-[#5E5A54] dark:text-[#B5B0A4] font-editorial-body leading-relaxed max-w-2xl">
-              Some countries provide raw materials—such as <strong className="text-[#12100E] dark:text-[#FAF8F2] font-semibold">Guatemala for jade</strong> and <strong className="text-[#12100E] dark:text-[#FAF8F2] font-semibold">Brazil for amethyst & citrine</strong>. Others ignite the aesthetic vocabulary—such as ancient spirals in <strong className="text-[#12100E] dark:text-[#FAF8F2] font-semibold">Greece</strong> and Bauhaus geometry in <strong className="text-[#12100E] dark:text-[#FAF8F2] font-semibold">Germany</strong>.
+            
+            <p className="text-sm sm:text-base text-[#5E5C57] dark:text-[#B5B0A4] font-editorial-body leading-relaxed">
+              Some countries provide rare raw materials—such as <strong className="text-[#111111] dark:text-[#FAF9F5] font-semibold">Guatemala for jade</strong> and <strong className="text-[#111111] dark:text-[#FAF9F5] font-semibold">Brazil for amethyst and citrine</strong>. Others ignite the design vocabulary—such as ancient spirals in <strong className="text-[#111111] dark:text-[#FAF9F5] font-semibold">Greece</strong> and functional Bauhaus lines in <strong className="text-[#111111] dark:text-[#FAF9F5] font-semibold">Germany</strong>.
             </p>
           </div>
 
-          {/* Destination Navigator Controls */}
-          <div className="flex items-center gap-4 self-start lg:self-end font-editorial-mono text-xs">
+          {/* Navigation Controls */}
+          <div className="flex items-center gap-3 self-start lg:self-end">
             <button
               onClick={handlePrev}
-              className="w-11 h-11 rounded-full border border-[#12100E]/20 dark:border-white/20 flex items-center justify-center text-[#12100E] dark:text-[#FAF8F2] hover:bg-[#12100E] hover:text-[#FAF8F2] dark:hover:bg-[#FAF8F2] dark:hover:text-[#12100E] transition-all"
+              className="w-10 h-10 rounded-full border border-[#111111]/20 dark:border-white/20 flex items-center justify-center text-[#111111] dark:text-[#FAF9F5] hover:bg-[#111111] hover:text-[#FAF9F5] dark:hover:bg-[#FAF9F5] dark:hover:text-[#111111] transition-all"
               aria-label="Previous country"
             >
               <ArrowLeft className="w-4 h-4" />
             </button>
-            <span className="text-[#8F8A80] dark:text-[#888379] tracking-widest">
-              0{currentIndex + 1} / 0{TRAVEL_DESTINATIONS.length}
-            </span>
             <button
               onClick={handleNext}
-              className="w-11 h-11 rounded-full border border-[#12100E]/20 dark:border-white/20 flex items-center justify-center text-[#12100E] dark:text-[#FAF8F2] hover:bg-[#12100E] hover:text-[#FAF8F2] dark:hover:bg-[#FAF8F2] dark:hover:text-[#12100E] transition-all"
+              className="w-10 h-10 rounded-full border border-[#111111]/20 dark:border-white/20 flex items-center justify-center text-[#111111] dark:text-[#FAF9F5] hover:bg-[#111111] hover:text-[#FAF9F5] dark:hover:bg-[#FAF9F5] dark:hover:text-[#111111] transition-all"
               aria-label="Next country"
             >
               <ArrowRight className="w-4 h-4" />
             </button>
+            <span className="font-editorial-mono text-xs text-[#73716B] dark:text-[#9E9A90] ml-2">
+              0{currentIndex + 1} / 0{TRAVEL_DESTINATIONS.length}
+            </span>
           </div>
         </div>
 
-        {/* 8-COUNTRY LUXURY INDEX SELECTOR (Spaced Out Haute-Couture Rail) */}
-        <div className="mt-6 flex items-center gap-x-6 gap-y-2 overflow-x-auto pb-4 pt-1 scrollbar-none border-b border-[#12100E]/8 dark:border-white/10 font-editorial-mono text-[11px] uppercase tracking-[0.16em]">
+        {/* 8-Country Interactive Selector Rail */}
+        <div className="mt-6 flex items-center gap-2 overflow-x-auto pb-3 pt-1 scrollbar-none border-b border-[#111111]/8 dark:border-white/10">
           {TRAVEL_DESTINATIONS.map((d, idx) => {
             const isSelected = d.id === activeDest.id;
             return (
               <button
                 key={d.id}
                 onClick={() => setActiveCountryId(d.id)}
-                className={`flex-shrink-0 py-1 transition-all flex items-center gap-2 group ${
+                className={`flex-shrink-0 px-4 py-2 text-xs font-editorial-mono uppercase tracking-wider transition-all flex items-center gap-2 rounded-xs border ${
                   isSelected
-                    ? 'text-[#12100E] dark:text-[#FAF8F2] font-bold'
-                    : 'text-[#8F8A80] dark:text-[#888379] hover:text-[#12100E] dark:hover:text-[#FAF8F2]'
+                    ? 'bg-[#111111] dark:bg-[#FAF9F5] text-[#FAF9F5] dark:text-[#111111] border-[#111111] dark:border-[#FAF9F5] shadow-xs font-semibold'
+                    : 'bg-[#ECEAE2] dark:bg-[#1A1917] text-[#5E5C57] dark:text-[#9E9A90] border-transparent hover:border-[#A88B58]/40 hover:text-[#111111] dark:hover:text-[#FAF9F5]'
                 }`}
               >
-                <span className={`text-[9px] ${isSelected ? 'text-[#C5A869]' : 'opacity-50'}`}>
+                <span className={`text-[9px] ${isSelected ? 'text-[#A88B58] dark:text-[#B09462]' : 'text-[#8A867E]'}`}>
                   0{idx + 1}
                 </span>
                 <span>{d.country}</span>
-                {isSelected && (
-                  <span className={`text-[8px] px-1.5 py-0.5 rounded-full ${
-                    d.isMaterialSource 
-                      ? 'bg-[#C5A869]/20 text-[#C5A869]' 
-                      : 'bg-black/10 dark:bg-white/10 text-[#78746B] dark:text-[#B5B0A4]'
-                  }`}>
-                    {d.isMaterialSource ? 'MATERIAL' : 'DESIGN'}
-                  </span>
-                )}
+                <span className={`text-[8px] px-1.5 py-0.5 rounded-2xs ${
+                  d.isMaterialSource 
+                    ? 'bg-[#A88B58]/20 text-[#A88B58] dark:bg-[#A88B58]/30 dark:text-[#E8D0A0]' 
+                    : 'bg-black/5 dark:bg-white/10 text-[#73716B] dark:text-[#9E9A90]'
+                }`}>
+                  {d.isMaterialSource ? 'MATERIAL' : 'DESIGN'}
+                </span>
               </button>
             );
           })}
         </div>
 
-        {/* DESTINATION CINEMATIC ESSAY BANNER (Overlapping Scrollytelling Moment) */}
-        <div className="mt-12 relative">
-          <div className="relative aspect-[16/9] sm:aspect-[21/9] lg:aspect-[24/9] w-full overflow-hidden bg-[#161412] shadow-[0_30px_70px_rgba(0,0,0,0.15)] dark:shadow-[0_30px_80px_rgba(0,0,0,0.85)]">
-            <img
-              src={activeDest.heroImage}
-              alt={activeDest.heroAlt}
-              className="w-full h-full object-cover filter contrast-[1.08] brightness-[0.92] transition-transform duration-1000 ease-out hover:scale-105"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent pointer-events-none" />
-
-            {/* Overlapping Floating Destination Title Layer */}
-            <div className="absolute bottom-6 sm:bottom-10 left-6 sm:left-12 right-6 sm:right-12 flex flex-col sm:flex-row sm:items-end justify-between gap-4 text-[#FAF8F2]">
-              <div className="space-y-1">
-                <div className="font-editorial-mono text-[9px] sm:text-[10px] uppercase tracking-[0.25em] text-[#C5A869] flex items-center gap-2">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#C5A869]" />
-                  <span>{activeDest.type.toUpperCase()} · ARCHIVE DISPATCH</span>
+        {/* Destination Hero Banner */}
+        <div className="mt-8 relative bg-[#ECE9E0] dark:bg-[#161514] border border-[#111111]/10 dark:border-white/10 overflow-hidden shadow-xs">
+          <div className="grid grid-cols-12 items-stretch">
+            
+            {/* Left: Destination Editorial Info */}
+            <div className="col-span-12 lg:col-span-6 p-6 sm:p-10 lg:p-12 flex flex-col justify-between space-y-6">
+              <div className="space-y-3">
+                <div className="flex flex-wrap items-center gap-2 font-editorial-mono text-[10px] uppercase tracking-widest text-[#73716B] dark:text-[#9E9A90]">
+                  <span className={`px-2 py-0.5 font-bold ${
+                    activeDest.isMaterialSource 
+                      ? 'bg-[#A88B58] text-[#111111]' 
+                      : 'bg-[#111111] dark:bg-[#FAF9F5] text-[#FAF9F5] dark:text-[#111111]'
+                  }`}>
+                    {activeDest.type.toUpperCase()}
+                  </span>
+                  <span>CAPE ELIZABETH STUDIO ARCHIVE</span>
                 </div>
-                <h3 className="font-editorial-luxury text-3xl sm:text-5xl lg:text-7xl font-normal leading-none tracking-tight">
+
+                <h3 className="font-display-grotesk text-3xl sm:text-5xl font-black uppercase tracking-tight text-[#111111] dark:text-[#FAF9F5] leading-none">
                   {activeDest.country}
                 </h3>
-              </div>
 
-              <div className="max-w-md text-right hidden sm:block">
-                <p className="font-editorial-serif italic text-base sm:text-lg text-[#EAE6DD]/90">
+                <p className="font-editorial-serif italic text-lg sm:text-xl text-[#5E5C57] dark:text-[#C2BCAB]">
                   "{activeDest.tagline}"
                 </p>
-                <span className="font-editorial-mono text-[9px] uppercase tracking-widest text-[#B0AAA0] block mt-1">
-                  {activeDest.heroAlt}
+
+                <p className="text-xs sm:text-sm text-[#73716B] dark:text-[#9E9A90] font-editorial-body leading-relaxed pt-1">
+                  {activeDest.sourceNotes}
+                </p>
+              </div>
+
+              {/* Distinction Highlight Pill */}
+              <div className="p-3.5 bg-[#FAF9F5] dark:bg-[#1F1E1B] border-l-2 border-[#A88B58] text-xs font-editorial-mono text-[#5E5C57] dark:text-[#C2BCAB] flex items-center justify-between">
+                <span>
+                  {activeDest.isMaterialSource
+                    ? `✦ DIRECT MATERIAL SOURCING: Hand-harvested minerals direct from local artisan lapidaries.`
+                    : `✦ AESTHETIC & ARCHITECTURAL INSPIRATION: Motifs and forms forged at the Maine bench.`}
+                </span>
+                <span className="text-[#A88B58] font-bold text-[10px] uppercase ml-2 flex-shrink-0">
+                  3 BENCH PIECES
                 </span>
               </div>
             </div>
+
+            {/* Right: Destination Atmospheric Hero Photograph */}
+            <div className="col-span-12 lg:col-span-6 relative min-h-[260px] sm:min-h-[340px] bg-[#24221F] overflow-hidden">
+              <img
+                src={activeDest.heroImage}
+                alt={activeDest.heroAlt}
+                className="w-full h-full object-cover filter contrast-[1.05] transition-transform duration-700 hover:scale-105"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none"></div>
+              <div className="absolute bottom-3 left-4 right-4 text-right">
+                <span className="font-editorial-mono text-[9px] uppercase tracking-widest text-[#FAF9F5]/90 bg-black/60 px-2 py-1 backdrop-blur-xs">
+                  FIELD PHOTOGRAPHY · {activeDest.heroAlt}
+                </span>
+              </div>
+            </div>
+
           </div>
         </div>
 
-        {/* ASYMMETRICAL EDITORIAL SPREAD: THE 3 SIDE-BY-SIDE INSPIRATION PAIRS */}
-        {/* (Completely eliminates the boxy 3-column cards for a magazine spread rhythm) */}
-        <div className="mt-20 space-y-28 sm:space-y-36">
+        {/* The 3 Side-by-Side Pairs (The Client's Signature Storytelling Structure) */}
+        <div className="mt-12 space-y-12">
+          <div className="flex items-center justify-between border-b border-[#111111]/10 dark:border-white/10 pb-3">
+            <span className="font-editorial-mono text-[10px] uppercase tracking-[0.2em] text-[#73716B] dark:text-[#9E9A90]">
+              SIDE-BY-SIDE INSPIRATION PAIRS · {activeDest.country.toUpperCase()} (3 BENCH CREATIONS)
+            </span>
+            <span className="font-editorial-mono text-[10px] uppercase text-[#A88B58]">
+              TRAVEL SOURCE ↔ HAND-CRAFTED JEWELRY
+            </span>
+          </div>
 
-          {/* PAIR 1: Asymmetrical Diptych (Tall Inspiration Portrait Left + Floating Jewelry Right) */}
-          {activeDest.pairs.length > 0 && (() => {
-            const pair = activeDest.pairs[0];
-            const isAdded = addedPairId === pair.id;
-            return (
-              <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center">
-                
-                {/* Left: Tall Inspiration Field Photograph */}
-                <div className="lg:col-span-5 space-y-3">
-                  <div className="relative aspect-[3/4] sm:aspect-[9/13] bg-[#EAE6DD] dark:bg-[#1E1B17] overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.08)] group">
-                    <img
-                      src={pair.travelImage}
-                      alt={pair.travelAlt}
-                      className="w-full h-full object-cover filter contrast-[1.04] transition-transform duration-700 group-hover:scale-105"
-                    />
-                    <div className="absolute top-3 left-3 gloss-pill px-2.5 py-1 rounded-full text-[8px] font-editorial-mono uppercase text-[#12100E] dark:text-[#FAF8F2]">
-                      FIELD PHOTOGRAPHY · {activeDest.country}
-                    </div>
-                  </div>
-                  <div className="font-editorial-mono text-[9px] text-[#78746B] dark:text-[#A8A49C] uppercase tracking-wider">
-                    SOURCE 01: {pair.travelAlt}
-                  </div>
-                </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
+            {activeDest.pairs.map((pair, idx) => {
+              const isAdded = addedPairId === pair.id;
 
-                {/* Right: Floating Handcrafted Bench Piece + Editorial Narrative */}
-                <div className="lg:col-span-7 space-y-6 lg:pl-6">
-                  <div className="space-y-3">
-                    <div className="font-editorial-mono text-[9px] uppercase tracking-[0.25em] text-[#C5A869] font-bold">
-                      PAIR 01 · RESULTING BENCH PIECE
-                    </div>
-                    <h4 
-                      onClick={() => handlePieceClick(pair)}
-                      className="font-editorial-luxury text-3xl sm:text-5xl font-normal text-[#12100E] dark:text-[#FAF8F2] hover:text-[#C5A869] transition-colors cursor-pointer"
-                    >
-                      {pair.title}
-                    </h4>
-                    
-                    {/* Authentic Storytelling Caption */}
-                    <blockquote className="font-editorial-serif italic text-lg sm:text-2xl text-[#5E5A54] dark:text-[#C5A869] leading-relaxed max-w-xl">
-                      "{pair.caption}"
-                    </blockquote>
-                  </div>
-
-                  {/* Borderless Jewelry Showcase */}
-                  <div 
-                    onClick={() => handlePieceClick(pair)}
-                    className="relative aspect-[16/11] sm:aspect-[16/10] bg-[#FAF8F2] dark:bg-[#161412] p-8 shadow-[0_25px_60px_rgba(0,0,0,0.06)] dark:shadow-[0_25px_60px_rgba(0,0,0,0.7)] group cursor-pointer overflow-hidden transition-all duration-700 hover:shadow-[0_30px_70px_rgba(197,168,105,0.18)]"
-                  >
-                    <img
-                      src={pair.jewelryImage}
-                      alt={pair.jewelryAlt}
-                      className="w-full h-full object-contain filter contrast-[1.08] transition-transform duration-700 group-hover:scale-105"
-                    />
-
-                    {/* Specular Highlight */}
-                    <div className="absolute inset-0 pointer-events-none overflow-hidden opacity-0 group-hover:opacity-100 transition-opacity duration-700">
-                      <div className="w-[45%] h-full bg-gradient-to-r from-transparent via-white/35 to-transparent transform -skew-x-25 -translate-x-full group-hover:translate-x-[350%] transition-transform duration-1000 ease-out" />
-                    </div>
-
-                    <div className="absolute top-4 right-4 gloss-pill px-3 py-1 rounded-full text-[9px] font-editorial-mono font-bold text-[#C5A869]">
-                      $185 · ONE OF ONE
-                    </div>
-                  </div>
-
-                  {/* Action Bar */}
-                  <div className="flex items-center gap-4 pt-2">
-                    <button
-                      onClick={() => handlePieceClick(pair)}
-                      className="text-xs font-editorial-mono uppercase tracking-[0.2em] text-[#12100E] dark:text-[#FAF8F2] hover:text-[#C5A869] flex items-center gap-2 font-semibold transition-colors"
-                    >
-                      <span>INSPECT DETAILS</span>
-                      <ArrowRight className="w-3.5 h-3.5" />
-                    </button>
-
-                    <button
-                      onClick={(e) => handleQuickAddPair(pair, e)}
-                      className={`text-[10px] font-editorial-mono uppercase tracking-widest px-4 py-2 rounded-full transition-all flex items-center gap-2 ${
-                        isAdded
-                          ? 'bg-[#2E5E4E] text-[#FAF8F2]'
-                          : 'bg-[#12100E] dark:bg-[#FAF8F2] text-[#FAF8F2] dark:text-[#12100E] hover:bg-[#C5A869] dark:hover:bg-[#C5A869] hover:text-[#12100E]'
-                      }`}
-                    >
-                      {isAdded ? <Check className="w-3.5 h-3.5" /> : <ShoppingBag className="w-3.5 h-3.5" />}
-                      <span>{isAdded ? 'ADDED' : 'ACQUIRE'}</span>
-                    </button>
-                  </div>
-                </div>
-
-              </div>
-            );
-          })()}
-
-          {/* PAIR 2: Reversed Cinematic Horizontal Spread (Jewelry Left + Wide Inspiration Right) */}
-          {activeDest.pairs.length > 1 && (() => {
-            const pair = activeDest.pairs[1];
-            const isAdded = addedPairId === pair.id;
-            return (
-              <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center">
-                
-                {/* Left: Handcrafted Bench Creation */}
-                <div className="lg:col-span-7 space-y-6 order-2 lg:order-1">
-                  <div className="space-y-3">
-                    <div className="font-editorial-mono text-[9px] uppercase tracking-[0.25em] text-[#C5A869] font-bold">
-                      PAIR 02 · RESULTING BENCH PIECE
-                    </div>
-                    <h4 
-                      onClick={() => handlePieceClick(pair)}
-                      className="font-editorial-luxury text-3xl sm:text-5xl font-normal text-[#12100E] dark:text-[#FAF8F2] hover:text-[#C5A869] transition-colors cursor-pointer"
-                    >
-                      {pair.title}
-                    </h4>
-                    
-                    <blockquote className="font-editorial-serif italic text-lg sm:text-2xl text-[#5E5A54] dark:text-[#C5A869] leading-relaxed max-w-xl">
-                      "{pair.caption}"
-                    </blockquote>
-                  </div>
-
-                  <div 
-                    onClick={() => handlePieceClick(pair)}
-                    className="relative aspect-[16/11] sm:aspect-[16/10] bg-[#FAF8F2] dark:bg-[#161412] p-8 shadow-[0_25px_60px_rgba(0,0,0,0.06)] dark:shadow-[0_25px_60px_rgba(0,0,0,0.7)] group cursor-pointer overflow-hidden transition-all duration-700 hover:shadow-[0_30px_70px_rgba(197,168,105,0.18)]"
-                  >
-                    <img
-                      src={pair.jewelryImage}
-                      alt={pair.jewelryAlt}
-                      className="w-full h-full object-contain filter contrast-[1.08] transition-transform duration-700 group-hover:scale-105"
-                    />
-
-                    <div className="absolute inset-0 pointer-events-none overflow-hidden opacity-0 group-hover:opacity-100 transition-opacity duration-700">
-                      <div className="w-[45%] h-full bg-gradient-to-r from-transparent via-white/35 to-transparent transform -skew-x-25 -translate-x-full group-hover:translate-x-[350%] transition-transform duration-1000 ease-out" />
-                    </div>
-
-                    <div className="absolute top-4 left-4 gloss-pill px-3 py-1 rounded-full text-[9px] font-editorial-mono font-bold text-[#C5A869]">
-                      $185 · BENCH WORK
-                    </div>
-                  </div>
-
-                  <div className="flex items-center gap-4 pt-2">
-                    <button
-                      onClick={() => handlePieceClick(pair)}
-                      className="text-xs font-editorial-mono uppercase tracking-[0.2em] text-[#12100E] dark:text-[#FAF8F2] hover:text-[#C5A869] flex items-center gap-2 font-semibold transition-colors"
-                    >
-                      <span>INSPECT DETAILS</span>
-                      <ArrowRight className="w-3.5 h-3.5" />
-                    </button>
-
-                    <button
-                      onClick={(e) => handleQuickAddPair(pair, e)}
-                      className={`text-[10px] font-editorial-mono uppercase tracking-widest px-4 py-2 rounded-full transition-all flex items-center gap-2 ${
-                        isAdded
-                          ? 'bg-[#2E5E4E] text-[#FAF8F2]'
-                          : 'bg-[#12100E] dark:bg-[#FAF8F2] text-[#FAF8F2] dark:text-[#12100E] hover:bg-[#C5A869] dark:hover:bg-[#C5A869] hover:text-[#12100E]'
-                      }`}
-                    >
-                      {isAdded ? <Check className="w-3.5 h-3.5" /> : <ShoppingBag className="w-3.5 h-3.5" />}
-                      <span>{isAdded ? 'ADDED' : 'ACQUIRE'}</span>
-                    </button>
-                  </div>
-                </div>
-
-                {/* Right: Field Photograph */}
-                <div className="lg:col-span-5 space-y-3 order-1 lg:order-2">
-                  <div className="relative aspect-[3/4] sm:aspect-[9/13] bg-[#EAE6DD] dark:bg-[#1E1B17] overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.08)] group">
-                    <img
-                      src={pair.travelImage}
-                      alt={pair.travelAlt}
-                      className="w-full h-full object-cover filter contrast-[1.04] transition-transform duration-700 group-hover:scale-105"
-                    />
-                    <div className="absolute top-3 right-3 gloss-pill px-2.5 py-1 rounded-full text-[8px] font-editorial-mono uppercase text-[#12100E] dark:text-[#FAF8F2]">
-                      TRAVEL SOURCE · {activeDest.country}
-                    </div>
-                  </div>
-                  <div className="font-editorial-mono text-[9px] text-[#78746B] dark:text-[#A8A49C] uppercase tracking-wider text-right">
-                    {pair.travelAlt}
-                  </div>
-                </div>
-
-              </div>
-            );
-          })()}
-
-          {/* PAIR 3: Expansive Monumental Feature Spread (Centerpiece) */}
-          {activeDest.pairs.length > 2 && (() => {
-            const pair = activeDest.pairs[2];
-            const isAdded = addedPairId === pair.id;
-            return (
-              <div className="relative py-10 border-t border-[#12100E]/10 dark:border-white/10">
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-                  
-                  {/* Left: Inspiration Mini Fragment */}
-                  <div className="lg:col-span-4 space-y-3">
-                    <div className="aspect-[4/3] bg-[#EAE6DD] dark:bg-[#1E1B17] overflow-hidden shadow-sm relative group">
-                      <img
-                        src={pair.travelImage}
-                        alt={pair.travelAlt}
-                        className="w-full h-full object-cover filter contrast-[1.04] group-hover:scale-105 transition-transform duration-700"
-                      />
-                      <div className="absolute bottom-2 left-2 bg-black/70 text-[#FAF8F2] text-[8px] font-editorial-mono uppercase px-2 py-0.5">
-                        INSPIRATION MOTIF
+              return (
+                <div
+                  key={pair.id}
+                  className="bg-[#FAF9F5] dark:bg-[#151413] border border-[#111111]/10 dark:border-white/10 flex flex-col justify-between shadow-xs transition-all duration-300 hover:border-[#A88B58]/50 hover:shadow-[0_12px_30px_rgba(0,0,0,0.06)] group"
+                >
+                  {/* Top Images Split: Side A (Inspiration) ↔ Side B (Jewelry) */}
+                  <div className="p-3 bg-[#EFECE4] dark:bg-[#1A1917] border-b border-[#111111]/8 dark:border-white/10">
+                    <div className="grid grid-cols-2 gap-2">
+                      
+                      {/* Left: Travel Inspiration Photo */}
+                      <div className="flex flex-col space-y-1">
+                        <div className="aspect-[4/5] bg-[#E2DFD6] dark:bg-[#201F1C] overflow-hidden relative border border-[#111111]/8 dark:border-white/10">
+                          <img
+                            src={pair.travelImage}
+                            alt={pair.travelAlt}
+                            className="w-full h-full object-cover filter contrast-[1.02] transition-transform duration-500 group-hover:scale-105"
+                          />
+                          <div className="absolute top-1 left-1 bg-black/70 text-[#FAF9F5] text-[7px] font-editorial-mono uppercase tracking-wider px-1.5 py-0.5">
+                            INSPIRATION
+                          </div>
+                        </div>
+                        <span className="text-[8px] font-editorial-mono uppercase text-[#73716B] dark:text-[#9E9A90] truncate">
+                          {activeDest.country}
+                        </span>
                       </div>
-                    </div>
-                    <p className="font-editorial-body text-xs text-[#78746B] dark:text-[#A8A49C]">
-                      {pair.travelAlt}
-                    </p>
-                  </div>
 
-                  {/* Center: Monumental Headline & Narrative */}
-                  <div className="lg:col-span-5 space-y-4">
-                    <span className="font-editorial-mono text-[9px] uppercase tracking-[0.25em] text-[#C5A869] font-bold">
-                      PAIR 03 · CLOSING CREATION
-                    </span>
-                    <h4 
-                      onClick={() => handlePieceClick(pair)}
-                      className="font-editorial-luxury text-3xl sm:text-4xl lg:text-5xl font-normal text-[#12100E] dark:text-[#FAF8F2] hover:text-[#C5A869] transition-colors cursor-pointer"
-                    >
-                      {pair.title}
-                    </h4>
-                    <p className="font-editorial-serif italic text-base sm:text-xl text-[#5E5A54] dark:text-[#C5A869] leading-relaxed">
-                      "{pair.caption}"
-                    </p>
-                  </div>
-
-                  {/* Right: Floating Centerpiece */}
-                  <div className="lg:col-span-3 space-y-3">
-                    <div 
-                      onClick={() => handlePieceClick(pair)}
-                      className="relative aspect-square bg-[#FAF8F2] dark:bg-[#161412] p-6 shadow-[0_20px_50px_rgba(0,0,0,0.06)] dark:shadow-[0_20px_50px_rgba(0,0,0,0.7)] group cursor-pointer overflow-hidden transition-all duration-700 hover:shadow-[0_25px_60px_rgba(197,168,105,0.18)]"
-                    >
-                      <img
-                        src={pair.jewelryImage}
-                        alt={pair.jewelryAlt}
-                        className="w-full h-full object-contain filter contrast-[1.06] group-hover:scale-105 transition-transform duration-700"
-                      />
-                      <div className="absolute bottom-3 right-3 text-[9px] font-editorial-mono font-bold text-[#C5A869]">
-                        $185
+                      {/* Right: Handcrafted Jewelry Piece */}
+                      <div 
+                        onClick={() => handlePieceClick(pair)}
+                        className="flex flex-col space-y-1 cursor-pointer"
+                        title="Click to inspect piece"
+                      >
+                        <div className="aspect-[4/5] bg-[#E2DFD6] dark:bg-[#201F1C] overflow-hidden relative border border-[#111111]/8 dark:border-white/10 group-hover:border-[#A88B58]/60 transition-colors">
+                          <img
+                            src={pair.jewelryImage}
+                            alt={pair.jewelryAlt}
+                            className="w-full h-full object-cover filter contrast-[1.06] transition-transform duration-500 group-hover:scale-105"
+                          />
+                          <div className="absolute top-1 right-1 bg-[#A88B58] text-[#111111] text-[7px] font-editorial-mono uppercase font-bold tracking-wider px-1.5 py-0.5">
+                            JEWELRY
+                          </div>
+                          
+                          {/* Quick Inspect Hover Overlay */}
+                          <div className="absolute inset-0 bg-[#111111]/30 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                            <span className="bg-[#FAF9F5] text-[#111111] text-[9px] font-editorial-mono uppercase px-2 py-1 shadow-xs flex items-center gap-1 font-semibold">
+                              <Eye className="w-3 h-3" />
+                              INSPECT
+                            </span>
+                          </div>
+                        </div>
+                        <span className="text-[8px] font-editorial-mono uppercase text-[#A88B58] font-bold truncate">
+                          BENCH WORK
+                        </span>
                       </div>
-                    </div>
 
-                    <button
-                      onClick={(e) => handleQuickAddPair(pair, e)}
-                      className={`w-full text-[10px] font-editorial-mono uppercase tracking-widest py-2.5 rounded-full transition-all flex items-center justify-center gap-2 ${
-                        isAdded
-                          ? 'bg-[#2E5E4E] text-[#FAF8F2]'
-                          : 'bg-[#12100E] dark:bg-[#FAF8F2] text-[#FAF8F2] dark:text-[#12100E] hover:bg-[#C5A869] dark:hover:bg-[#C5A869] hover:text-[#12100E]'
-                      }`}
-                    >
-                      {isAdded ? <Check className="w-3.5 h-3.5" /> : <ShoppingBag className="w-3.5 h-3.5" />}
-                      <span>{isAdded ? 'ADDED TO BAG' : 'ACQUIRE PIECE'}</span>
-                    </button>
+                    </div>
                   </div>
 
-                </div>
-              </div>
-            );
-          })()}
+                  {/* Body Content & Narrative Caption */}
+                  <div className="p-5 flex-1 flex flex-col justify-between space-y-4">
+                    <div className="space-y-2">
+                      <div className="flex items-center justify-between text-[9px] font-editorial-mono text-[#73716B] dark:text-[#9E9A90] uppercase">
+                        <span>PAIR 0{idx + 1} OF 03</span>
+                        <span className="text-[#111111] dark:text-[#FAF9F5] font-semibold">EDITION OF ONE</span>
+                      </div>
 
+                      <h4 
+                        onClick={() => handlePieceClick(pair)}
+                        className="font-display-grotesk text-lg sm:text-xl font-bold text-[#111111] dark:text-[#FAF9F5] hover:text-[#A88B58] dark:hover:text-[#A88B58] cursor-pointer transition-colors"
+                      >
+                        {pair.title}
+                      </h4>
+
+                      {/* Client's Storytelling Caption */}
+                      <p className="text-xs sm:text-sm text-[#5E5C57] dark:text-[#C2BCAB] font-editorial-body leading-relaxed italic">
+                        "{pair.caption}"
+                      </p>
+                    </div>
+
+                    {/* Action Bar */}
+                    <div className="pt-3 border-t border-[#111111]/10 dark:border-white/10 flex items-center justify-between gap-2">
+                      <button
+                        onClick={() => handlePieceClick(pair)}
+                        className="text-xs font-editorial-mono uppercase tracking-wider text-[#111111] dark:text-[#FAF9F5] hover:text-[#A88B58] dark:hover:text-[#A88B58] flex items-center gap-1.5 transition-colors font-semibold"
+                      >
+                        <span>DETAILS</span>
+                        <ArrowRight className="w-3.5 h-3.5" />
+                      </button>
+
+                      <button
+                        onClick={(e) => handleQuickAddPair(pair, e)}
+                        className={`text-[10px] font-editorial-mono uppercase tracking-wider px-3 py-1.5 transition-all flex items-center gap-1.5 rounded-2xs ${
+                          isAdded
+                            ? 'bg-[#2E5E4E] text-[#FAF9F5] font-semibold'
+                            : 'bg-[#111111] dark:bg-[#FAF9F5] text-[#FAF9F5] dark:text-[#111111] hover:bg-[#A88B58] dark:hover:bg-[#A88B58] hover:text-[#111111]'
+                        }`}
+                      >
+                        {isAdded ? (
+                          <>
+                            <Check className="w-3 h-3" />
+                            <span>ADDED</span>
+                          </>
+                        ) : (
+                          <>
+                            <ShoppingBag className="w-3 h-3" />
+                            <span>ADD TO BAG</span>
+                          </>
+                        )}
+                      </button>
+                    </div>
+
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* Bottom Destination Footer Summary */}
+        <div className="mt-12 p-4 bg-[#EBE8DF] dark:bg-[#181715] border border-[#111111]/10 dark:border-white/10 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs font-editorial-mono text-[#73716B] dark:text-[#9E9A90]">
+          <div className="flex items-center gap-2">
+            <span className="w-2 h-2 rounded-full bg-[#A88B58]"></span>
+            <span>EACH PIECE INDIVIDUALLY CRAFTED AT THE MAINE COAST STUDIO BENCH</span>
+          </div>
+          <div className="flex items-center gap-4">
+            <a
+              href="#collection"
+              className="text-[#111111] dark:text-[#FAF9F5] hover:text-[#A88B58] underline underline-offset-4 uppercase tracking-wider font-semibold"
+            >
+              BROWSE ALL 5 COLLECTIONS →
+            </a>
+          </div>
         </div>
 
       </div>

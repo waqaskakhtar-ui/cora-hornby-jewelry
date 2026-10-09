@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from 'react';
+import { Link } from 'react-router-dom';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { BRAND_INFO } from '../data/coraData';
@@ -34,18 +35,20 @@ export default function Footer() {
   return (
     <footer
       ref={footerRef}
-      className="bg-[#FAF8F2] dark:bg-[#060505] border-t border-[#12100E]/10 dark:border-white/10 pt-20 pb-0 overflow-hidden relative transition-colors duration-700"
+      className="bg-[#FAF9F5] dark:bg-[#0A0909] border-t border-[#111111]/10 dark:border-white/10 pt-16 pb-0 overflow-hidden relative transition-colors duration-300"
     >
-      <div className="max-w-[1720px] mx-auto px-6 sm:px-10 lg:px-16">
+      <div className="max-w-[1720px] mx-auto px-6 sm:px-10 lg:px-14">
         
         {/* Upper Footer Columns */}
-        <div className="grid grid-cols-12 gap-8 lg:gap-12 pb-16 border-b border-[#12100E]/8 dark:border-white/10">
+        <div className="grid grid-cols-12 gap-8 lg:gap-12 pb-14 border-b border-[#111111]/8 dark:border-white/10">
           
           {/* Brand Info */}
           <div className="col-span-12 lg:col-span-4 space-y-4">
-            <h3 className="font-editorial-luxury text-3xl font-normal tracking-tight text-[#12100E] dark:text-[#FAF8F2]">
-              {BRAND_INFO.name}
-            </h3>
+            <Link to="/" className="block">
+              <h3 className="font-editorial-heading text-3xl font-bold tracking-tight text-[#111111] dark:text-[#FAF9F5]">
+                {BRAND_INFO.name}
+              </h3>
+            </Link>
             <p className="text-sm sm:text-base text-[#73716B] dark:text-[#A6A49E] font-editorial-body max-w-sm leading-relaxed">
               Traveling the world for inspiration and materials. Handcrafted on the coast of Maine using hammered metals, leather, freshwater pearls, druzies, and semi-precious stones.
             </p>
@@ -55,17 +58,17 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Nav Column 1: TAXONOMY */}
+          {/* Nav Column 1: COLLECTIONS */}
           <div className="col-span-6 sm:col-span-3 lg:col-span-2 space-y-3 font-editorial-mono text-xs sm:text-sm">
             <span className="text-[10px] uppercase tracking-[0.2em] text-[#8A867E] dark:text-[#8E8B83] block font-semibold">
               COLLECTIONS
             </span>
             <ul className="space-y-2 text-[#5E5C57] dark:text-[#B5B3AC]">
-              <li><a href="#collection" className="hover:text-[#111111] dark:hover:text-[#FAF9F5] transition-colors">Mixed Metals</a></li>
-              <li><a href="#collection" className="hover:text-[#111111] dark:hover:text-[#FAF9F5] transition-colors">Geometrics</a></li>
-              <li><a href="#collection" className="hover:text-[#111111] dark:hover:text-[#FAF9F5] transition-colors">Mayan Sol</a></li>
-              <li><a href="#collection" className="hover:text-[#111111] dark:hover:text-[#FAF9F5] transition-colors">Pearls</a></li>
-              <li><a href="#collection" className="hover:text-[#111111] dark:hover:text-[#FAF9F5] transition-colors">Black is Back</a></li>
+              <li><Link to="/collections/mixed-metals" className="hover:text-[#111111] dark:hover:text-[#FAF9F5] transition-colors">Mixed Metals</Link></li>
+              <li><Link to="/collections/geometrics" className="hover:text-[#111111] dark:hover:text-[#FAF9F5] transition-colors">Geometrics</Link></li>
+              <li><Link to="/collections/mayan-sol" className="hover:text-[#111111] dark:hover:text-[#FAF9F5] transition-colors">Mayan Sol</Link></li>
+              <li><Link to="/collections/pearls" className="hover:text-[#111111] dark:hover:text-[#FAF9F5] transition-colors">Pearls</Link></li>
+              <li><Link to="/collections/black-is-back" className="hover:text-[#111111] dark:hover:text-[#FAF9F5] transition-colors">Black is Back</Link></li>
             </ul>
           </div>
 
@@ -75,11 +78,12 @@ export default function Footer() {
               TRAVEL ARCHIVE
             </span>
             <ul className="space-y-2 text-[#5E5C57] dark:text-[#B5B3AC]">
-              <li><a href="#travels" className="hover:text-[#111111] dark:hover:text-[#FAF9F5] transition-colors">Greece (Aegean)</a></li>
-              <li><a href="#travels" className="hover:text-[#111111] dark:hover:text-[#FAF9F5] transition-colors">Namibia (Deadvlei)</a></li>
-              <li><a href="#travels" className="hover:text-[#111111] dark:hover:text-[#FAF9F5] transition-colors">Brazil (Amethyst)</a></li>
-              <li><a href="#travels" className="hover:text-[#111111] dark:hover:text-[#FAF9F5] transition-colors">Guatemala (Jade)</a></li>
-              <li><a href="#travels" className="hover:text-[#111111] dark:hover:text-[#FAF9F5] transition-colors">Germany (Bauhaus)</a></li>
+              <li><Link to="/travel/greece" className="hover:text-[#111111] dark:hover:text-[#FAF9F5] transition-colors">Greece (Aegean)</Link></li>
+              <li><Link to="/travel/namibia" className="hover:text-[#111111] dark:hover:text-[#FAF9F5] transition-colors">Namibia (Deadvlei)</Link></li>
+              <li><Link to="/travel/brazil" className="hover:text-[#111111] dark:hover:text-[#FAF9F5] transition-colors">Brazil (Citrine)</Link></li>
+              <li><Link to="/travel/guatemala" className="hover:text-[#111111] dark:hover:text-[#FAF9F5] transition-colors">Guatemala (Jade)</Link></li>
+              <li><Link to="/travel/germany" className="hover:text-[#111111] dark:hover:text-[#FAF9F5] transition-colors">Germany (Bauhaus)</Link></li>
+              <li><Link to="/travel" className="text-[#A88B58] hover:underline font-bold">All 8 Countries →</Link></li>
             </ul>
           </div>
 
@@ -89,11 +93,11 @@ export default function Footer() {
               ASSURANCES
             </span>
             <ul className="space-y-2 text-[#5E5C57] dark:text-[#B5B3AC]">
-              <li><a href="#assurances" className="hover:text-[#111111] dark:hover:text-[#FAF9F5] transition-colors">Logo Gift Boxes</a></li>
-              <li><a href="#assurances" className="hover:text-[#111111] dark:hover:text-[#FAF9F5] transition-colors">Insured Shipping</a></li>
-              <li><a href="#assurances" className="hover:text-[#111111] dark:hover:text-[#FAF9F5] transition-colors">Money-Back Guarantee</a></li>
-              <li><a href="#customers" className="hover:text-[#111111] dark:hover:text-[#FAF9F5] transition-colors">Cora's Customers</a></li>
-              <li><a href="#story" className="hover:text-[#111111] dark:hover:text-[#FAF9F5] transition-colors">About Cora's Story</a></li>
+              <li><Link to="/packaging-and-shipping" className="hover:text-[#111111] dark:hover:text-[#FAF9F5] transition-colors">Logo Gift Boxes</Link></li>
+              <li><Link to="/packaging-and-shipping" className="hover:text-[#111111] dark:hover:text-[#FAF9F5] transition-colors">Insured Shipping</Link></li>
+              <li><Link to="/guarantees" className="hover:text-[#111111] dark:hover:text-[#FAF9F5] transition-colors">30-Day Money-Back</Link></li>
+              <li><Link to="/customers" className="hover:text-[#111111] dark:hover:text-[#FAF9F5] transition-colors">Cora's Customers</Link></li>
+              <li><Link to="/story" className="hover:text-[#111111] dark:hover:text-[#FAF9F5] transition-colors">About Cora's Story</Link></li>
             </ul>
           </div>
 
@@ -131,7 +135,7 @@ export default function Footer() {
         ref={wordmarkRef}
         className="w-full overflow-hidden select-none pointer-events-none mt-6 sm:mt-10 -mb-6 sm:-mb-10 lg:-mb-16"
       >
-        <div className="font-editorial-luxury italic font-light text-[#12100E] dark:text-[#FAF8F2]/90 text-[18vw] leading-[0.75] tracking-tight whitespace-nowrap uppercase opacity-[0.96]">
+        <div className="font-display-grotesk font-black text-[#111111] dark:text-[#FAF9F5]/90 text-[17vw] leading-[0.75] tracking-[-0.06em] whitespace-nowrap uppercase opacity-[0.98]">
           cora hornby atelier
         </div>
       </div>
