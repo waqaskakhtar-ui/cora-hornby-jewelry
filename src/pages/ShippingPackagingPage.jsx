@@ -52,17 +52,25 @@ export default function ShippingPackagingPage() {
             </p>
 
             {/* Visual Box Rendering Showcase */}
-            <div className="p-6 bg-[#f8f4e7] dark:bg-black border border-[#4e342e]/15 dark:border-white/15 space-y-3">
-              <div className="aspect-[16/9] bg-[#111111] border border-white/20 flex flex-col items-center justify-center text-center p-6 text-white relative shadow-2xl overflow-hidden">
-                <span className="font-editorial-mono text-[9px] uppercase tracking-[0.3em] text-[#cc5500] dark:text-[#2c3480] block">
-                  CUSTOM RIGID DEBOSSED GIFT BOX
-                </span>
-                <span className="font-display-serif text-2xl font-bold tracking-wider mt-1">
-                  CORA HORNBY
-                </span>
-                <span className="text-[8px] font-editorial-mono opacity-60 tracking-widest mt-1">
-                  CAPE ELIZABETH · MAINE
-                </span>
+            <div className="p-4 bg-[#f8f4e7] dark:bg-black border border-[#4e342e]/15 dark:border-white/15 space-y-4">
+              <div className="grid grid-cols-2 gap-3">
+                <div className="aspect-[4/3] bg-white/50 dark:bg-white/5 border border-[#4e342e]/15 dark:border-white/15 overflow-hidden rounded-xs">
+                  <img 
+                    src="/mockup_assets/packaging-box.png" 
+                    alt="Custom Rigid Debossed Logo Gift Box with Ribbon" 
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <div className="aspect-[4/3] bg-white/50 dark:bg-white/5 border border-[#4e342e]/15 dark:border-white/15 overflow-hidden rounded-xs">
+                  <img 
+                    src="/mockup_assets/packaging-pouch.png" 
+                    alt="Archival Cotton Drawstring Pouch" 
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+              </div>
+              <div className="text-center font-editorial-mono text-[10px] uppercase tracking-wider text-[#4e342e]/70 dark:text-white/70">
+                Signature Packaging Included With Every Piece
               </div>
             </div>
 

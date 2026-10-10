@@ -80,12 +80,21 @@ export default function StoryPage() {
 
           {/* Right Column: Atelier Portrait & Bench Photographs */}
           <div className="lg:col-span-5 space-y-6">
-            <div data-stagger="image" className="aspect-[4/5] bg-[#4e342e]/10 dark:bg-white/10 overflow-hidden border border-[#4e342e]/15 dark:border-white/15 p-3 shadow-xl">
-              <img
-                src="https://images.squarespace-cdn.com/content/v1/5b882c0b365f0225b70e3aa1/1537476309953-DV5JOAJARNACFY2W1DDX/modeling-citrine-necklace.JPG"
-                alt="Cora Hornby studio styling"
-                className="w-full h-full object-cover filter contrast-[1.05]"
-              />
+            <div data-stagger="image" className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div className="aspect-[4/5] bg-[#4e342e]/10 dark:bg-white/10 overflow-hidden border border-[#4e342e]/15 dark:border-white/15 p-2 shadow-xl">
+                <img
+                  src="/mockup_assets/cora-bench.png"
+                  alt="Cora Hornby working at her jewelry studio workbench"
+                  className="w-full h-full object-cover filter contrast-[1.05]"
+                />
+              </div>
+              <div className="aspect-[4/5] bg-[#4e342e]/10 dark:bg-white/10 overflow-hidden border border-[#4e342e]/15 dark:border-white/15 p-2 shadow-xl">
+                <img
+                  src="https://images.squarespace-cdn.com/content/v1/5b882c0b365f0225b70e3aa1/1537476309953-DV5JOAJARNACFY2W1DDX/modeling-citrine-necklace.JPG"
+                  alt="Cora Hornby studio styling"
+                  className="w-full h-full object-cover filter contrast-[1.05]"
+                />
+              </div>
             </div>
 
             <div className="p-6 bg-[#4e342e]/5 dark:bg-white/5 border border-[#4e342e]/15 dark:border-white/15 font-editorial-mono text-xs space-y-2">

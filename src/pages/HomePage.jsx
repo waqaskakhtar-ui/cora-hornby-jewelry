@@ -1,414 +1,495 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Compass, Sparkles, Grid, ShieldCheck, Heart, Award } from 'lucide-react';
-import { BRAND_INFO, COLLECTIONS, TRAVEL_DESTINATIONS, PRODUCTS, FEATURED_MASTERPIECE } from '../data/coraData';
+import { 
+  ArrowRight, 
+  ArrowLeft, 
+  Search, 
+  ShoppingBag, 
+  Sparkles, 
+  Compass, 
+  ShieldCheck, 
+  Gift, 
+  Truck, 
+  ChevronRight
+} from 'lucide-react';
+import { BRAND_INFO, COLLECTIONS, TRAVEL_DESTINATIONS, PRODUCTS } from '../data/coraData';
 
 export default function HomePage({ onAddToCart }) {
-  const heroPiece = PRODUCTS[0]; // Mayan Sol Turquoise Earrings
-  const zebraPiece = PRODUCTS[1]; // African Zebra Jasper
+  // Carousel index for Curated Collections
+  const [collectionSlide, setCollectionSlide] = useState(0);
+
+  // Quick helper to safely grab product
+  const getProduct = (slug) => PRODUCTS.find(p => p.slug === slug) || PRODUCTS[0];
 
   return (
-    <div className="w-full">
-      {/* SECTION 1 (HERO): 50/50 Split Viewport with Asymmetrical Editorial Hierarchy */}
-      <section className="relative min-h-[92vh] lg:min-h-screen pt-24 pb-12 px-6 sm:px-10 lg:px-14 flex flex-col justify-between overflow-hidden">
+    <div className="w-full bg-[#f8f4e7] dark:bg-[#000000] text-[#4e342e] dark:text-[#ffffff] transition-colors duration-400">
+      
+      {/* =========================================================================
+          MAIN 50/50 DUAL-PANE EDITORIAL SPLIT VIEWPORT
+          Directly matches the uploaded official design mockup:
+          Left Pane: Giant CORA HORNBY + Collar Necklace + Agate Pointers + Photo Collage + Collections
+          Right Pane: METALS Watermark + Brazil Showcase + Cora Studio Story + Packaging
+      ========================================================================= */}
+      <div className="w-full grid grid-cols-1 lg:grid-cols-2 border-b border-[#4e342e]/15 dark:border-white/15">
         
-        {/* Top Eyebrow Metadata */}
-        <div data-stagger="text" className="w-full flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 text-[11px] font-editorial-mono text-[#4e342e]/75 dark:text-white/75 uppercase tracking-[0.18em] pb-4 border-b border-[#4e342e]/12 dark:border-white/12">
-          <div className="flex items-center gap-2">
-            <span className="w-2 h-2 rounded-full bg-[#cc5500] dark:bg-[#2c3480]"></span>
-            <span className="font-semibold text-[#4e342e] dark:text-white">
-              CORA HORNBY JEWELRY · CAPE ELIZABETH, MAINE BENCH
-            </span>
-          </div>
-          <div className="flex items-center gap-6">
-            <span>EDITION OF ONE CREATIONS</span>
-            <span className="text-[#cc5500] dark:text-[#2c3480] font-bold">EST. 2018</span>
-          </div>
-        </div>
-
-        {/* 50/50 Split Viewport Container */}
-        <div className="my-auto py-8 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-center">
+        {/* =====================================================================
+            LEFT COLUMN
+        ===================================================================== */}
+        <div className="flex flex-col border-b lg:border-b-0 lg:border-r border-[#4e342e]/15 dark:border-white/15 px-6 sm:px-10 lg:px-12 pt-28 pb-16 justify-between space-y-12">
           
-          {/* Left Column: Massive Dramatic Typography & Centered Primary CTA in Immediate Heat Zone */}
-          <div data-stagger="text" className="lg:col-span-6 space-y-8">
-            <div className="space-y-4">
-              <span className="font-editorial-mono text-xs uppercase tracking-[0.25em] text-[#cc5500] dark:text-[#2c3480] font-bold block">
-                BENCH ARCHIVE EXHIBITION · 2026
-              </span>
-              
-              <h1 className="font-display-serif text-5xl sm:text-7xl lg:text-8xl font-black text-[#4e342e] dark:text-white leading-[0.92] tracking-tight">
-                CORA <br />
-                <span className="font-editorial-body italic font-light text-[#4e342e]/85 dark:text-white/85">
-                  HORNBY
-                </span>
+          {/* 1. Header Bar Sub-Navigation (Mockup accurate) */}
+          <div className="flex items-center justify-between border-b border-[#4e342e]/12 dark:border-white/12 pb-4 text-[11px] font-editorial-mono tracking-[0.16em] uppercase text-[#4e342e]/70 dark:text-white/70">
+            <span className="font-semibold text-[#4e342e] dark:text-white">Est. 2018</span>
+            <div className="flex items-center gap-6">
+              <Link to="/collections" className="hover:text-[#cc5500] dark:hover:text-[#2c3480] transition-colors">Collections</Link>
+              <Link to="/story" className="hover:text-[#cc5500] dark:hover:text-[#2c3480] transition-colors">About</Link>
+              <Link to="/shipping" className="hover:text-[#cc5500] dark:hover:text-[#2c3480] transition-colors">Contacts</Link>
+            </div>
+            <div className="flex items-center gap-4">
+              <Link to="/shop" className="hover:text-[#cc5500] dark:hover:text-[#2c3480] transition-colors">Search</Link>
+              <Link to="/shop" className="hover:text-[#cc5500] dark:hover:text-[#2c3480] transition-colors">Cart</Link>
+            </div>
+          </div>
+
+          {/* 2. Hero Stacked Typography with Overlapping Collar Necklace & Pointers */}
+          <div className="relative pt-6 pb-8">
+            
+            {/* Top Right Model Earring Portrait Crop */}
+            <div className="absolute top-0 right-2 w-16 sm:w-20 aspect-square rounded-sm overflow-hidden border border-[#4e342e]/20 dark:border-white/20 shadow-md hidden sm:block">
+              <img 
+                src="https://images.squarespace-cdn.com/content/v1/5b882c0b365f0225b70e3aa1/1593920126047-TJDE8V45MWZW4M0KCUIF/Model+look+right.jpg" 
+                alt="Editorial Earring Styling"
+                className="w-full h-full object-cover grayscale contrast-125"
+              />
+            </div>
+
+            {/* Giant Bold Headline */}
+            <div className="relative select-none text-center">
+              <h1 className="font-sans font-black text-6xl sm:text-8xl xl:text-[10rem] tracking-tighter leading-[0.82] uppercase text-[#4e342e] dark:text-[#ffffff] transition-colors">
+                CORA<br />
+                HORNBY
               </h1>
-              
-              <p className="text-base sm:text-lg text-[#4e342e]/85 dark:text-white/85 font-editorial-body max-w-lg leading-relaxed pt-2">
-                Hand-crafted on the coast of Maine using hammered metals, leather, freshwater pearls, semi-precious stones, druzies, and crystals.
+
+              {/* Overlapping Crescent Collar Necklace with Agate (Exact Mockup Match) */}
+              <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-10">
+                <div className="relative group pointer-events-auto">
+                  <img
+                    src="/mockup_assets/crescent-collar.png"
+                    alt="Natural Agate Crescent Collar Necklace"
+                    className="w-44 sm:w-56 xl:w-64 object-contain drop-shadow-[0_20px_40px_rgba(78,52,46,0.35)] dark:drop-shadow-[0_20px_40px_rgba(255,255,255,0.18)] transition-transform duration-700 group-hover:scale-105"
+                  />
+                  
+                  {/* Top-Right Curved Annotation Pointer */}
+                  <div className="absolute -top-3 -right-20 sm:-right-28 hidden xs:flex flex-col items-start text-left pointer-events-none">
+                    <span className="text-[10px] sm:text-[11px] font-editorial-mono leading-tight text-[#4e342e] dark:text-white max-w-[120px]">
+                      Natural Agate & Heavy Silver
+                    </span>
+                    <svg className="w-16 h-8 text-[#cc5500] dark:text-[#2c3480]" viewBox="0 0 60 30" fill="none" stroke="currentColor" strokeWidth="1.2">
+                      <path d="M5 25 C20 25, 45 15, 55 5" />
+                      <circle cx="5" cy="25" r="2.5" fill="currentColor" />
+                    </svg>
+                  </div>
+
+                  {/* Bottom-Left Curved Annotation Pointer */}
+                  <div className="absolute -bottom-4 -left-20 sm:-left-28 hidden xs:flex flex-col items-end text-right pointer-events-none">
+                    <span className="text-[10px] sm:text-[11px] font-editorial-mono leading-tight text-[#4e342e] dark:text-white max-w-[120px]">
+                      Natural Agate & Heavy Silver
+                    </span>
+                    <svg className="w-16 h-8 text-[#cc5500] dark:text-[#2c3480]" viewBox="0 0 60 30" fill="none" stroke="currentColor" strokeWidth="1.2">
+                      <path d="M55 5 C40 10, 20 25, 5 25" />
+                      <circle cx="55" cy="5" r="2.5" fill="currentColor" />
+                    </svg>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Explore All CTA Button right under necklace */}
+            <div className="pt-6 flex justify-end">
+              <Link
+                to="/collections"
+                className="inline-flex items-center gap-2 px-5 py-2.5 text-[11px] font-editorial-mono uppercase font-bold tracking-[0.18em] border border-[#cc5500] dark:border-[#2c3480] bg-[#cc5500]/10 dark:bg-[#2c3480]/20 text-[#cc5500] dark:text-[#ffffff] hover:bg-[#cc5500] hover:text-white dark:hover:bg-[#2c3480] transition-all"
+              >
+                <span>EXPLORE ALL</span>
+                <ArrowRight className="w-3.5 h-3.5" />
+              </Link>
+            </div>
+
+          </div>
+
+          {/* 3. Mid Block: Traveling the World + Raw Gold Ring Pointer */}
+          <div className="pt-4 border-t border-[#4e342e]/12 dark:border-white/12 grid grid-cols-1 sm:grid-cols-12 gap-6 items-center">
+            <div className="sm:col-span-8 space-y-2">
+              <h2 className="font-display-serif text-2xl sm:text-3xl font-bold text-[#4e342e] dark:text-white leading-tight">
+                Traveling the World for Inspiration and Materials
+              </h2>
+              <p className="font-editorial-body text-sm sm:text-base text-[#4e342e]/80 dark:text-white/80 max-w-md leading-relaxed">
+                The expedition around for inspiration and the coming up inspiration and Materials.
               </p>
             </div>
 
-            {/* Primary CTA: High-Conversion Heat Zone */}
-            <div className="pt-2 flex flex-col sm:flex-row items-start sm:items-center gap-4">
-              <Link
-                to="/collections"
-                className="px-8 py-4 bg-[#cc5500] dark:bg-[#2c3480] text-white font-editorial-mono text-xs uppercase tracking-[0.2em] font-bold transition-all shadow-[0_10px_30px_rgba(204,85,0,0.25)] dark:shadow-[0_10px_30px_rgba(44,52,128,0.35)] hover:scale-[1.03] active:scale-[0.98] flex items-center gap-3 group"
-              >
-                <span>EXPLORE THE COLLECTIONS</span>
-                <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1.5" />
-              </Link>
-
-              <Link
-                to="/travels"
-                className="px-6 py-4 border border-[#4e342e]/25 dark:border-white/25 text-[#4e342e] dark:text-white font-editorial-mono text-xs uppercase tracking-[0.16em] hover:border-[#cc5500] dark:hover:border-[#2c3480] hover:text-[#cc5500] dark:hover:text-[#2c3480] transition-colors"
-              >
-                TRAVEL INSPIRATIONS (8)
-              </Link>
-            </div>
-
-            {/* Trust Micro-Badges */}
-            <div className="pt-4 grid grid-cols-2 gap-3 text-[11px] font-editorial-mono text-[#4e342e]/70 dark:text-white/70">
-              <div className="flex items-center gap-1.5">
-                <span className="w-1.5 h-1.5 bg-[#cc5500] dark:bg-[#2c3480]"></span>
-                <span>Hand-crafted in Maine</span>
+            {/* Gold Ring Macro Box + Pointer */}
+            <div className="sm:col-span-4 flex items-center gap-3">
+              <div className="flex items-center gap-2">
+                <span className="w-2 h-2 rounded-full bg-[#cc5500] dark:bg-[#2c3480]"></span>
+                <span className="text-[10px] font-editorial-mono uppercase text-[#4e342e]/70 dark:text-white/70 whitespace-nowrap">
+                  Raw 18-karat Gold
+                </span>
               </div>
-              <div className="flex items-center gap-1.5">
-                <span className="w-1.5 h-1.5 bg-[#cc5500] dark:bg-[#2c3480]"></span>
-                <span>30-Day Money-Back Guarantee</span>
+              <div className="w-16 h-14 bg-white/50 dark:bg-white/5 border border-[#4e342e]/15 dark:border-white/15 p-1 rounded-sm shadow-sm overflow-hidden flex-shrink-0">
+                <img 
+                  src="/mockup_assets/gold-ring-macro.png" 
+                  alt="Raw 18-karat Gold Ring" 
+                  className="w-full h-full object-cover"
+                />
               </div>
             </div>
           </div>
 
-          {/* Right Column: Auto-Playing Lifestyle & High-Resolution Bench Visual Split */}
-          <div data-stagger="image" className="lg:col-span-6 relative">
-            <div className="relative aspect-[4/5] sm:aspect-[1/1] lg:aspect-[4/5] bg-[#4e342e]/5 dark:bg-white/5 border border-[#4e342e]/15 dark:border-white/15 overflow-hidden p-3 shadow-2xl group">
-              
-              {/* Corner Exhibition Brackets */}
-              <div className="absolute inset-4 pointer-events-none z-20">
-                <span className="absolute top-0 left-0 w-3 h-3 border-t-2 border-l-2 border-[#cc5500] dark:border-[#2c3480]"></span>
-                <span className="absolute top-0 right-0 w-3 h-3 border-t-2 border-r-2 border-[#cc5500] dark:border-[#2c3480]"></span>
-                <span className="absolute bottom-0 left-0 w-3 h-3 border-b-2 border-l-2 border-[#cc5500] dark:border-[#2c3480]"></span>
-                <span className="absolute bottom-0 right-0 w-3 h-3 border-b-2 border-r-2 border-[#cc5500] dark:border-[#2c3480]"></span>
+          {/* 4. Natural Surroundings Expedition Photo Collage */}
+          <div className="space-y-3">
+            <div className="grid grid-cols-6 gap-2 items-center bg-[#4e342e]/3 dark:bg-white/3 p-3 border border-[#4e342e]/10 dark:border-white/10 rounded-sm">
+              {/* Photo 1: Model tall portrait */}
+              <div className="col-span-2 aspect-[3/4] overflow-hidden rounded-xs">
+                <img 
+                  src="https://images.squarespace-cdn.com/content/v1/5b882c0b365f0225b70e3aa1/1593920126047-TJDE8V45MWZW4M0KCUIF/Model+look+right.jpg" 
+                  alt="Model portrait" 
+                  className="w-full h-full object-cover filter contrast-105"
+                />
+              </div>
+              {/* Photo 2: Mountain peaks */}
+              <div className="col-span-2 aspect-[4/3] overflow-hidden rounded-xs">
+                <img 
+                  src="/travel_inspirations/greece-hero.jpg" 
+                  alt="Meteora geological peak" 
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              {/* Photo 3: Gold rings & fabric */}
+              <div className="col-span-2 aspect-square overflow-hidden rounded-xs">
+                <img 
+                  src="/mockup_assets/brazil-ring-sand.png" 
+                  alt="Ring on linen" 
+                  className="w-full h-full object-cover"
+                />
+              </div>
+            </div>
+            <div className="flex items-center justify-between text-[11px] font-editorial-mono text-[#4e342e]/70 dark:text-white/70 tracking-widest uppercase">
+              <span>Natural surroundings expedition.</span>
+              <span className="text-[#cc5500] dark:text-[#2c3480] font-bold">ATELIER · MAINE</span>
+            </div>
+          </div>
+
+          {/* 5. CURATED COLLECTIONS & CRAFT (With Slider Controls) */}
+          <div className="space-y-6 pt-6 border-t border-[#4e342e]/12 dark:border-white/12">
+            <div className="flex items-center justify-between">
+              <h3 className="font-display-serif text-2xl sm:text-3xl font-black uppercase tracking-tight text-[#4e342e] dark:text-white">
+                CURATED COLLECTIONS & CRAFT
+              </h3>
+              <div className="flex items-center gap-3 font-editorial-mono text-xs">
+                <button 
+                  onClick={() => setCollectionSlide(prev => (prev === 0 ? 1 : 0))}
+                  className="p-2 border border-[#4e342e]/20 dark:border-white/20 hover:bg-[#cc5500] hover:text-white dark:hover:bg-[#2c3480] transition-colors"
+                  aria-label="Previous Collection"
+                >
+                  <ArrowLeft className="w-3.5 h-3.5" />
+                </button>
+                <button 
+                  onClick={() => setCollectionSlide(prev => (prev === 0 ? 1 : 0))}
+                  className="p-2 border border-[#4e342e]/20 dark:border-white/20 hover:bg-[#cc5500] hover:text-white dark:hover:bg-[#2c3480] transition-colors"
+                  aria-label="Next Collection"
+                >
+                  <ArrowRight className="w-3.5 h-3.5" />
+                </button>
+                <span className="font-bold text-[#cc5500] dark:text-[#2c3480]">
+                  {collectionSlide === 0 ? "01 / 02" : "02 / 02"}
+                </span>
+              </div>
+            </div>
+
+            {/* Asymmetrical Craft Mosaic */}
+            <div className="grid grid-cols-4 gap-3 items-end">
+              <div className="p-2 bg-white/40 dark:bg-white/5 border border-[#4e342e]/10 dark:border-white/10 rounded-sm">
+                <img 
+                  src="/mockup_assets/gold-ring-macro.png" 
+                  alt="Hand-hammered gold ring" 
+                  className="w-full aspect-square object-contain"
+                />
+              </div>
+              <div className="p-2 bg-white/40 dark:bg-white/5 border border-[#4e342e]/10 dark:border-white/10 rounded-sm">
+                <img 
+                  src="/mockup_assets/greece-coin-earring.png" 
+                  alt="Ancient coin earrings" 
+                  className="w-full aspect-square object-contain"
+                />
+              </div>
+              <div className="p-2 bg-white/40 dark:bg-white/5 border border-[#4e342e]/10 dark:border-white/10 rounded-sm">
+                <img 
+                  src="/mockup_assets/greece-cuff.png" 
+                  alt="Hammered bronze cuff" 
+                  className="w-full aspect-square object-contain"
+                />
+              </div>
+              <div className="p-2 bg-white/40 dark:bg-white/5 border border-[#4e342e]/10 dark:border-white/10 rounded-sm">
+                <img 
+                  src="/hero-zebra-jasper-3d.png" 
+                  alt="African Zebra Jasper Bracelet" 
+                  className="w-full aspect-square object-contain"
+                />
+              </div>
+            </div>
+
+            {/* Bottom 4 Pieces Row: V COLLECTIONS | 01  02 */}
+            <div className="pt-4 border-t border-[#4e342e]/10 dark:border-white/10">
+              <div className="flex items-center justify-between text-[10px] font-editorial-mono uppercase text-[#4e342e]/60 dark:text-white/60 pb-3">
+                <span>EST. 2018</span>
+                <span className="font-bold text-[#4e342e] dark:text-white">V COLLECTIONS | 01  02</span>
               </div>
 
-              {/* Main Image with Smooth Subtle Scale */}
-              <div className="w-full h-full overflow-hidden relative">
-                <img
-                  src="https://images.squarespace-cdn.com/content/v1/5b882c0b365f0225b70e3aa1/1593920126047-TJDE8V45MWZW4M0KCUIF/Model+look+right.jpg"
-                  alt="Cora Hornby signature jewelry styling"
-                  className="w-full h-full object-cover filter contrast-[1.04] transition-transform duration-700 group-hover:scale-105"
-                />
-
-                {/* Overlaid Floating Product Tag */}
-                <div className="absolute bottom-4 left-4 right-4 bg-[#f8f4e7]/95 dark:bg-[#000000]/95 backdrop-blur-md p-4 border border-[#4e342e]/15 dark:border-white/20 flex items-center justify-between z-20">
-                  <div>
-                    <span className="text-[9px] font-editorial-mono uppercase tracking-widest text-[#cc5500] dark:text-[#2c3480] block font-bold">
-                      FEATURED ATELIER PIECE
-                    </span>
-                    <span className="font-display-serif text-base font-bold text-[#4e342e] dark:text-white">
-                      Mayan Sol Turquoise Drops
-                    </span>
-                  </div>
-                  <Link
-                    to="/product/prod-mayan-sol"
-                    className="text-xs font-editorial-mono uppercase font-bold text-[#cc5500] dark:text-[#2c3480] hover:underline flex items-center gap-1"
+              <div className="grid grid-cols-4 gap-2">
+                {PRODUCTS.slice(0, 4).map((item, idx) => (
+                  <Link 
+                    key={item.id} 
+                    to={`/product/${item.slug}`}
+                    className="group bg-white dark:bg-[#111111] p-2 border border-[#4e342e]/10 dark:border-white/10 flex flex-col justify-between hover:border-[#cc5500] dark:hover:border-[#2c3480] transition-colors"
                   >
-                    <span>VIEW</span>
+                    <div className="w-full aspect-square overflow-hidden flex items-center justify-center p-1">
+                      <img 
+                        src={item.image} 
+                        alt={item.title} 
+                        className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500"
+                      />
+                    </div>
+                    <div className="pt-2 text-center">
+                      <span className="text-[9px] font-editorial-mono text-[#4e342e]/60 dark:text-white/60 block">0{idx + 1}</span>
+                      <span className="text-[10px] font-editorial-mono font-bold text-[#4e342e] dark:text-white truncate block">
+                        ${item.price}
+                      </span>
+                    </div>
+                  </Link>
+                ))}
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+
+        {/* =====================================================================
+            RIGHT COLUMN
+        ===================================================================== */}
+        <div className="flex flex-col px-6 sm:px-10 lg:px-12 pt-28 pb-16 justify-between space-y-12">
+          
+          {/* 1. Top Section with Ghost Outline "METALS" & Model Images */}
+          <div className="relative overflow-hidden pt-2 pb-6">
+            
+            {/* Ghost Watermark Background Typography (Mockup accurate) */}
+            <div className="absolute top-0 left-0 right-0 pointer-events-none select-none z-0">
+              <span className="font-sans font-black text-7xl sm:text-9xl text-[#4e342e]/6 dark:text-white/8 uppercase tracking-widest block">
+                METALS
+              </span>
+            </div>
+
+            <div className="relative z-10 flex flex-col sm:flex-row items-start justify-between gap-6">
+              <div className="max-w-xs space-y-3">
+                <span className="text-[11px] font-editorial-mono uppercase tracking-[0.2em] text-[#cc5500] dark:text-[#2c3480] font-bold block">
+                  01 → 03 DESTINATIONS
+                </span>
+                <h2 className="font-display-serif text-2xl sm:text-3xl font-bold text-[#4e342e] dark:text-white leading-tight">
+                  Traveling the World for Inspiration and Materials
+                </h2>
+                <p className="font-editorial-body text-sm text-[#4e342e]/80 dark:text-white/80 leading-relaxed">
+                  The expedition around for inspiration and the coming up inspiration and Materials.
+                </p>
+              </div>
+
+              {/* Top Right Model Photos */}
+              <div className="flex items-center gap-2 flex-shrink-0">
+                <div className="w-20 aspect-[3/4] bg-white/20 dark:bg-white/5 border border-[#4e342e]/15 dark:border-white/15 overflow-hidden rounded-xs">
+                  <img 
+                    src="/travel_inspirations/namibia-hero.jpg" 
+                    alt="Ceremonial jewelry look" 
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <div className="w-20 aspect-[3/4] bg-white/20 dark:bg-white/5 border border-[#4e342e]/15 dark:border-white/15 overflow-hidden rounded-xs">
+                  <img 
+                    src="/travel_inspirations/namibia-pair-2-inspiration.jpg" 
+                    alt="Leather talisman look" 
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          {/* 2. Destination Card: 01 / BRAZIL + Copacabana Collage */}
+          <div className="p-6 bg-[#4e342e]/4 dark:bg-white/4 border border-[#4e342e]/15 dark:border-white/15 rounded-sm space-y-6">
+            <div className="grid grid-cols-1 sm:grid-cols-12 gap-6 items-center">
+              
+              {/* Destination Highlight Box */}
+              <div className="sm:col-span-6 space-y-3">
+                <span className="text-xs font-editorial-mono font-bold text-[#cc5500] dark:text-[#2c3480] block">
+                  01 /
+                </span>
+                <h3 className="font-sans font-black text-3xl sm:text-4xl text-[#4e342e] dark:text-white uppercase tracking-tight">
+                  BRAZIL
+                </h3>
+                <p className="font-editorial-body text-sm text-[#4e342e]/80 dark:text-white/80 leading-relaxed">
+                  Deep gemstones of Copacabana™ shades, resonating its and senses, museums and culture.
+                </p>
+                <div className="pt-2">
+                  <Link
+                    to="/travels/brazil"
+                    className="inline-flex items-center gap-2 text-xs font-editorial-mono uppercase font-bold text-[#cc5500] dark:text-[#2c3480] hover:translate-x-1 transition-transform"
+                  >
+                    <span>Explore Brazil</span>
                     <ArrowRight className="w-3.5 h-3.5" />
                   </Link>
                 </div>
-
               </div>
+
+              {/* Brazil Photo Collage */}
+              <div className="sm:col-span-6 grid grid-cols-2 gap-2">
+                <div className="aspect-[4/3] overflow-hidden rounded-xs border border-[#4e342e]/10 dark:border-white/10">
+                  <img 
+                    src="/travel_inspirations/brazil-hero.jpg" 
+                    alt="Copacabana beach" 
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <div className="aspect-[4/3] overflow-hidden rounded-xs border border-[#4e342e]/10 dark:border-white/10">
+                  <img 
+                    src="/mockup_assets/brazil-ring-sand.png" 
+                    alt="Gold citrine ring on sand" 
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <div className="col-span-2 aspect-[16/7] overflow-hidden rounded-xs border border-[#4e342e]/10 dark:border-white/10">
+                  <img 
+                    src="/travel_inspirations/brazil-pair-2-jewelry.jpg" 
+                    alt="Brazilian amethyst rough cluster" 
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+              </div>
+
             </div>
           </div>
 
-        </div>
-
-        {/* Bottom Bar: 3-Way Taxonomy Quick Jump */}
-        <div className="pt-4 border-t border-[#4e342e]/12 dark:border-white/12 flex flex-wrap items-center justify-between gap-4 font-editorial-mono text-[10px] uppercase text-[#4e342e]/70 dark:text-white/70">
-          <span>BROWSE 3 WAYS:</span>
-          <div className="flex flex-wrap items-center gap-4 font-semibold text-[#4e342e] dark:text-white">
-            <Link to="/travels" className="hover:text-[#cc5500] dark:hover:text-[#2c3480]">01 / TRAVEL INSPIRATION (8 COUNTRIES)</Link>
-            <span className="opacity-30">·</span>
-            <Link to="/collections" className="hover:text-[#cc5500] dark:hover:text-[#2c3480]">02 / COLLECTIONS (5 LINES)</Link>
-            <span className="opacity-30">·</span>
-            <Link to="/shop" className="hover:text-[#cc5500] dark:hover:text-[#2c3480]">03 / PRODUCT TYPES (5 CATEGORIES)</Link>
-          </div>
-        </div>
-
-      </section>
-
-      {/* SECTION 2 (THE HOOK): Full-Width Monumental Text Block */}
-      <section className="py-24 sm:py-32 px-6 sm:px-10 lg:px-14 bg-[#4e342e] text-[#f8f4e7] dark:bg-[#080808] dark:text-white transition-colors duration-400">
-        <div className="max-w-[1720px] mx-auto text-center space-y-6">
-          <span className="font-editorial-mono text-xs uppercase tracking-[0.3em] text-[#cc5500] dark:text-[#2c3480] font-bold block">
-            THE ATELIER PHILOSOPHY
-          </span>
-
-          <h2 data-stagger="text" className="font-display-serif text-4xl sm:text-6xl lg:text-7xl xl:text-8xl font-black max-w-6xl mx-auto leading-[0.98] tracking-tight">
-            “Traveling the World for Inspiration and Materials.”
-          </h2>
-
-          <p className="font-editorial-body text-base sm:text-xl text-[#f8f4e7]/80 dark:text-white/80 max-w-3xl mx-auto leading-relaxed pt-2">
-            Some countries are the direct sources of rare raw materials—such as Guatemala for mountain jade, and Brazil for amethyst and citrine. Others ignite the design vocabulary—such as ancient Aegean spirals in Greece and Bauhaus geometry in Germany. Handcrafted on the coast of Maine.
-          </p>
-
-          <div className="pt-6 flex justify-center">
-            <Link
-              to="/story"
-              className="text-xs font-editorial-mono uppercase tracking-[0.2em] font-bold text-[#cc5500] dark:text-[#2c3480] hover:text-white dark:hover:text-white underline underline-offset-8 transition-colors"
-            >
-              READ CORA'S FULL JOURNEY →
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* SECTION 3 (ENTRYWAYS): Three Asymmetrical Editorial Cards */}
-      <section className="py-20 lg:py-28 px-6 sm:px-10 lg:px-14 bg-[#f8f4e7] dark:bg-[#000000] border-t border-[#4e342e]/12 dark:border-white/12">
-        <div className="max-w-[1720px] mx-auto">
-          
-          <div className="flex flex-col sm:flex-row items-baseline justify-between gap-4 pb-12 border-b border-[#4e342e]/15 dark:border-white/15">
-            <div>
-              <span className="font-editorial-mono text-[10px] uppercase tracking-[0.2em] text-[#cc5500] dark:text-[#2c3480] font-bold block">
-                03 / THREE WAYS OF BROWSING
-              </span>
-              <h2 className="font-display-serif text-3xl sm:text-5xl font-bold text-[#4e342e] dark:text-white mt-1">
-                Enter the Archive
-              </h2>
-            </div>
-            <p className="text-sm font-editorial-mono text-[#4e342e]/70 dark:text-white/70 max-w-md">
-              Every listing is classified across three dimensions: country of inspiration, thematic collection, and product silhouette.
-            </p>
-          </div>
-
-          {/* Three Asymmetrical Editorial Cards Grid */}
-          <div className="mt-12 grid grid-cols-1 md:grid-cols-12 gap-8 lg:gap-10 items-stretch editorial-hover-parent">
+          {/* 3. Brand Story: I TRAVEL TO GATHER. (Authentic Studio Portrait of Cora) */}
+          <div className="pt-6 border-t border-[#4e342e]/12 dark:border-white/12 space-y-6">
             
-            {/* Card 1: Travel Inspiration (Span 4) */}
-            <Link
-              to="/travels"
-              className="md:col-span-4 bg-[#4e342e]/5 dark:bg-white/5 border border-[#4e342e]/15 dark:border-white/15 p-8 flex flex-col justify-between editorial-hover-card group relative"
-            >
-              <div className="space-y-6">
-                <div className="flex items-center justify-between font-editorial-mono text-[10px] uppercase tracking-widest text-[#cc5500] dark:text-[#2c3480] font-bold">
-                  <span>ENTRYWAY 01</span>
-                  <Compass className="w-4 h-4" />
-                </div>
-
-                <div className="aspect-[4/3] bg-[#4e342e]/10 dark:bg-white/10 overflow-hidden relative border border-[#4e342e]/10 dark:border-white/10">
-                  <img
-                    src="/travel_inspirations/greece-hero.jpg"
-                    alt="Travel Inspiration"
-                    className="w-full h-full object-cover filter contrast-[1.05] transition-transform duration-700 group-hover:scale-105"
-                  />
-                  <div className="absolute top-2 left-2 bg-[#f8f4e7]/90 dark:bg-[#000000]/90 px-2 py-0.5 font-editorial-mono text-[8px] uppercase tracking-wider text-[#4e342e] dark:text-white">
-                    8 COUNTRIES
-                  </div>
-                </div>
-
-                <h3 className="font-display-serif text-3xl font-bold text-[#4e342e] dark:text-white">
-                  Travel Inspiration
-                </h3>
-
-                <p className="text-xs sm:text-sm text-[#4e342e]/80 dark:text-white/80 font-editorial-body leading-relaxed">
-                  Explore 8 global destinations featuring 3 curated pieces each with side-by-side inspiration photos and storytelling captions.
-                </p>
-              </div>
-
-              <div className="pt-6 mt-6 border-t border-[#4e342e]/10 dark:border-white/10 flex items-center justify-between text-xs font-editorial-mono font-bold text-[#cc5500] dark:text-[#2c3480]">
-                <span>EXPLORE 8 COUNTRIES</span>
-                <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1.5" />
-              </div>
-            </Link>
-
-            {/* Card 2: Curated Collections (Span 4) */}
-            <Link
-              to="/collections"
-              className="md:col-span-4 bg-[#4e342e]/5 dark:bg-white/5 border border-[#4e342e]/15 dark:border-white/15 p-8 flex flex-col justify-between editorial-hover-card group relative"
-            >
-              <div className="space-y-6">
-                <div className="flex items-center justify-between font-editorial-mono text-[10px] uppercase tracking-widest text-[#cc5500] dark:text-[#2c3480] font-bold">
-                  <span>ENTRYWAY 02</span>
-                  <Sparkles className="w-4 h-4" />
-                </div>
-
-                <div className="aspect-[4/3] bg-[#4e342e]/10 dark:bg-white/10 overflow-hidden relative border border-[#4e342e]/10 dark:border-white/10">
-                  <img
-                    src="https://images.squarespace-cdn.com/content/v1/5b882c0b365f0225b70e3aa1/1786657275999-NO6EK65SN16E85AOD73A/https%3A%2F%2Fi.etsystatic.com%2F24076881%2Fr%2Fil%2Fec8df4%2F3451414898%2Fil_fullxfull.3451414898_qvov.jpg"
-                    alt="Curated Collections"
-                    className="w-full h-full object-cover filter contrast-[1.05] transition-transform duration-700 group-hover:scale-105"
-                  />
-                  <div className="absolute top-2 left-2 bg-[#f8f4e7]/90 dark:bg-[#000000]/90 px-2 py-0.5 font-editorial-mono text-[8px] uppercase tracking-wider text-[#4e342e] dark:text-white">
-                    5 SIGNATURE LINES
-                  </div>
-                </div>
-
-                <h3 className="font-display-serif text-3xl font-bold text-[#4e342e] dark:text-white">
-                  Curated Collections
-                </h3>
-
-                <p className="text-xs sm:text-sm text-[#4e342e]/80 dark:text-white/80 font-editorial-body leading-relaxed">
-                  Floating minimalist grids for Mixed Metals, Geometrics, Mayan Sol, Pearls, and Black is Back.
-                </p>
-              </div>
-
-              <div className="pt-6 mt-6 border-t border-[#4e342e]/10 dark:border-white/10 flex items-center justify-between text-xs font-editorial-mono font-bold text-[#cc5500] dark:text-[#2c3480]">
-                <span>BROWSE 5 COLLECTIONS</span>
-                <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1.5" />
-              </div>
-            </Link>
-
-            {/* Card 3: Shop All Products (Span 4) */}
-            <Link
-              to="/shop"
-              className="md:col-span-4 bg-[#4e342e]/5 dark:bg-white/5 border border-[#4e342e]/15 dark:border-white/15 p-8 flex flex-col justify-between editorial-hover-card group relative"
-            >
-              <div className="space-y-6">
-                <div className="flex items-center justify-between font-editorial-mono text-[10px] uppercase tracking-widest text-[#cc5500] dark:text-[#2c3480] font-bold">
-                  <span>ENTRYWAY 03</span>
-                  <Grid className="w-4 h-4" />
-                </div>
-
-                <div className="aspect-[4/3] bg-[#4e342e]/10 dark:bg-white/10 overflow-hidden relative border border-[#4e342e]/10 dark:border-white/10">
-                  <img
-                    src="/hero-zebra-jasper-3d.png"
-                    alt="Shop All Pieces"
-                    className="w-full h-full object-cover filter contrast-[1.05] transition-transform duration-700 group-hover:scale-105"
-                  />
-                  <div className="absolute top-2 left-2 bg-[#f8f4e7]/90 dark:bg-[#000000]/90 px-2 py-0.5 font-editorial-mono text-[8px] uppercase tracking-wider text-[#4e342e] dark:text-white">
-                    5 SILHOUETTES
-                  </div>
-                </div>
-
-                <h3 className="font-display-serif text-3xl font-bold text-[#4e342e] dark:text-white">
-                  Shop All Products
-                </h3>
-
-                <p className="text-xs sm:text-sm text-[#4e342e]/80 dark:text-white/80 font-editorial-body leading-relaxed">
-                  Filter across Earrings, Necklaces, Bracelets, Rings, and Bag Charms with live inventory status.
-                </p>
-              </div>
-
-              <div className="pt-6 mt-6 border-t border-[#4e342e]/10 dark:border-white/10 flex items-center justify-between text-xs font-editorial-mono font-bold text-[#cc5500] dark:text-[#2c3480]">
-                <span>VIEW FULL CATALOG (60+)</span>
-                <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1.5" />
-              </div>
-            </Link>
-
-          </div>
-
-        </div>
-      </section>
-
-      {/* SECTION 4: MASTERPIECE ANATOMY HIGHLIGHT */}
-      <section className="py-20 lg:py-28 px-6 sm:px-10 lg:px-14 bg-[#4e342e]/5 dark:bg-white/5 border-t border-[#4e342e]/12 dark:border-white/12">
-        <div className="max-w-[1720px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
-          
-          <div className="lg:col-span-6 space-y-6">
-            <span className="font-editorial-mono text-[10px] uppercase tracking-[0.25em] text-[#cc5500] dark:text-[#2c3480] font-bold">
-              BENCH HIGHLIGHT · ONE OF ONE
-            </span>
-
-            <h2 className="font-display-serif text-4xl sm:text-6xl font-bold text-[#4e342e] dark:text-white leading-tight">
-              {FEATURED_MASTERPIECE.name}
-            </h2>
-
-            <p className="text-sm sm:text-base text-[#4e342e]/85 dark:text-white/85 font-editorial-body leading-relaxed">
-              {FEATURED_MASTERPIECE.material}. Cold-hammered on an antique iron anvil in Cape Elizabeth, Maine. Each facet reflects coastal light at an organic angle, leaving the human trace of the artisan.
-            </p>
-
-            <div className="grid grid-cols-2 gap-4 font-editorial-mono text-xs text-[#4e342e]/80 dark:text-white/80 pt-2">
-              <div className="p-3 bg-[#f8f4e7] dark:bg-[#000000] border border-[#4e342e]/15 dark:border-white/15">
-                <span className="text-[9px] uppercase block opacity-60">PRICE</span>
-                <span className="font-bold text-base text-[#4e342e] dark:text-white">{FEATURED_MASTERPIECE.price}</span>
-              </div>
-              <div className="p-3 bg-[#f8f4e7] dark:bg-[#000000] border border-[#4e342e]/15 dark:border-white/15">
-                <span className="text-[9px] uppercase block opacity-60">EDITION</span>
-                <span className="font-bold text-base text-[#cc5500] dark:text-[#2c3480]">ONE OF ONE</span>
-              </div>
+            {/* Social / Editorial Micro-Links */}
+            <div className="flex items-center gap-4 text-[#4e342e]/60 dark:text-white/60 text-xs font-editorial-mono">
+              <span className="hover:text-[#cc5500] dark:hover:text-[#2c3480] cursor-pointer">&lt;</span>
+              <span className="hover:text-[#cc5500] dark:hover:text-[#2c3480] cursor-pointer">f</span>
+              <span className="hover:text-[#cc5500] dark:hover:text-[#2c3480] cursor-pointer">ig</span>
             </div>
 
-            <div className="pt-2 flex items-center gap-4">
-              <Link
-                to="/product/prod-cleo"
-                className="px-8 py-3.5 bg-[#cc5500] dark:bg-[#2c3480] text-white font-editorial-mono text-xs uppercase tracking-[0.18em] font-bold hover:scale-105 transition-all shadow-md"
+            <div className="grid grid-cols-1 sm:grid-cols-12 gap-6 items-center">
+              
+              <div className="sm:col-span-7 space-y-4">
+                <h3 className="font-sans font-black text-3xl sm:text-4xl lg:text-5xl uppercase tracking-tighter text-[#4e342e] dark:text-white leading-[0.92]">
+                  I TRAVEL TO<br />
+                  GATHER.
+                </h3>
+                <p className="font-editorial-body text-sm sm:text-base text-[#4e342e]/80 dark:text-white/80 leading-relaxed max-w-sm">
+                  Designed with precious stones and semi-precious materials and with exceptional craftsmanship. Unique pieces crafted along the Maine coastline.
+                </p>
+                <div className="pt-2">
+                  <Link
+                    to="/story"
+                    className="inline-flex items-center gap-2 text-xs font-editorial-mono uppercase font-bold text-[#cc5500] dark:text-[#2c3480] hover:underline"
+                  >
+                    <span>Read Cora's Full Story</span>
+                    <ArrowRight className="w-3.5 h-3.5" />
+                  </Link>
+                </div>
+              </div>
+
+              {/* Real Photo of Cora Hornby at Studio Workbench */}
+              <div className="sm:col-span-5 relative group">
+                <div className="aspect-[4/5] bg-white/40 dark:bg-white/5 border border-[#4e342e]/20 dark:border-white/20 p-1.5 shadow-lg overflow-hidden rounded-sm">
+                  <img 
+                    src="/mockup_assets/cora-bench.png" 
+                    alt="Cora Hornby working at her jewelry studio workbench" 
+                    className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700"
+                  />
+                </div>
+                <div className="pt-1.5 flex items-center justify-between text-[10px] font-editorial-mono text-[#4e342e]/60 dark:text-white/60">
+                  <span>CAPE ELIZABETH BENCH</span>
+                  <span>EST. 2018</span>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          {/* 4. Assurance & Packaging Section: Packaging, Shipping & Commitment */}
+          <div className="pt-6 border-t border-[#4e342e]/12 dark:border-white/12 space-y-4">
+            <div className="flex items-center justify-between">
+              <h4 className="font-display-serif text-xl sm:text-2xl font-bold text-[#4e342e] dark:text-white">
+                Packaging, Shipping & Commitment
+              </h4>
+              <Link 
+                to="/shipping" 
+                className="text-xs font-editorial-mono uppercase font-bold text-[#cc5500] dark:text-[#2c3480] hover:underline flex items-center gap-1"
               >
-                VIEW MASTERPIECE SPECS →
+                <span>Explore More</span>
+                <ArrowRight className="w-3 h-3" />
               </Link>
             </div>
-          </div>
 
-          <div className="lg:col-span-6">
-            <div className="aspect-[4/3] bg-[#f8f4e7] dark:bg-[#000000] p-4 border border-[#4e342e]/15 dark:border-white/15 shadow-2xl relative overflow-hidden group">
-              <img
-                src={FEATURED_MASTERPIECE.mainImage}
-                alt={FEATURED_MASTERPIECE.name}
-                className="w-full h-full object-cover filter contrast-[1.04] transition-transform duration-700 group-hover:scale-105"
-              />
-              <div className="absolute top-6 right-6 bg-[#f8f4e7]/90 dark:bg-black/90 px-3 py-1 text-[10px] font-editorial-mono uppercase font-bold text-[#cc5500] dark:text-[#2c3480] border border-[#4e342e]/15 dark:border-white/20">
-                MAINE BENCH FORGED
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+              
+              {/* Feature Box 1: Luxury Rigid Gift Box */}
+              <div className="p-3 bg-white/50 dark:bg-white/5 border border-[#4e342e]/15 dark:border-white/15 rounded-sm space-y-2">
+                <div className="aspect-[4/3] overflow-hidden rounded-xs">
+                  <img 
+                    src="/mockup_assets/packaging-box.png" 
+                    alt="Debossed Logo Gift Box with Ribbon" 
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <span className="text-[10px] font-editorial-mono uppercase font-bold text-[#4e342e] dark:text-white block">
+                  Debossed Gift Box
+                </span>
               </div>
+
+              {/* Feature Box 2: Branded Logo Pouch */}
+              <div className="p-3 bg-white/50 dark:bg-white/5 border border-[#4e342e]/15 dark:border-white/15 rounded-sm space-y-2">
+                <div className="aspect-[4/3] overflow-hidden rounded-xs">
+                  <img 
+                    src="/mockup_assets/packaging-pouch.png" 
+                    alt="Organic Cotton Logo Drawstring Pouch" 
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <span className="text-[10px] font-editorial-mono uppercase font-bold text-[#4e342e] dark:text-white block">
+                  Archival Pouch
+                </span>
+              </div>
+
+              {/* Feature Box 3: Trust & Assurance Commitment */}
+              <div className="p-3 bg-white/50 dark:bg-white/5 border border-[#4e342e]/15 dark:border-white/15 rounded-sm flex flex-col justify-between">
+                <p className="text-[11px] font-editorial-body text-[#4e342e]/80 dark:text-white/80 leading-relaxed">
+                  Each and every piece arrives wrapped in archival protective packaging, ready for gift-giving and lifetime safe storage.
+                </p>
+                <div className="pt-2 text-[10px] font-editorial-mono uppercase text-[#cc5500] dark:text-[#2c3480] font-bold">
+                  30-Day Money-Back Guarantee
+                </div>
+              </div>
+
             </div>
           </div>
 
         </div>
-      </section>
 
-      {/* SECTION 5: TRUST SIGNALS & SOCIAL PROOF TEASER */}
-      <section className="py-16 px-6 sm:px-10 lg:px-14 bg-[#f8f4e7] dark:bg-[#000000] border-t border-[#4e342e]/12 dark:border-white/12">
-        <div className="max-w-[1720px] mx-auto grid grid-cols-1 md:grid-cols-3 gap-6 font-editorial-mono text-xs">
-          
-          <Link
-            to="/customers"
-            className="p-6 bg-[#4e342e]/5 dark:bg-white/5 border border-[#4e342e]/15 dark:border-white/15 flex items-start gap-4 hover:border-[#cc5500] dark:hover:border-[#2c3480] transition-colors group"
-          >
-            <Heart className="w-5 h-5 text-[#cc5500] dark:text-[#2c3480] flex-shrink-0 mt-0.5" />
-            <div>
-              <span className="font-bold text-[#4e342e] dark:text-white block uppercase">500+ Verified Etsy Reviews</span>
-              <p className="text-[#4e342e]/70 dark:text-white/70 text-[11px] mt-1 font-editorial-body">
-                "The magnetic handshake clasp is absolute genius... pure artisan integrity."
-              </p>
-              <span className="text-[#cc5500] dark:text-[#2c3480] text-[10px] uppercase font-bold mt-2 block group-hover:underline">
-                Read Collector Quotes →
-              </span>
-            </div>
-          </Link>
+      </div>
 
-          <Link
-            to="/shipping"
-            className="p-6 bg-[#4e342e]/5 dark:bg-white/5 border border-[#4e342e]/15 dark:border-white/15 flex items-start gap-4 hover:border-[#cc5500] dark:hover:border-[#2c3480] transition-colors group"
-          >
-            <Award className="w-5 h-5 text-[#cc5500] dark:text-[#2c3480] flex-shrink-0 mt-0.5" />
-            <div>
-              <span className="font-bold text-[#4e342e] dark:text-white block uppercase">Signature Logo Gift Box</span>
-              <p className="text-[#4e342e]/70 dark:text-white/70 text-[11px] mt-1 font-editorial-body">
-                Every piece arrives in our custom rigid black gift box debossed with the Cora Hornby logo.
-              </p>
-              <span className="text-[#cc5500] dark:text-[#2c3480] text-[10px] uppercase font-bold mt-2 block group-hover:underline">
-                Packaging & Dispatch Details →
-              </span>
-            </div>
-          </Link>
-
-          <Link
-            to="/guarantees"
-            className="p-6 bg-[#4e342e]/5 dark:bg-white/5 border border-[#4e342e]/15 dark:border-white/15 flex items-start gap-4 hover:border-[#cc5500] dark:hover:border-[#2c3480] transition-colors group"
-          >
-            <ShieldCheck className="w-5 h-5 text-[#cc5500] dark:text-[#2c3480] flex-shrink-0 mt-0.5" />
-            <div>
-              <span className="font-bold text-[#4e342e] dark:text-white block uppercase">100% Money-Back Guarantee</span>
-              <p className="text-[#4e342e]/70 dark:text-white/70 text-[11px] mt-1 font-editorial-body">
-                30-day risk-free collecting with complimentary chain and cord sizing adjustments.
-              </p>
-              <span className="text-[#cc5500] dark:text-[#2c3480] text-[10px] uppercase font-bold mt-2 block group-hover:underline">
-                Read Guarantees →
-              </span>
-            </div>
-          </Link>
-
-        </div>
-      </section>
     </div>
   );
 }
