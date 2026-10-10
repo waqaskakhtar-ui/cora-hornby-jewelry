@@ -1,155 +1,102 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Heart, Star, Quote, Award } from 'lucide-react';
+import { Star, Heart, Award, ArrowRight } from 'lucide-react';
 import { CUSTOMER_STORIES } from '../data/coraData';
 
 export default function CustomersPage() {
-  // Expand customer stories array with diverse variations for a rich masonry gallery
-  const extendedStories = [
-    ...CUSTOMER_STORIES,
-    {
-      id: "cust-5",
-      author: "Annabelle Vance",
-      location: "San Francisco, CA",
-      quote: "The contrast between the hammered brass crescent and the volcanic lava rock is pure art. I wear them to gallery openings and people constantly ask where they came from.",
-      piece: "Caldera Lava Stone Earrings",
-      rating: 5,
-      date: "Verified Etsy Collector · January 2026",
-      photo: "https://images.squarespace-cdn.com/content/v1/5b882c0b365f0225b70e3aa1/1786657407786-RFXK8MW4PWVJ10M80Z19/https%3A%2F%2Fi.etsystatic.com%2F24076881%2Fr%2Fil%2F923bab%2F5999251349%2Fil_fullxfull.5999251349_s24p.jpg"
-    },
-    {
-      id: "cust-6",
-      author: "Grace Thornton",
-      location: "London, UK",
-      quote: "International dispatch from Maine was surprisingly fast. The logo box is so sturdy and beautiful that I keep it displayed on my dressing table.",
-      piece: "African Zebra Jasper Bracelet",
-      rating: 5,
-      date: "Verified Etsy Collector · December 2025",
-      photo: "https://images.squarespace-cdn.com/content/v1/5b882c0b365f0225b70e3aa1/1786657175661-H3MP7IZ64SJDBIXNNAL1/https%3A%2F%2Fi.etsystatic.com%2F24076881%2Fr%2Fil%2Ff84fda%2F5999280529%2Fil_fullxfull.5999280529_2eqo.jpg"
-    }
-  ];
-
   return (
-    <div className="min-h-screen bg-[#FAF9F5] dark:bg-[#0A0909] text-[#111111] dark:text-[#FAF9F5] pt-28 sm:pt-36 pb-24 transition-colors duration-500">
-      <div className="max-w-[1720px] mx-auto px-6 sm:px-10 lg:px-14">
+    <div className="w-full pt-28 pb-24 px-6 sm:px-10 lg:px-14">
+      <div className="max-w-[1720px] mx-auto space-y-16">
         
-        {/* Breadcrumb */}
-        <div className="flex items-center gap-2 font-editorial-micro text-[#8A867E] mb-4">
-          <Link to="/" className="hover:text-[#111111] dark:hover:text-[#FAF9F5]">HOME</Link>
-          <span>/</span>
-          <span className="text-[#A88B58]">CORA'S CUSTOMERS</span>
-        </div>
-
-        {/* Section Header */}
-        <div className="pb-12 border-b border-[#111111]/10 dark:border-white/10 flex flex-col lg:flex-row lg:items-end justify-between gap-6">
-          <div className="space-y-4 max-w-3xl">
-            <div className="font-editorial-micro text-[#A88B58] flex items-center gap-2">
-              <Heart className="w-4 h-4 text-[#A88B58]" />
-              <span>COLLECTOR ARCHIVE · CLIENT STYLING & ETSY FEEDBACK</span>
-            </div>
-
-            <h1 className="font-editorial-heading text-4xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-[#111111] dark:text-[#FAF9F5] leading-none">
-              Cora’s Customers
-            </h1>
-
-            <p className="font-editorial-body text-sm sm:text-base text-[#5E5C57] dark:text-[#B5B0A4] leading-relaxed">
-              Photographs and reviews sent by collectors around the world who wear Cora Hornby creations. Sourced directly from verified reviews on our Etsy studio shop.
-            </p>
+        {/* Header Block */}
+        <div data-stagger="text" className="space-y-4 max-w-4xl border-b border-[#4e342e]/15 dark:border-white/15 pb-8">
+          <div className="flex items-center gap-2 font-editorial-mono text-xs uppercase tracking-[0.25em] text-[#cc5500] dark:text-[#2c3480] font-bold">
+            <Heart className="w-4 h-4" />
+            <span>COLLECTOR ARCHIVE · SOCIAL PROOF & ETSY REVIEWS</span>
           </div>
 
-          <div className="flex items-center gap-6 font-editorial-mono text-xs">
-            <div className="flex items-center gap-1 text-[#A88B58]">
+          <h1 className="font-display-serif text-4xl sm:text-6xl lg:text-7xl font-black text-[#4e342e] dark:text-white leading-[0.96]">
+            Cora’s Customers
+          </h1>
+
+          <p className="text-base sm:text-lg text-[#4e342e]/85 dark:text-white/85 font-editorial-body leading-relaxed pt-1">
+            Real customer photos and reviews shared from Cora's Etsy studio shop. Over 500+ five-star verified purchases treasured across the United States and worldwide.
+          </p>
+
+          <div className="flex items-center gap-6 pt-2 font-editorial-mono text-xs text-[#4e342e]/70 dark:text-white/70">
+            <div className="flex items-center gap-1 text-[#cc5500] dark:text-[#2c3480]">
               {[...Array(5)].map((_, i) => (
-                <Star key={i} className="w-4 h-4 fill-[#A88B58]" />
+                <Star key={i} className="w-4 h-4 fill-current" />
               ))}
             </div>
-            <span className="font-bold text-[#111111] dark:text-[#FAF9F5]">5.0 STAR COLLECTOR RATING</span>
+            <span className="font-bold text-[#4e342e] dark:text-white">5.0 OUT OF 5.0 STAR RATING</span>
+            <span>·</span>
+            <span>VERIFIED COLLECTORS</span>
           </div>
         </div>
 
-        {/* Asymmetrical Masonry Gallery (No two images align horizontally) */}
-        <div className="mt-14 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 lg:gap-14 items-start">
-          {extendedStories.map((story, idx) => {
-            // Irregular stagger heights to enforce non-aligned horizontal axes
-            const staggerClasses = [
-              'lg:translate-y-0',
-              'lg:translate-y-16',
-              'lg:translate-y-6',
-              'lg:translate-y-24',
-              'lg:translate-y-10',
-              'lg:translate-y-28'
-            ][idx % 6];
-
-            const aspectClasses = [
-              'aspect-[3/4]',
-              'aspect-[4/5]',
-              'aspect-[1/1]',
-              'aspect-[4/5]',
-              'aspect-[3/4]',
-              'aspect-[4/5]'
-            ][idx % 6];
-
-            return (
-              <div
-                key={story.id}
-                className={`flex flex-col bg-[#FAF9F5] dark:bg-[#121110] border border-[#111111]/10 dark:border-white/10 p-6 sm:p-8 shadow-sm transition-all duration-500 hover:border-[#A88B58]/40 hover:shadow-xl group ${staggerClasses}`}
-              >
-                {/* Visual Customer Styling Photo */}
-                <div className={`relative ${aspectClasses} bg-[#ECE8DF] dark:bg-[#181715] overflow-hidden reveal-clip`}>
-                  <img
-                    src={story.photo}
-                    alt={`${story.author} styling ${story.piece}`}
-                    className="w-full h-full object-cover filter contrast-[1.04] transition-transform duration-700 group-hover:scale-105"
-                  />
-                  <div className="absolute top-3 right-3 bg-black/65 backdrop-blur-xs text-[#FAF9F5] px-2 py-0.5 font-editorial-micro text-[8px]">
-                    VERIFIED COLLECTOR
-                  </div>
+        {/* MASONRY GALLERY OF CUSTOMER PHOTOS / ETSY QUOTES */}
+        <div className="columns-1 md:columns-2 lg:columns-3 gap-8 space-y-8">
+          {CUSTOMER_STORIES.map((story) => (
+            <div
+              key={story.id}
+              className="break-inside-avoid bg-[#4e342e]/5 dark:bg-white/5 border border-[#4e342e]/15 dark:border-white/15 p-6 sm:p-8 space-y-5 transition-all duration-300 hover:border-[#cc5500] dark:hover:border-[#2c3480] group"
+            >
+              {/* Customer Photo */}
+              <div className="aspect-[4/3] bg-[#4e342e]/10 dark:bg-white/10 overflow-hidden relative border border-[#4e342e]/10 dark:border-white/10">
+                <img
+                  src={story.photo}
+                  alt={`${story.author} styling ${story.piece}`}
+                  className="w-full h-full object-cover filter contrast-[1.03] transition-transform duration-700 group-hover:scale-105"
+                />
+                <div className="absolute top-2 right-2 bg-black/70 text-white text-[8px] font-editorial-mono uppercase px-2 py-0.5">
+                  VERIFIED STYLING
                 </div>
-
-                {/* Overlapping Text Card with Negative Margin */}
-                <div className="mt-[-2rem] relative z-10 p-5 bg-[#FAF9F5]/95 dark:bg-[#161514]/95 backdrop-blur-md border border-[#111111]/8 dark:border-white/10 shadow-md space-y-3">
-                  <div className="flex items-center gap-1 text-[#A88B58]">
-                    {[...Array(story.rating)].map((_, i) => (
-                      <Star key={i} className="w-3 h-3 fill-[#A88B58]" />
-                    ))}
-                  </div>
-
-                  <p className="font-editorial-heading italic text-sm sm:text-base text-[#111111] dark:text-[#FAF9F5] leading-relaxed">
-                    "{story.quote}"
-                  </p>
-
-                  <div className="pt-3 border-t border-[#111111]/8 dark:border-white/10 font-editorial-mono text-xs flex items-center justify-between">
-                    <div>
-                      <span className="font-bold text-[#111111] dark:text-[#FAF9F5] block">{story.author}</span>
-                      <span className="text-[10px] text-[#73716B] dark:text-[#9E9A90]">{story.location}</span>
-                    </div>
-                    <span className="text-[10px] text-[#A88B58] font-bold text-right max-w-[130px] truncate">
-                      {story.piece}
-                    </span>
-                  </div>
-                </div>
-
               </div>
-            );
-          })}
+
+              {/* Rating Stars */}
+              <div className="flex items-center gap-1 text-[#cc5500] dark:text-[#2c3480]">
+                {[...Array(story.rating)].map((_, i) => (
+                  <Star key={i} className="w-3.5 h-3.5 fill-current" />
+                ))}
+              </div>
+
+              {/* Real Etsy Quote */}
+              <p className="font-editorial-body italic text-sm sm:text-base text-[#4e342e]/90 dark:text-white/90 leading-relaxed">
+                "{story.quote}"
+              </p>
+
+              {/* Collector Details */}
+              <div className="pt-4 border-t border-[#4e342e]/10 dark:border-white/10 font-editorial-mono text-xs space-y-1">
+                <div className="font-bold text-[#4e342e] dark:text-white">
+                  {story.author}
+                </div>
+                <div className="text-[11px] text-[#4e342e]/60 dark:text-white/60 flex items-center justify-between">
+                  <span>{story.location}</span>
+                  <span className="text-[#cc5500] dark:text-[#2c3480] font-semibold">{story.piece}</span>
+                </div>
+                <div className="text-[9px] text-[#4e342e]/40 dark:text-white/40">
+                  {story.date}
+                </div>
+              </div>
+            </div>
+          ))}
         </div>
 
-        {/* Bottom Etsy Callout Banner */}
-        <div className="mt-28 p-8 bg-[#F5F3EC] dark:bg-[#141312] border border-[#111111]/10 dark:border-white/10 flex flex-col sm:flex-row items-center justify-between gap-6">
-          <div className="space-y-1">
-            <span className="font-editorial-micro text-[#A88B58]">
-              COMMUNITY OF COLLECTORS
+        {/* Bottom Banner */}
+        <div className="p-8 bg-[#4e342e]/5 dark:bg-white/5 border border-[#4e342e]/15 dark:border-white/15 flex flex-col sm:flex-row items-center justify-between gap-6 font-editorial-mono text-xs">
+          <div className="flex items-center gap-3">
+            <Award className="w-5 h-5 text-[#cc5500] dark:text-[#2c3480]" />
+            <span className="text-[#4e342e] dark:text-white font-bold uppercase">
+              JOIN HUNDREDS OF COLLECTORS WEARING ONE-OF-A-KIND BENCH PIECES
             </span>
-            <h3 className="font-editorial-heading text-2xl font-bold text-[#111111] dark:text-[#FAF9F5]">
-              Own a piece of Cora’s travel story today
-            </h3>
           </div>
-
           <Link
             to="/shop"
-            className="px-6 py-3 bg-[#111111] dark:bg-[#FAF9F5] text-[#FAF9F5] dark:text-[#111111] font-editorial-mono text-xs uppercase tracking-widest font-bold hover:bg-[#A88B58] transition-colors"
+            className="px-6 py-3 bg-[#cc5500] dark:bg-[#2c3480] text-white uppercase font-bold tracking-wider hover:scale-105 transition-all flex items-center gap-2"
           >
-            EXPLORE THE COMPLETE SHOP CATALOG →
+            <span>SHOP THE ARCHIVE</span>
+            <ArrowRight className="w-4 h-4" />
           </Link>
         </div>
 

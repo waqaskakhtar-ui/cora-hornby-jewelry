@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { X, Plus, Check, ShieldCheck, Sparkles, MapPin, ArrowRight } from 'lucide-react';
+import { X, Plus, Check, ShieldCheck, Sparkles, MapPin } from 'lucide-react';
 
 export default function ProductModal({ product, onClose, onAddToCart }) {
   if (!product) return null;
@@ -144,15 +143,6 @@ export default function ProductModal({ product, onClose, onAddToCart }) {
                 </>
               )}
             </button>
-
-            <Link
-              to={`/product/${product.id}`}
-              onClick={onClose}
-              className="w-full py-3 text-center flex items-center justify-center gap-2 text-[11px] font-editorial-mono uppercase tracking-[0.2em] border border-[#111111]/20 dark:border-white/20 text-[#111111] dark:text-[#FAF9F5] hover:border-[#111111] dark:hover:border-white hover:bg-[#111111]/5 dark:hover:bg-white/5 transition-all"
-            >
-              <span>VIEW FULL PIECE ARCHIVE & PROVENANCE</span>
-              <ArrowRight className="w-3.5 h-3.5" />
-            </Link>
 
             <div className="text-center">
               <a

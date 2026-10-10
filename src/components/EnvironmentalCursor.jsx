@@ -99,7 +99,7 @@ export default function EnvironmentalCursor() {
           width: isInspect || isExplore ? '240px' : '180px',
           height: isInspect || isExplore ? '240px' : '180px',
           transform: 'translate(-50%, -50%)',
-          background: 'radial-gradient(circle, rgba(168, 139, 88, 0.14) 0%, rgba(168, 139, 88, 0.04) 40%, transparent 70%)',
+          background: 'radial-gradient(circle, rgba(204, 85, 0, 0.12) 0%, rgba(44, 52, 128, 0.04) 40%, transparent 70%)',
           opacity: isVisible ? 1 : 0,
         }}
       />
@@ -108,10 +108,10 @@ export default function EnvironmentalCursor() {
       <div
         className={`absolute rounded-full flex items-center justify-center transition-all duration-300 ease-out will-change-transform ${
           isInspect || isExplore
-            ? 'w-20 h-20 bg-[#FAF9F5]/40 dark:bg-[#111111]/60 backdrop-blur-md border border-[#111111]/30 dark:border-white/40 shadow-xl'
+            ? 'w-20 h-20 bg-[#f8f4e7]/60 dark:bg-[#000000]/70 backdrop-blur-md border border-[#4e342e]/30 dark:border-white/40 shadow-xl'
             : isButton
-            ? 'w-10 h-10 bg-[#111111]/10 dark:bg-white/15 border border-[#111111]/40 dark:border-white/50 scale-110'
-            : 'w-7 h-7 border border-[#111111]/30 dark:border-white/35 bg-transparent'
+            ? 'w-10 h-10 bg-[#cc5500]/15 dark:bg-[#2c3480]/20 border border-[#cc5500]/50 dark:border-[#2c3480]/60 scale-110'
+            : 'w-7 h-7 border border-[#4e342e]/30 dark:border-white/35 bg-transparent'
         }`}
         style={{
           left: `${position.x}px`,
@@ -124,8 +124,8 @@ export default function EnvironmentalCursor() {
           <div
             className={`w-1 h-1 rounded-full transition-all duration-200 ${
               isButton
-                ? 'bg-[#A88B58] scale-150'
-                : 'bg-[#111111] dark:bg-[#FAF9F5]'
+                ? 'bg-[#cc5500] dark:bg-[#2c3480] scale-150'
+                : 'bg-[#4e342e] dark:bg-white'
             }`}
           />
         )}

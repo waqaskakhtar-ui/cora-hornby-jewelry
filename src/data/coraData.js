@@ -621,70 +621,9 @@ export const PRODUCTS = [
     image: "https://images.squarespace-cdn.com/content/v1/5b882c0b365f0225b70e3aa1/1786657181197-OSX439JGIW9HWFHD0OAN/https%3A%2F%2Fi.etsystatic.com%2F24076881%2Fr%2Fil%2F837825%2F5999270815%2Fil_fullxfull.5999270815_4ui8.jpg",
     altImage: "/travel_inspirations/greece-pair-1-jewelry.jpg",
     modelImage: "https://images.squarespace-cdn.com/content/v1/5b882c0b365f0225b70e3aa1/1786657175661-H3MP7IZ64SJDBIXNNAL1/https%3A%2F%2Fi.etsystatic.com%2F24076881%2Fr%2Fil%2Ff84fda%2F5999280529%2Fil_fullxfull.5999280529_2eqo.jpg",
+    featured: false
   }
 ];
-
-// Enrich products with all travel pairs so every single curated travel piece has a full product page!
-TRAVEL_DESTINATIONS.forEach(dest => {
-  dest.pairs.forEach((pair, idx) => {
-    const existing = PRODUCTS.find(p => p.id === pair.id || p.name.toLowerCase() === pair.title.toLowerCase());
-    if (!existing) {
-      let cat = "Earrings";
-      const titleLower = pair.title.toLowerCase();
-      if (titleLower.includes("necklace") || titleLower.includes("pendant") || titleLower.includes("collar") || titleLower.includes("choker") || titleLower.includes("talisman") || titleLower.includes("strand")) {
-        cat = "Necklaces";
-      } else if (titleLower.includes("bracelet") || titleLower.includes("bangle") || titleLower.includes("cuff") || titleLower.includes("set")) {
-        cat = "Bracelets";
-      } else if (titleLower.includes("ring")) {
-        cat = "Rings";
-      } else if (titleLower.includes("charm")) {
-        cat = "Bag Charms";
-      }
-
-      let col = "Mixed Metals";
-      if (titleLower.includes("pearl")) col = "Pearls";
-      else if (titleLower.includes("jade") || titleLower.includes("sol")) col = "Mayan Sol";
-      else if (titleLower.includes("black") || titleLower.includes("bone") || titleLower.includes("lava") || titleLower.includes("dark")) col = "Black is Back";
-      else if (titleLower.includes("geometric") || titleLower.includes("cube") || titleLower.includes("spiral") || titleLower.includes("dome") || titleLower.includes("face")) col = "Geometrics";
-
-      PRODUCTS.push({
-        id: pair.id,
-        name: pair.title,
-        category: cat,
-        productType: cat,
-        collection: col,
-        travelCountry: dest.country,
-        countryId: dest.id,
-        isMaterialSource: dest.isMaterialSource,
-        material: "Cold-worked hammered metals, wire armature wrapping, natural minerals and hand-selected travel elements",
-        price: idx === 0 ? "$145.00" : idx === 1 ? "$120.00" : "$95.00",
-        dimensions: "Studio custom bench scale · One-of-a-kind edition",
-        description: pair.caption,
-        origin: `${dest.country} ${dest.isMaterialSource ? 'Material Sourcing' : 'Design Inspiration'} · Cape Elizabeth Studio`,
-        image: pair.jewelryImage,
-        altImage: pair.travelImage,
-        modelImage: dest.heroImage,
-        featured: false
-      });
-    }
-  });
-});
-
-export const getProductById = (id) => {
-  return PRODUCTS.find(p => p.id === id || p.id === `prod-${id}` || (id && p.id.includes(id))) || PRODUCTS[0];
-};
-
-export const getCountryById = (countryId) => {
-  if (!countryId) return TRAVEL_DESTINATIONS[0];
-  const cleaned = countryId.toLowerCase().trim();
-  return TRAVEL_DESTINATIONS.find(d => d.id === cleaned || d.country.toLowerCase().includes(cleaned)) || TRAVEL_DESTINATIONS[0];
-};
-
-export const getCollectionBySlug = (slug) => {
-  if (!slug) return COLLECTIONS[0];
-  const cleaned = slug.toLowerCase().trim();
-  return COLLECTIONS.find(c => c.slug === cleaned || c.id === cleaned || c.name.toLowerCase().replace(/\s+/g, '-') === cleaned) || COLLECTIONS[0];
-};
 
 // Masterpiece for spotlight
 export const FEATURED_MASTERPIECE = {

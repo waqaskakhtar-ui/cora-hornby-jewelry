@@ -3,29 +3,56 @@
 @tailwind utilities;
 
 @layer base {
+  :root {
+    --cora-bg: #f8f4e7;
+    --cora-text: #4e342e;
+    --cora-border: #4e342e;
+    --cora-accent: #cc5500;
+    --cora-accent-hover: #b34700;
+    --cora-card-bg: rgba(78, 52, 46, 0.04);
+    --cora-subtle-border: rgba(78, 52, 46, 0.18);
+  }
+
+  .dark {
+    --cora-bg: #000000;
+    --cora-text: #ffffff;
+    --cora-border: #ffffff;
+    --cora-accent: #2c3480;
+    --cora-accent-hover: #3b46a3;
+    --cora-card-bg: rgba(255, 255, 255, 0.04);
+    --cora-subtle-border: rgba(255, 255, 255, 0.18);
+  }
+
   body {
-    background-color: #F9F8F5;
-    color: #111111;
+    background-color: #f8f4e7;
+    color: #4e342e;
     font-family: 'Montserrat', system-ui, -apple-system, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+    transition: background-color 0.4s ease, color 0.4s ease;
   }
 
   .dark body {
-    background-color: #0A0909;
-    color: #FAF9F5;
+    background-color: #000000;
+    color: #ffffff;
   }
 
   ::selection {
-    background-color: #111111;
-    color: #FAF9F5;
+    background-color: #cc5500;
+    color: #ffffff;
+  }
+
+  .dark ::selection {
+    background-color: #2c3480;
+    color: #ffffff;
   }
 }
 
 /* Custom editorial typography utility classes */
-.font-display-grotesk {
-  font-family: 'Syne', 'Montserrat', sans-serif;
-  letter-spacing: -0.05em;
+.font-display-serif {
+  font-family: 'Playfair Display', Georgia, serif;
+  letter-spacing: -0.02em;
 }
 
 .font-editorial-body {
@@ -34,10 +61,6 @@
 
 .font-editorial-mono {
   font-family: 'JetBrains Mono', monospace;
-}
-
-.font-editorial-serif {
-  font-family: 'Playfair Display', Georgia, serif;
 }
 
 /* Hide scrollbar for clean horizontal sequences */
@@ -51,21 +74,57 @@
 
 /* Subtle grain overlay for authentic tactile editorial paper feel */
 .editorial-grain {
-  background-image: radial-gradient(rgba(0, 0, 0, 0.03) 1px, transparent 0);
+  background-image: radial-gradient(rgba(78, 52, 46, 0.04) 1px, transparent 0);
+  background-size: 24px 24px;
+}
+.dark .editorial-grain {
+  background-image: radial-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 0);
   background-size: 24px 24px;
 }
 
-/* Annotation pointer line animations */
-@keyframes pulseSubtle {
-  0%, 100% { opacity: 0.8; transform: scale(1); }
-  50% { opacity: 1; transform: scale(1.15); }
+/* Luxury CRO Hover Physics: Smooth scale 1.05 over 0.6s + dimming surrounding items */
+.editorial-hover-card {
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease, filter 0.4s ease, box-shadow 0.6s ease;
+  will-change: transform, opacity;
+}
+.editorial-hover-card:hover {
+  transform: scale(1.05);
+  z-index: 25;
+}
+.editorial-hover-parent:hover .editorial-hover-card:not(:hover) {
+  opacity: 0.55;
+  filter: grayscale(20%);
 }
 
-.annotation-dot {
-  animation: pulseSubtle 3s ease-in-out infinite;
+/* Slow Clip-Path Inset Reveal for Editorial Imagery */
+@keyframes clipInsetReveal {
+  0% {
+    clip-path: inset(12% 0 12% 0);
+    opacity: 0.85;
+    transform: scale(1.04);
+  }
+  100% {
+    clip-path: inset(0% 0% 0% 0%);
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 
-/* Atmospheric Jewelry Glint: light catching minerals and forged metal */
+.image-clip-reveal {
+  animation: clipInsetReveal 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Page Transition background sweep */
+@keyframes sweepBackground {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(100%);
+  }
+}
+
+/* Light Glint Reflection on Hover */
 @keyframes gleamSweep {
   0% { transform: translateX(-150%) skewX(-25deg); opacity: 0; }
   20% { opacity: 0.35; }
@@ -75,137 +134,4 @@
 
 .animate-gleam {
   animation: gleamSweep 1.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
-
-/* Atmospheric Ambient Spotlight */
-.ambient-glow-warm {
-  background: radial-gradient(circle 300px at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(168, 139, 88, 0.08), transparent 70%);
-}
-
-.dark .ambient-glow-warm {
-  background: radial-gradient(circle 350px at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(200, 169, 110, 0.09), transparent 70%);
-}
-
-/* Hairline Editorial Link Underline */
-.editorial-link {
-  position: relative;
-  display: inline-block;
-}
-.editorial-link::after {
-  content: '';
-  position: absolute;
-  bottom: -2px;
-  left: 0;
-  width: 0%;
-  height: 1px;
-  background-color: currentColor;
-  transition: width 0.35s cubic-bezier(0.25, 1, 0.5, 1);
-}
-.editorial-link:hover::after {
-  width: 100%;
-}
-
-
-/* =========================================================
-   LUXURY EDITORIAL STYLING & ANIMATION MANDATES
-   ========================================================= */
-
-/* 1. Slow clip-path inset reveal for images */
-@keyframes clipPathReveal {
-  0% {
-    clip-path: inset(12% 0 12% 0);
-    opacity: 0;
-    transform: scale(1.04);
-  }
-  100% {
-    clip-path: inset(0% 0 0% 0);
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
-.reveal-clip {
-  animation: clipPathReveal 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
-
-/* 2. Floating jewelry card with 0.6s hover scale physics */
-.floating-product-card {
-  border: none !important;
-  outline: none !important;
-  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease, filter 0.4s ease;
-  transform: translateZ(0);
-  will-change: transform;
-}
-
-.floating-product-card:hover {
-  transform: scale(1.05) translateZ(0);
-  z-index: 20;
-}
-
-/* 3. Asymmetrical gallery hover dimming (dims siblings to spotlight hovered piece) */
-.editorial-gallery-group:hover .floating-product-card:not(:hover) {
-  opacity: 0.55;
-  filter: contrast(0.95);
-}
-
-/* 4. Luxury Specular Glint & Sheen */
-.luxury-specular {
-  position: relative;
-  overflow: hidden;
-}
-
-.luxury-specular::after {
-  content: '';
-  position: absolute;
-  top: -60%;
-  left: -60%;
-  width: 220%;
-  height: 220%;
-  background: linear-gradient(
-    55deg,
-    transparent 35%,
-    rgba(255, 255, 255, 0.22) 50%,
-    transparent 65%
-  );
-  transform: rotate(25deg) translateY(-100%);
-  transition: transform 1s cubic-bezier(0.16, 1, 0.3, 1);
-  pointer-events: none;
-}
-
-.luxury-specular:hover::after {
-  transform: rotate(25deg) translateY(100%);
-}
-
-/* 5. Glassmorphic Editorial Card */
-.editorial-glass {
-  background: rgba(250, 249, 245, 0.75);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  border: 1px solid rgba(17, 17, 17, 0.08);
-}
-
-.dark .editorial-glass {
-  background: rgba(18, 17, 16, 0.75);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-}
-
-/* 6. Typography aliases */
-.font-editorial-heading {
-  font-family: 'Playfair Display', 'Cormorant Garamond', Georgia, serif;
-  letter-spacing: -0.035em;
-  font-weight: 700;
-}
-
-.font-editorial-micro {
-  font-family: 'Inter', 'Montserrat', sans-serif;
-  font-size: 0.6875rem;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: rgba(94, 92, 87, 0.85);
-}
-
-.dark .font-editorial-micro {
-  color: rgba(181, 179, 172, 0.85);
 }

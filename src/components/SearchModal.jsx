@@ -3,42 +3,47 @@ import { useNavigate } from 'react-router-dom';
 import { X, Search, ArrowRight } from 'lucide-react';
 import { PRODUCTS } from '../data/coraData';
 
-export default function SearchModal({ isOpen, onClose, onSelectProduct }) {
-  const navigate = useNavigate();
-  if (!isOpen) return null;
-
+export default function SearchModal({ isOpen, onClose }) {
   const [query, setQuery] = useState('');
+  const navigate = useNavigate();
+
+  if (!isOpen) return null;
 
   const filtered = query.trim() === ''
     ? PRODUCTS.slice(0, 4)
     : PRODUCTS.filter((p) => {
-        const text = `${p.name} ${p.material} ${p.category} ${p.description} ${p.origin}`.toLowerCase();
+        const text = `${p.name} ${p.material} ${p.category} ${p.description} ${p.origin} ${p.collection} ${p.travelCountry}`.toLowerCase();
         return text.includes(query.toLowerCase());
       });
 
+  const handleSelect = (item) => {
+    navigate(`/product/${item.id}`);
+    onClose();
+  };
+
   return (
-    <div className="fixed inset-0 z-50 flex items-start justify-center pt-20 px-4 sm:px-6 bg-[#111111]/70 dark:bg-black/80 backdrop-blur-sm animate-fade-in">
+    <div className="fixed inset-0 z-50 flex items-start justify-center pt-20 px-4 sm:px-6 bg-black/75 backdrop-blur-sm animate-fade-in">
       <div 
-        className="w-full max-w-3xl bg-[#FAF9F5] dark:bg-[#121110] border border-[#111111]/15 dark:border-white/15 shadow-2xl overflow-hidden p-6 sm:p-10 transition-colors duration-300"
+        className="w-full max-w-3xl bg-[#f8f4e7] dark:bg-[#000000] text-[#4e342e] dark:text-[#ffffff] border border-[#4e342e]/15 dark:border-white/15 shadow-2xl overflow-hidden p-6 sm:p-10 transition-colors duration-300"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Search Input Bar */}
-        <div className="flex items-center justify-between pb-6 border-b border-[#111111]/15 dark:border-white/15">
+        <div className="flex items-center justify-between pb-6 border-b border-[#4e342e]/15 dark:border-white/15">
           <div className="flex items-center gap-3 flex-1">
-            <Search className="w-5 h-5 text-[#8A867E] dark:text-[#8E8B83]" />
+            <Search className="w-5 h-5 text-[#cc5500] dark:text-[#2c3480]" />
             <input
               type="text"
               autoFocus
               value={query}
               onChange={(e) => setQuery(e.target.value)}
-              placeholder="Search pieces, stones (druzy, brass, jade, citrine)..."
-              className="w-full bg-transparent font-display-grotesk text-xl sm:text-2xl text-[#111111] dark:text-[#FAF9F5] placeholder-[#8A867E] dark:placeholder-[#8E8B83] focus:outline-hidden"
+              placeholder="Search pieces, minerals (jade, citrine, druzy, pearls)..."
+              className="w-full bg-transparent font-display-serif text-xl sm:text-2xl text-[#4e342e] dark:text-white placeholder-[#4e342e]/40 dark:placeholder-white/40 focus:outline-hidden"
             />
           </div>
 
           <button
             onClick={onClose}
-            className="p-2 text-[#111111] dark:text-[#FAF9F5] hover:opacity-60 transition-opacity ml-4"
+            className="p-2 text-[#4e342e] dark:text-white hover:text-[#cc5500] dark:hover:text-[#2c3480] transition-colors ml-4"
             aria-label="Close search"
           >
             <X className="w-5 h-5" />
@@ -46,13 +51,13 @@ export default function SearchModal({ isOpen, onClose, onSelectProduct }) {
         </div>
 
         {/* Quick Filter Tags */}
-        <div className="py-4 flex flex-wrap gap-2 border-b border-[#111111]/8 dark:border-white/10 font-editorial-mono text-[10px] uppercase text-[#73716B] dark:text-[#A6A49E]">
-          <span className="py-1 text-[#8A867E] dark:text-[#8E8B83]">FREQUENT:</span>
-          {['Brass', 'Druzy', 'Turquoise', 'Citrine', 'Leather', 'Pearl', 'Amethyst'].map((tag) => (
+        <div className="py-4 flex flex-wrap gap-2 border-b border-[#4e342e]/10 dark:border-white/10 font-editorial-mono text-[10px] uppercase">
+          <span className="py-1 text-[#4e342e]/60 dark:text-white/60">POPULAR:</span>
+          {['Jade', 'Citrine', 'Druzy', 'Pearls', 'Turquoise', 'Brass', 'Zebra Jasper', 'Bauhaus'].map((tag) => (
             <button
               key={tag}
               onClick={() => setQuery(tag)}
-              className="px-2.5 py-1 bg-[#EBE9DF]/70 dark:bg-[#1E1D1B] hover:bg-[#111111] dark:hover:bg-[#FAF9F5] hover:text-[#FAF9F5] dark:hover:text-[#111111] transition-colors"
+              className="px-2.5 py-1 border border-[#4e342e]/15 dark:border-white/15 hover:border-[#cc5500] dark:hover:border-[#2c3480] hover:text-[#cc5500] dark:hover:text-[#2c3480] transition-colors"
             >
               {tag}
             </button>
@@ -60,45 +65,41 @@ export default function SearchModal({ isOpen, onClose, onSelectProduct }) {
         </div>
 
         {/* Results List */}
-        <div className="mt-6 max-h-[50vh] overflow-y-auto space-y-4">
-          <div className="font-editorial-mono text-[10px] uppercase tracking-widest text-[#8A867E] dark:text-[#8E8B83]">
+        <div className="mt-6 max-h-[50vh] overflow-y-auto space-y-3">
+          <div className="font-editorial-mono text-[10px] uppercase tracking-widest text-[#4e342e]/60 dark:text-white/60">
             {query ? `RESULTS FOR "${query}" (${filtered.length})` : 'FEATURED FROM ARCHIVE'}
           </div>
 
           {filtered.length === 0 ? (
-            <div className="py-12 text-center text-xs font-editorial-mono text-[#8A867E] dark:text-[#8E8B83]">
-              NO MATCHING PIECES FOUND. TRY SEARCHING FOR "BRASS", "DRUZY", OR "STONE".
+            <div className="py-12 text-center text-xs font-editorial-mono text-[#4e342e]/60 dark:text-white/60">
+              NO MATCHING PIECES FOUND. TRY SEARCHING FOR "JADE", "CITRINE", OR "BRASS".
             </div>
           ) : (
             filtered.map((item) => (
               <div
                 key={item.id}
-                onClick={() => {
-                  navigate(`/product/${item.id}`);
-                  if (onSelectProduct) onSelectProduct(item);
-                  onClose();
-                }}
-                className="group flex items-center justify-between p-3 hover:bg-[#F2EFE8] dark:hover:bg-[#1A1918] cursor-pointer transition-colors border border-transparent hover:border-[#111111]/8 dark:hover:border-white/10"
+                onClick={() => handleSelect(item)}
+                className="group flex items-center justify-between p-3.5 hover:bg-[#4e342e]/5 dark:hover:bg-white/5 cursor-pointer transition-colors border border-transparent hover:border-[#4e342e]/10 dark:hover:border-white/10"
               >
                 <div className="flex items-center gap-4">
-                  <div className="w-14 h-14 bg-[#E5E2DA] dark:bg-[#1E1D1B] overflow-hidden shrink-0">
-                    <img src={item.image} alt="" className="w-full h-full object-cover" />
+                  <div className="w-14 h-14 bg-[#4e342e]/10 dark:bg-white/10 overflow-hidden shrink-0 border border-[#4e342e]/10 dark:border-white/10">
+                    <img src={item.image} alt={item.name} className="w-full h-full object-cover" />
                   </div>
                   <div>
-                    <h4 className="font-display-grotesk text-sm font-bold text-[#111111] dark:text-[#FAF9F5]">
+                    <h4 className="font-display-serif text-base font-bold text-[#4e342e] dark:text-white group-hover:text-[#cc5500] dark:group-hover:text-[#2c3480] transition-colors">
                       {item.name}
                     </h4>
-                    <span className="font-editorial-mono text-xs text-[#73716B] dark:text-[#A6A49E]">
+                    <span className="font-editorial-mono text-xs text-[#4e342e]/70 dark:text-white/70 block line-clamp-1">
                       {item.material}
                     </span>
                   </div>
                 </div>
 
                 <div className="flex items-center gap-3">
-                  <span className="font-editorial-mono text-xs font-semibold text-[#111111] dark:text-[#FAF9F5]">
+                  <span className="font-editorial-mono text-xs font-bold text-[#4e342e] dark:text-white">
                     {item.price}
                   </span>
-                  <ArrowRight className="w-4 h-4 text-[#8A867E] dark:text-[#8E8B83] group-hover:translate-x-1 group-hover:text-[#111111] dark:group-hover:text-[#FAF9F5] transition-all" />
+                  <ArrowRight className="w-4 h-4 text-[#cc5500] dark:text-[#2c3480] group-hover:translate-x-1 transition-transform" />
                 </div>
               </div>
             ))

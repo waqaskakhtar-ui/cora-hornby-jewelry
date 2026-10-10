@@ -1,165 +1,149 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { Sparkles, ArrowRight, ArrowLeft, ShoppingBag, Check } from 'lucide-react';
-import { getCollectionBySlug, COLLECTIONS, PRODUCTS } from '../data/coraData';
+import { ArrowLeft, ArrowRight, Eye, ShoppingBag } from 'lucide-react';
+import { COLLECTIONS, PRODUCTS } from '../data/coraData';
 
-export default function CollectionDetailPage({ onQuickAdd, onSelectProduct }) {
+export default function CollectionDetailPage({ onAddToCart }) {
   const { collectionSlug } = useParams();
-  const collection = getCollectionBySlug(collectionSlug);
-  const [addedId, setAddedId] = useState(null);
+  
+  const currentCollection = COLLECTIONS.find((c) => c.slug === collectionSlug) || COLLECTIONS[0];
+  const collectionIndex = COLLECTIONS.findIndex((c) => c.slug === currentCollection.slug);
+  
+  const prevCollection = COLLECTIONS[(collectionIndex > 0 ? collectionIndex - 1 : COLLECTIONS.length - 1)];
+  const nextCollection = COLLECTIONS[(collectionIndex < COLLECTIONS.length - 1 ? collectionIndex + 1 : 0)];
 
-  // Filter products for this collection
-  const collectionProducts = PRODUCTS.filter(p => 
-    p.collection && p.collection.toLowerCase() === collection.name.toLowerCase()
+  // Get matching products for this collection
+  const matchingProducts = PRODUCTS.filter((p) =>
+    p.collection && p.collection.toLowerCase() === currentCollection.name.toLowerCase()
   );
 
-  // Fallback if small inventory, show companion pieces
-  const displayProducts = collectionProducts.length > 0 
-    ? collectionProducts 
-    : PRODUCTS.slice(0, 6);
-
-  // Next / Previous navigation
-  const currentIndex = COLLECTIONS.findIndex(c => c.id === collection.id || c.slug === collection.slug);
-  const prevCol = COLLECTIONS[currentIndex > 0 ? currentIndex - 1 : COLLECTIONS.length - 1];
-  const nextCol = COLLECTIONS[currentIndex < COLLECTIONS.length - 1 ? currentIndex + 1 : 0];
-
-  const handleQuickAdd = (product, e) => {
-    e.stopPropagation();
-    if (onQuickAdd) onQuickAdd(product);
-    setAddedId(product.id);
-    setTimeout(() => setAddedId(null), 1800);
-  };
+  // If few items directly tagged, fallback to full catalog items for that aesthetic
+  const displayProducts = matchingProducts.length > 0 ? matchingProducts : PRODUCTS.slice(0, 8);
 
   return (
-    <div className="min-h-screen bg-[#FAF9F5] dark:bg-[#0A0909] text-[#111111] dark:text-[#FAF9F5] pt-28 sm:pt-36 pb-24 transition-colors duration-500">
-      <div className="max-w-[1720px] mx-auto px-6 sm:px-10 lg:px-14">
+    <div className="w-full pt-28 pb-24 px-6 sm:px-10 lg:px-14">
+      <div className="max-w-[1720px] mx-auto space-y-16">
         
-        {/* Breadcrumb Row */}
-        <div className="flex flex-wrap items-center justify-between gap-4 font-editorial-micro text-[#8A867E] mb-6">
-          <div className="flex items-center gap-2">
-            <Link to="/" className="hover:text-[#111111] dark:hover:text-[#FAF9F5]">HOME</Link>
+        {/* Navigation Breadcrumbs & Collection Switcher */}
+        <div data-stagger="text" className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-4 border-b border-[#4e342e]/15 dark:border-white/15">
+          <div className="flex items-center gap-3 text-xs font-editorial-mono uppercase tracking-wider text-[#4e342e]/70 dark:text-white/70">
+            <Link to="/collections" className="hover:text-[#cc5500] dark:hover:text-[#2c3480] flex items-center gap-1">
+              <ArrowLeft className="w-3.5 h-3.5" />
+              <span>ALL 5 COLLECTIONS</span>
+            </Link>
             <span>/</span>
-            <Link to="/collections" className="hover:text-[#111111] dark:hover:text-[#FAF9F5]">COLLECTIONS</Link>
-            <span>/</span>
-            <span className="text-[#A88B58] font-bold">{collection.name.toUpperCase()}</span>
+            <span className="text-[#4e342e] dark:text-white font-bold">{currentCollection.name}</span>
           </div>
 
-          <div className="flex items-center gap-4">
-            <Link 
-              to={`/collections/${prevCol.slug}`} 
-              className="hover:text-[#111111] dark:hover:text-[#FAF9F5] flex items-center gap-1 font-editorial-mono text-xs"
+          <div className="flex items-center gap-4 text-xs font-editorial-mono">
+            <Link
+              to={`/collections/${prevCollection.slug}`}
+              className="hover:text-[#cc5500] dark:hover:text-[#2c3480] flex items-center gap-1"
             >
-              ← PREV ({prevCol.name})
+              ← {prevCollection.name}
             </Link>
-            <span>·</span>
-            <Link 
-              to={`/collections/${nextCol.slug}`} 
-              className="hover:text-[#111111] dark:hover:text-[#FAF9F5] flex items-center gap-1 font-editorial-mono text-xs"
+            <span className="opacity-30">|</span>
+            <Link
+              to={`/collections/${nextCollection.slug}`}
+              className="hover:text-[#cc5500] dark:hover:text-[#2c3480] flex items-center gap-1 font-bold"
             >
-              NEXT ({nextCol.name}) →
+              {nextCollection.name} →
             </Link>
           </div>
         </div>
 
-        {/* Collection Editorial Header */}
-        <div className="pb-12 border-b border-[#111111]/10 dark:border-white/10 space-y-4 max-w-4xl">
-          <div className="font-editorial-micro text-[#A88B58] flex items-center gap-2">
-            <Sparkles className="w-4 h-4 text-[#A88B58]" />
-            <span>THE CURATED SERIES ARCHIVE</span>
-          </div>
+        {/* Collection Hero Header */}
+        <div data-stagger="text" className="space-y-4 max-w-4xl">
+          <span className="font-editorial-mono text-xs uppercase tracking-[0.25em] text-[#cc5500] dark:text-[#2c3480] font-bold block">
+            FLOATING MINIMALIST GRID · SIGNATURE LINE
+          </span>
 
-          <h1 className="font-editorial-heading text-4xl sm:text-6xl font-bold tracking-tight text-[#111111] dark:text-[#FAF9F5]">
-            {collection.name}
+          <h1 className="font-display-serif text-5xl sm:text-7xl lg:text-8xl font-black text-[#4e342e] dark:text-white leading-[0.92] tracking-tight">
+            {currentCollection.name}
           </h1>
 
-          <p className="font-editorial-body text-base sm:text-lg text-[#5E5C57] dark:text-[#C2BCAB] leading-relaxed">
-            {collection.desc} Hand-crafted in Cape Elizabeth, Maine without duplicate molds to ensure each creation is uniquely yours.
+          <p className="font-editorial-body text-base sm:text-lg text-[#4e342e]/85 dark:text-white/85 max-w-2xl leading-relaxed pt-2">
+            {currentCollection.desc} Every piece is individually bench-forged in Cape Elizabeth, Maine with zero duplicate mold repetitions.
           </p>
 
-          <div className="pt-2 flex items-center gap-6 font-editorial-mono text-xs text-[#73716B] dark:text-[#9E9A90]">
-            <span>{displayProducts.length} CATALOG PIECES</span>
+          <div className="pt-2 flex items-center gap-6 font-editorial-mono text-xs text-[#4e342e]/70 dark:text-white/70">
+            <span>{displayProducts.length} BENCH PIECES SHOWN</span>
             <span>·</span>
-            <span className="text-[#A88B58]">ETHICAL PROVENANCE</span>
+            <span>EDITION OF ONE</span>
             <span>·</span>
-            <span>MAINE BENCH DISPATCH</span>
+            <span className="text-[#cc5500] dark:text-[#2c3480] font-bold">100% UNTREATED STONES</span>
           </div>
         </div>
 
-        {/* Asymmetrical Gallery of Floating Product Cards (Borderless in Negative Space) */}
-        <div className="mt-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 lg:gap-14 editorial-gallery-group">
-          {displayProducts.map((product, idx) => {
-            const isStaggered = idx % 2 === 1;
-            const isAdded = addedId === product.id;
+        {/* FLOATING MINIMALIST GRID:
+            - STRICT REQUIREMENT: "Remove all visible UI cards/boxes. Float the jewelry pieces asymmetrically with massive padding."
+            - Smooth scale-up (scale: 1.05) over 0.6s on hover
+            - Dim surrounding UI slightly to draw absolute focus
+        */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 sm:gap-16 lg:gap-20 editorial-hover-parent pt-8">
+          {displayProducts.map((p, idx) => {
+            // Create asymmetrical rhythm with varied vertical offsets
+            const isStaggeredY = idx % 2 === 1;
 
             return (
               <div
-                key={product.id}
-                className={`floating-product-card group flex flex-col justify-between ${
-                  isStaggered ? 'sm:translate-y-8' : ''
+                key={p.id}
+                className={`flex flex-col items-center text-center p-8 sm:p-12 lg:p-16 editorial-hover-card group cursor-pointer ${
+                  isStaggeredY ? 'lg:translate-y-8' : ''
                 }`}
               >
-                {/* Borderless Image Container */}
-                <div className="relative aspect-[4/5] bg-[#ECE8DF] dark:bg-[#161514] overflow-hidden reveal-clip">
-                  <img
-                    src={product.image}
-                    alt={product.name}
-                    className="w-full h-full object-cover filter contrast-[1.05] transition-transform duration-700 group-hover:scale-105"
-                  />
+                {/* Floating Jewelry Piece: No background card, no borders, purely floating in negative space */}
+                <Link to={`/product/${p.id}`} className="w-full flex items-center justify-center mb-8 relative">
+                  <div className="w-full max-w-[320px] aspect-square relative flex items-center justify-center">
+                    <img
+                      src={p.image}
+                      alt={p.name}
+                      className="w-full h-full object-cover filter contrast-[1.06] shadow-[0_25px_50px_rgba(78,52,46,0.15)] dark:shadow-[0_25px_50px_rgba(0,0,0,0.8)]"
+                    />
 
-                  {/* Badges */}
-                  <div className="absolute top-3 left-3 bg-[#FAF9F5]/90 dark:bg-[#121110]/90 backdrop-blur-xs px-2.5 py-0.5 text-[8px] font-editorial-mono uppercase text-[#111111] dark:text-[#FAF9F5]">
-                    {product.productType || product.category}
+                    {/* Quick Inspect Pill on Hover */}
+                    <div className="absolute inset-0 bg-[#4e342e]/20 dark:bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                      <span className="px-4 py-2 bg-[#f8f4e7] dark:bg-[#000000] text-[#4e342e] dark:text-white font-editorial-mono text-xs uppercase tracking-widest font-bold shadow-lg flex items-center gap-1.5 border border-[#4e342e]/15 dark:border-white/15">
+                        <Eye className="w-3.5 h-3.5" />
+                        INSPECT
+                      </span>
+                    </div>
                   </div>
+                </Link>
 
-                  <div className="absolute bottom-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center gap-2">
+                {/* Microscopic Clean Typography */}
+                <div className="space-y-1.5 w-full max-w-sm">
+                  <span className="text-[10px] font-editorial-mono uppercase tracking-[0.22em] text-[#cc5500] dark:text-[#2c3480] font-bold block">
+                    {p.category} · {p.travelCountry || 'MAINE STUDIO'}
+                  </span>
+
+                  <Link to={`/product/${p.id}`}>
+                    <h2 className="font-display-serif text-2xl sm:text-3xl font-bold text-[#4e342e] dark:text-white group-hover:text-[#cc5500] dark:group-hover:text-[#2c3480] transition-colors leading-tight">
+                      {p.name}
+                    </h2>
+                  </Link>
+
+                  <p className="font-editorial-body text-xs text-[#4e342e]/75 dark:text-white/75 line-clamp-2 max-w-xs mx-auto pt-1">
+                    {p.description}
+                  </p>
+
+                  <div className="pt-3 flex items-center justify-center gap-4 font-editorial-mono">
+                    <span className="text-base font-bold text-[#4e342e] dark:text-white">
+                      {p.price}
+                    </span>
                     <button
-                      onClick={(e) => handleQuickAdd(product, e)}
-                      className="p-2.5 bg-[#111111] text-[#FAF9F5] dark:bg-[#FAF9F5] dark:text-[#111111] shadow-lg hover:bg-[#A88B58] dark:hover:bg-[#A88B58] transition-colors rounded-full"
-                      title="Add to Shopping Bag"
+                      onClick={() => onAddToCart && onAddToCart(p)}
+                      className="px-4 py-1.5 bg-[#cc5500] dark:bg-[#2c3480] text-white text-[10px] uppercase font-bold tracking-wider hover:scale-105 active:scale-95 transition-transform flex items-center gap-1"
                     >
-                      {isAdded ? <Check className="w-3.5 h-3.5" /> : <ShoppingBag className="w-3.5 h-3.5" />}
+                      <ShoppingBag className="w-3 h-3" />
+                      <span>ADD TO BAG</span>
                     </button>
                   </div>
                 </div>
 
-                {/* Metadata Block Overlapping into Negative Space */}
-                <div className="pt-4 space-y-1">
-                  <div className="flex items-center justify-between text-[9px] font-editorial-mono text-[#8A867E]">
-                    <span>{product.travelCountry || 'Cape Elizabeth Studio'}</span>
-                    <span className="font-bold text-[#111111] dark:text-[#FAF9F5]">{product.price}</span>
-                  </div>
-
-                  <Link to={`/product/${product.id}`} className="block">
-                    <h3 className="font-editorial-heading text-xl font-bold text-[#111111] dark:text-[#FAF9F5] group-hover:text-[#A88B58] transition-colors">
-                      {product.name}
-                    </h3>
-                  </Link>
-
-                  <p className="font-editorial-body text-xs text-[#5E5C57] dark:text-[#A6A49E] line-clamp-2 pt-1 leading-relaxed">
-                    {product.description}
-                  </p>
-                </div>
               </div>
             );
           })}
-        </div>
-
-        {/* Back Navigation Footer */}
-        <div className="mt-20 pt-8 border-t border-[#111111]/10 dark:border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4 font-editorial-mono text-xs">
-          <Link
-            to="/collections"
-            className="text-[#111111] dark:text-[#FAF9F5] hover:text-[#A88B58] flex items-center gap-2 font-bold"
-          >
-            <ArrowLeft className="w-4 h-4" />
-            <span>RETURN TO ALL COLLECTIONS</span>
-          </Link>
-
-          <Link
-            to="/shop"
-            className="text-[#A88B58] hover:underline"
-          >
-            BROWSE SHOP BY PRODUCT TYPE →
-          </Link>
         </div>
 
       </div>

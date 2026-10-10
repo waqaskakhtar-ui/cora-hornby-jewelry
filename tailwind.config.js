@@ -8,6 +8,19 @@ export default {
   theme: {
     extend: {
       colors: {
+        // Strict Theme Color System
+        cora: {
+          bg: '#f8f4e7',
+          text: '#4e342e',
+          border: '#4e342e',
+          accent: '#cc5500',
+          'accent-hover': '#b34700',
+          'dark-bg': '#000000',
+          'dark-text': '#ffffff',
+          'dark-border': '#ffffff',
+          'dark-accent': '#2c3480',
+          'dark-accent-hover': '#3b46a3',
+        },
         sand: {
           50: '#FAF9F5',
           100: '#F5F4EE',
@@ -23,26 +36,13 @@ export default {
           800: '#1A1917',
           700: '#24221F',
           600: '#2E2B27'
-        },
-        editorial: {
-          dark: '#111111',
-          charcoal: '#1A1A1A',
-          stone: '#5E5C57',
-          muted: '#8A867E',
-          line: '#E3DFD5',
-          lineDark: '#2C2B28',
-          brass: '#B09462',
-          druzy: '#6B7A82'
         }
       },
       fontFamily: {
-        sans: ['"Montserrat"', '"Inter"', 'system-ui', '-apple-system', 'sans-serif'],
-        content: ['"Montserrat"', '"Inter"', 'sans-serif'],
-        display: ['"Playfair Display"', '"Syne"', 'Georgia', 'serif'],
-        editorial: ['"Playfair Display"', '"Cormorant Garamond"', 'Georgia', 'serif'],
+        serif: ['"Playfair Display"', 'Georgia', 'serif'],
+        sans: ['"Montserrat"', 'system-ui', '-apple-system', 'sans-serif'],
+        display: ['"Playfair Display"', '"Montserrat"', 'serif'],
         mono: ['"JetBrains Mono"', 'ui-monospace', 'monospace'],
-        serif: ['"Playfair Display"', '"Cormorant Garamond"', 'Georgia', 'serif'],
-        micro: ['"Inter"', '"Montserrat"', 'sans-serif']
       },
       letterSpacing: {
         'ultra-tight': '-0.06em',
