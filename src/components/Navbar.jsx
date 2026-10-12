@@ -1,162 +1,222 @@
 import React, { useState, useEffect } from 'react';
-import { Search, ShoppingBag, Menu, X, Sun, Moon } from 'lucide-react';
+import { Search, ShoppingBag, Menu, X, Sun, Moon, Sparkles } from 'lucide-react';
 import { BRAND_INFO } from '../data/coraData';
 
-export default function Navbar({ cartCount, onOpenCart, onOpenSearch, isDark, onToggleTheme }) {
+export default function Navbar({
+  cartCount,
+  onOpenCart,
+  onOpenSearch,
+  isDark,
+  onToggleTheme,
+  currentView = 'home',
+  onNavigate
+}) {
   const [scrolled, setScrolled] = useState(false);
+  const [visible, setVisible] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 40);
+      const currentScrollY = window.scrollY;
+      setScrolled(currentScrollY > 30);
+
+      // Floating Dock auto-hide logic: hides on scroll down, reveals on scroll up
+      if (currentScrollY > 120 && currentScrollY > lastScrollY) {
+        setVisible(false);
+      } else {
+        setVisible(true);
+      }
+
+      setLastScrollY(currentScrollY);
     };
+
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [lastScrollY]);
 
-  const navLinks = [
-    { label: "Travels", href: "#travels" },
-    { label: "Collections", href: "#collection" },
-    { label: "3-Way Index", href: "#index" },
-    { label: "Customers", href: "#customers" },
-    { label: "Guarantees", href: "#assurances" },
-    { label: "About Cora", href: "#story" },
+  const navItems = [
+    { label: "COLLECTIONS", view: "collections", href: "#collections" },
+    { label: "SHOP ALL", view: "shop", href: "#shop" },
+    { label: "THE WORLD", view: "travels", href: "#travels" },
+    { label: "CRAFTSMANSHIP", view: "craftsmanship", href: "#craftsmanship" },
+    { label: "ASSURANCES", view: "assurances", href: "#assurances" },
   ];
+
+  const handleNavClick = (item, e) => {
+    e.preventDefault();
+    if (onNavigate) {
+      onNavigate(item.view);
+    } else {
+      const elem = document.querySelector(item.href);
+      if (elem) elem.scrollIntoView({ behavior: 'smooth' });
+    }
+    setMobileMenuOpen(false);
+  };
+
+  const handleLogoClick = (e) => {
+    e.preventDefault();
+    if (onNavigate) {
+      onNavigate('home');
+    }
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    setMobileMenuOpen(false);
+  };
 
   return (
     <>
+      {/* The Floating Dock */}
       <header
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-out ${
+          visible ? 'translate-y-0 opacity-100' : '-translate-y-full opacity-0'
+        } ${
           scrolled
-            ? 'bg-[#F9F8F5]/90 dark:bg-[#0F0E0D]/90 backdrop-blur-md py-3 border-b border-[#111111]/8 dark:border-white/10 shadow-[0_4px_24px_rgba(0,0,0,0.03)]'
-            : 'bg-transparent py-5 border-b border-transparent'
+            ? 'py-2.5 sm:py-3.5 bg-[#FAF9F5]/90 dark:bg-[#0A0A0A]/90 backdrop-blur-xl border-b border-[#111111]/8 dark:border-white/10 shadow-[0_10px_35px_rgba(0,0,0,0.04)]'
+            : 'py-4 sm:py-6 bg-transparent border-b border-transparent'
         }`}
       >
         <div className="max-w-[1720px] mx-auto px-6 sm:px-10 lg:px-14 flex items-center justify-between">
           
-          {/* Left: Brand Origin / Identifier */}
+          {/* Brand Mark */}
           <div className="flex items-center gap-6">
-            <a 
-              href="#" 
-              className="group flex flex-col items-start text-left"
+            <button
+              onClick={handleLogoClick}
+              className="group flex flex-col items-start text-left focus:outline-none"
             >
-              <span className="font-display-grotesk text-xl sm:text-2xl font-bold tracking-tight text-[#111111] dark:text-[#FAF9F5] group-hover:opacity-75 transition-opacity">
+              <span className="font-display-grotesk text-xl sm:text-2xl font-black tracking-tight text-[#111111] dark:text-[#FAF9F5] group-hover:text-[#A88B58] transition-colors">
                 {BRAND_INFO.name}
               </span>
-              <span className="font-editorial-mono text-[9px] uppercase tracking-[0.2em] text-[#73716B] dark:text-[#9E9A90]">
+              <span className="font-editorial-mono text-[9px] uppercase tracking-[0.22em] text-[#73716B] dark:text-[#9E9A90]">
                 CAPE ELIZABETH · ME
               </span>
-            </a>
+            </button>
 
             <div className="hidden xl:flex items-center gap-2 pl-6 border-l border-[#111111]/10 dark:border-white/10 text-[#8A867E] dark:text-[#9E9A90] text-[11px] font-editorial-mono">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#111111]/40 dark:bg-white/40"></span>
+              <span className="w-1.5 h-1.5 rounded-full bg-[#A88B58]"></span>
               <span>{BRAND_INFO.coordinates}</span>
             </div>
           </div>
 
-          {/* Center: Minimal Editorial Navigation */}
-          <nav className="hidden md:flex items-center gap-8 lg:gap-10">
-            {navLinks.map((link) => (
-              <a
-                key={link.label}
-                href={link.href}
-                className="text-[13px] tracking-[0.04em] text-[#111111]/80 dark:text-[#FAF9F5]/80 hover:text-[#A88B58] dark:hover:text-[#A88B58] font-medium transition-colors relative py-1 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[1px] after:bg-[#A88B58] hover:after:w-full after:transition-all after:duration-300"
-              >
-                {link.label}
-              </a>
-            ))}
+          {/* Center Navigation Links (Matching Mockup) */}
+          <nav className="hidden md:flex items-center gap-7 lg:gap-9 font-editorial-mono text-xs uppercase tracking-[0.14em]">
+            {navItems.map((item) => {
+              const isActive = currentView === item.view;
+              return (
+                <button
+                  key={item.label}
+                  onClick={(e) => handleNavClick(item, e)}
+                  className={`py-1 relative transition-colors ${
+                    isActive
+                      ? 'text-[#A88B58] font-bold'
+                      : 'text-[#111111]/80 dark:text-[#FAF9F5]/80 hover:text-[#A88B58] dark:hover:text-[#A88B58]'
+                  }`}
+                >
+                  <span>{item.label}</span>
+                  {isActive && (
+                    <span className="absolute bottom-0 left-0 right-0 h-[1.5px] bg-[#A88B58] rounded-full" />
+                  )}
+                </button>
+              );
+            })}
           </nav>
 
-          {/* Right: Actions (Theme Switcher, Search, Bag, Mobile Trigger) */}
-          <div className="flex items-center gap-3 sm:gap-5">
+          {/* Right Actions: Dark/Light Mode, Search, Bag Counter Bubble */}
+          <div className="flex items-center gap-3 sm:gap-4">
             
-            {/* Dark / Light Mode Switcher Button */}
+            {/* Theme Toggle Pill */}
             <button
               onClick={onToggleTheme}
-              className="group relative flex items-center gap-1.5 px-2.5 py-1 text-[11px] font-editorial-mono uppercase tracking-[0.12em] border border-[#111111]/15 dark:border-white/20 bg-[#FAF9F5] dark:bg-[#1A1917] text-[#111111] dark:text-[#FAF9F5] hover:border-[#A88B58] dark:hover:border-[#A88B58] hover:shadow-[0_0_15px_rgba(168,139,88,0.2)] transition-all shadow-xs"
-              aria-label="Toggle dark mode"
-              title={isDark ? "Switch to Ivory Studio theme" : "Switch to Obsidian Dark theme"}
+              className="flex items-center gap-1.5 px-2.5 py-1 text-[10px] font-editorial-mono uppercase tracking-[0.14em] border border-[#111111]/15 dark:border-white/20 bg-[#FAF9F5] dark:bg-[#161514] text-[#111111] dark:text-[#FAF9F5] hover:border-[#A88B58] transition-all shadow-2xs"
+              aria-label="Toggle theme"
             >
               {isDark ? (
                 <>
-                  <Sun className="w-3.5 h-3.5 text-[#B09462] group-hover:rotate-45 transition-transform duration-300" />
+                  <Sun className="w-3 h-3 text-[#A88B58]" />
                   <span className="hidden sm:inline">IVORY</span>
                 </>
               ) : (
                 <>
-                  <Moon className="w-3.5 h-3.5 text-[#111111] group-hover:-rotate-12 transition-transform duration-300" />
+                  <Moon className="w-3 h-3 text-[#111111]" />
                   <span className="hidden sm:inline">DARK</span>
                 </>
               )}
             </button>
 
+            {/* Search Trigger */}
             <button
               onClick={onOpenSearch}
-              className="text-[12px] font-editorial-mono uppercase tracking-[0.12em] text-[#111111]/75 dark:text-[#FAF9F5]/75 hover:text-[#A88B58] dark:hover:text-[#A88B58] flex items-center gap-1.5 py-1 transition-colors group"
+              className="p-1.5 text-[#111111]/75 dark:text-[#FAF9F5]/75 hover:text-[#A88B58] transition-colors group"
               aria-label="Search Collection"
             >
-              <Search className="w-3.5 h-3.5 group-hover:scale-110 transition-transform" />
-              <span className="hidden sm:inline">Search</span>
+              <Search className="w-4 h-4 group-hover:scale-110 transition-transform" />
             </button>
 
+            {/* Shopping Bag with Floating Counter Bubble */}
             <button
               onClick={onOpenCart}
-              className="group relative flex items-center gap-2 text-[12px] font-editorial-mono uppercase tracking-[0.12em] text-[#111111] dark:text-[#FAF9F5] hover:text-[#A88B58] dark:hover:text-[#A88B58] py-1 transition-colors"
+              className="relative p-1.5 text-[#111111] dark:text-[#FAF9F5] hover:text-[#A88B58] transition-colors"
               aria-label="View Shopping Bag"
             >
-              <ShoppingBag className="w-3.5 h-3.5 transition-transform group-hover:scale-110 group-hover:text-[#A88B58]" />
-              <span>Bag</span>
-              <span className="inline-flex items-center justify-center w-4 h-4 rounded-full bg-[#111111] dark:bg-[#FAF9F5] text-[#FAF9F5] dark:text-[#111111] text-[10px] font-sans font-semibold group-hover:bg-[#A88B58] group-hover:text-white transition-colors">
-                {cartCount}
-              </span>
+              <ShoppingBag className="w-4 h-4" />
+              {cartCount > 0 && (
+                <span className="absolute -top-1 -right-1 w-4 h-4 rounded-full bg-[#A88B58] text-[#111111] font-editorial-mono text-[9px] font-bold flex items-center justify-center shadow-md animate-pulse">
+                  {cartCount}
+                </span>
+              )}
             </button>
 
-            {/* Mobile Menu Button */}
+            {/* Mobile Menu Toggle Button */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="md:hidden p-2 text-[#111111] dark:text-[#FAF9F5] hover:opacity-75 transition-opacity"
-              aria-label="Toggle navigation menu"
+              className="md:hidden p-1.5 text-[#111111] dark:text-[#FAF9F5]"
+              aria-label="Open Menu"
             >
               {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
             </button>
+
           </div>
 
         </div>
       </header>
 
-      {/* Mobile Drawer Navigation */}
+      {/* Mobile Drawer Menu */}
       {mobileMenuOpen && (
-        <div className="fixed inset-0 z-40 bg-[#F9F8F5] dark:bg-[#0F0E0D] pt-28 px-8 flex flex-col justify-between pb-12 md:hidden animate-fade-in text-[#111111] dark:text-[#FAF9F5]">
+        <div className="fixed inset-0 z-40 bg-[#F9F8F5] dark:bg-[#0A0A0A] pt-28 px-8 flex flex-col justify-between pb-12 md:hidden text-[#111111] dark:text-[#FAF9F5]">
           <div className="space-y-6">
             <div className="flex items-center justify-between border-b border-[#111111]/10 dark:border-white/10 pb-3">
-              <span className="font-editorial-mono text-[11px] uppercase tracking-widest text-[#8A867E] dark:text-[#9E9A90]">
-                Studio Navigation
+              <span className="font-editorial-mono text-[10px] uppercase tracking-widest text-[#8A867E]">
+                STUDIO NAVIGATION
               </span>
               <button
                 onClick={onToggleTheme}
                 className="flex items-center gap-1.5 text-xs font-editorial-mono px-3 py-1 border border-[#111111]/15 dark:border-white/20"
               >
-                {isDark ? <Sun className="w-3.5 h-3.5 text-[#B09462]" /> : <Moon className="w-3.5 h-3.5" />}
+                {isDark ? <Sun className="w-3.5 h-3.5 text-[#A88B58]" /> : <Moon className="w-3.5 h-3.5" />}
                 <span>{isDark ? "IVORY MODE" : "DARK MODE"}</span>
               </button>
             </div>
 
-            <nav className="flex flex-col gap-5">
-              {navLinks.map((link, idx) => (
-                <a
-                  key={link.label}
-                  href={link.href}
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="font-display-grotesk text-3xl font-bold text-[#111111] dark:text-[#FAF9F5] flex items-center justify-between"
+            <nav className="flex flex-col gap-4 font-display-grotesk text-2xl font-bold uppercase">
+              <button
+                onClick={handleLogoClick}
+                className="text-left py-1 hover:text-[#A88B58] transition-colors"
+              >
+                JOURNAL HOME
+              </button>
+              {navItems.map((item) => (
+                <button
+                  key={item.label}
+                  onClick={(e) => handleNavClick(item, e)}
+                  className="text-left py-1 hover:text-[#A88B58] transition-colors flex items-center justify-between"
                 >
-                  <span>{link.label}</span>
-                  <span className="font-editorial-mono text-sm text-[#8A867E]">0{idx + 1}</span>
-                </a>
+                  <span>{item.label}</span>
+                  <span className="font-editorial-mono text-xs text-[#A88B58]">→</span>
+                </button>
               ))}
             </nav>
           </div>
 
-          <div className="pt-8 border-t border-[#111111]/10 dark:border-white/10 space-y-2 font-editorial-mono text-xs text-[#73716B] dark:text-[#9E9A90]">
+          <div className="pt-8 border-t border-[#111111]/10 dark:border-white/10 space-y-1 font-editorial-mono text-xs text-[#73716B] dark:text-[#9E9A90]">
             <div>Cape Elizabeth, Maine · USA</div>
             <div>{BRAND_INFO.contact.email}</div>
             <div>{BRAND_INFO.contact.phone}</div>

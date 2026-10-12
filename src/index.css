@@ -25,7 +25,7 @@
 /* Custom editorial typography utility classes */
 .font-display-grotesk {
   font-family: 'Syne', 'Montserrat', sans-serif;
-  letter-spacing: -0.05em;
+  letter-spacing: -0.04em;
 }
 
 .font-editorial-body {
@@ -38,6 +38,53 @@
 
 .font-editorial-serif {
   font-family: 'Playfair Display', Georgia, serif;
+}
+
+.font-editorial-italiana {
+  font-family: 'Italiana', 'Playfair Display', serif;
+}
+
+.font-editorial-space {
+  font-family: 'Space Grotesk', sans-serif;
+}
+
+/* Fluid clamp scaling for anti-AI, non-standardized typography */
+.text-fluid-monumental {
+  font-size: clamp(2.75rem, 8.5vw, 8.5rem);
+  line-height: 0.92;
+}
+
+.text-fluid-headline {
+  font-size: clamp(2rem, 5.5vw, 5.5rem);
+  line-height: 0.96;
+}
+
+.text-fluid-subhead {
+  font-size: clamp(1.2rem, 2.8vw, 2.4rem);
+  line-height: 1.15;
+}
+
+/* High-Gloss Specular Highlight Mapping */
+.gloss-highlight {
+  position: relative;
+  overflow: hidden;
+}
+
+.gloss-highlight::after {
+  content: '';
+  position: absolute;
+  top: -150%;
+  left: -150%;
+  width: 300%;
+  height: 300%;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0) 30%, rgba(255, 255, 255, 0.35) 50%, rgba(255, 255, 255, 0) 70%);
+  transform: rotate(35deg) translate(-100%, -100%);
+  transition: transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: none;
+}
+
+.gloss-highlight:hover::after {
+  transform: rotate(35deg) translate(100%, 100%);
 }
 
 /* Hide scrollbar for clean horizontal sequences */

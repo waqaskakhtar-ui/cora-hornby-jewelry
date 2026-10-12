@@ -40,7 +40,9 @@ export default {
         content: ['"Montserrat"', 'sans-serif'],
         display: ['"Syne"', '"Montserrat"', 'sans-serif'],
         mono: ['"JetBrains Mono"', 'ui-monospace', 'monospace'],
-        serif: ['"Playfair Display"', 'Georgia', 'serif']
+        serif: ['"Playfair Display"', 'Georgia', 'serif'],
+        italiana: ['"Italiana"', '"Playfair Display"', 'Georgia', 'serif'],
+        space: ['"Space Grotesk"', 'sans-serif']
       },
       letterSpacing: {
         'ultra-tight': '-0.06em',
