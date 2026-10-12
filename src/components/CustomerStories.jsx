@@ -4,42 +4,42 @@ import { CUSTOMER_STORIES } from '../data/coraData';
 
 export default function CustomerStories() {
   return (
-    <section id="customers" className="py-16 lg:py-24 bg-[#F5F3EC] dark:bg-[#0F0E0D] text-[#111111] dark:text-[#FAF9F5] border-t border-[#111111]/8 dark:border-white/10 transition-colors duration-500 overflow-hidden">
-      <div className="max-w-[1720px] mx-auto px-6 sm:px-10 lg:px-14">
+    <section id="customers" className="py-24 sm:py-32 lg:py-36 bg-[#F6F4EE] dark:bg-[#0E0D0C] text-[#1C1B19] dark:text-[#F8F6F2] border-t border-[#E8E4DA] dark:border-[#262421] transition-colors duration-500 overflow-hidden font-sans">
+      <div className="max-w-[1600px] mx-auto px-6 sm:px-10 lg:px-16 space-y-12">
         
         {/* Section Header */}
-        <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 pb-8 border-b border-[#111111]/12 dark:border-white/10">
+        <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-8 pb-8 border-b border-[#E5E1D6] dark:border-[#262421]">
           <div className="space-y-3">
-            <div className="font-editorial-mono text-[10px] uppercase tracking-[0.25em] text-[#A88B58] flex items-center gap-2 font-semibold">
-              <Heart className="w-3.5 h-3.5 text-[#A88B58]" />
+            <div className="text-xs uppercase tracking-[0.22em] text-[#A88B58] flex items-center gap-2 font-bold">
+              <Heart className="w-4 h-4 text-[#A88B58]" />
               <span>COLLECTOR ARCHIVE · CORA'S CUSTOMERS</span>
             </div>
 
-            <h2 className="font-display-grotesk text-3xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-[#111111] dark:text-[#FAF9F5] leading-none">
-              Worn & Cherished Worldwide
+            <h2 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold uppercase tracking-tight text-[#1C1B19] dark:text-[#F8F6F2] leading-tight">
+              Worn &amp; Cherished Worldwide
             </h2>
 
-            <p className="text-sm sm:text-base text-[#5E5C57] dark:text-[#B5B0A4] font-editorial-body max-w-xl leading-relaxed">
+            <p className="text-sm sm:text-base text-[#55524B] dark:text-[#ACA79D] max-w-xl leading-relaxed font-normal">
               Real quotes and photos shared by collectors from Cora's Etsy studio shop. Handcrafted pieces that travel from the coast of Maine into everyday life.
             </p>
           </div>
 
           {/* Social Proof Badges */}
-          <div className="flex items-center gap-6 font-editorial-mono text-xs text-[#73716B] dark:text-[#9E9A90]">
+          <div className="flex items-center gap-6 text-xs text-[#7A766E] dark:text-[#9A968E]">
             <div className="flex flex-col">
               <div className="flex items-center gap-1 text-[#A88B58]">
                 {[...Array(5)].map((_, i) => (
-                  <Star key={i} className="w-3.5 h-3.5 fill-[#A88B58]" />
+                  <Star key={i} className="w-4 h-4 fill-[#A88B58]" />
                 ))}
               </div>
-              <span className="text-[10px] text-[#111111] dark:text-[#FAF9F5] font-semibold mt-1">
+              <span className="text-xs text-[#1C1B19] dark:text-[#F8F6F2] font-bold mt-1 tracking-wider uppercase">
                 5.0 RATING · 500+ ETSY REVIEWS
               </span>
             </div>
-            <div className="h-8 w-px bg-[#111111]/10 dark:border-white/10"></div>
+            <div className="h-8 w-px bg-[#D5D0C5] dark:border-[#33302B]"></div>
             <div>
-              <span className="block text-[10px] uppercase text-[#8A867E]">EST. 2018</span>
-              <span className="text-[10px] text-[#111111] dark:text-[#FAF9F5] font-semibold">MAINE BENCH STUDIO</span>
+              <span className="block text-xs uppercase text-[#7A766E] font-medium">EST. 2018</span>
+              <span className="text-xs text-[#1C1B19] dark:text-[#F8F6F2] font-bold tracking-wider uppercase">MAINE BENCH STUDIO</span>
             </div>
           </div>
         </div>

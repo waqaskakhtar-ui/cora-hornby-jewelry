@@ -8,18 +8,14 @@ gsap.registerPlugin(ScrollTrigger);
 
 export default function Hero({ onExploreClick, onSelectPiece, onFilterSelect, onNavigate }) {
   const heroRef = useRef(null);
-  const coraTypeRef = useRef(null);
-  const travelsTypeRef = useRef(null);
-  const centerpieceRef = useRef(null);
-  const supportingLeftRef = useRef(null);
-  const supportingRightRef = useRef(null);
-  const annotationRef = useRef(null);
+  const leftColRef = useRef(null);
+  const rightColRef = useRef(null);
   const filterBarRef = useRef(null);
 
   // Toggle between interactive 3D WebGL talisman and High-Res Studio Zebra Jasper piece
   const [centerpieceMode, setCenterpieceMode] = useState('3d'); // '3d' or 'photo'
   
-  // Interactive Dropdown states for the mockup bottom bar
+  // Interactive Dropdown states for the bottom filter bar
   const [activeDropdown, setActiveDropdown] = useState(null); // 'region' | 'material' | 'aesthetic' | 'sort' | null
 
   // Tilt physics for photo mode
@@ -29,7 +25,7 @@ export default function Hero({ onExploreClick, onSelectPiece, onFilterSelect, on
     const rect = e.currentTarget.getBoundingClientRect();
     const x = (e.clientX - rect.left) / rect.width - 0.5;
     const y = (e.clientY - rect.top) / rect.height - 0.5;
-    setTilt({ x: x * 14, y: -y * 14, active: true });
+    setTilt({ x: x * 12, y: -y * 12, active: true });
   };
 
   const handleCenterpieceMouseLeave = () => {
@@ -38,56 +34,15 @@ export default function Hero({ onExploreClick, onSelectPiece, onFilterSelect, on
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      gsap.set(coraTypeRef.current, { opacity: 0, y: -30 });
-      gsap.set(travelsTypeRef.current, { opacity: 0, y: 30 });
-      gsap.set(centerpieceRef.current, { opacity: 0, scale: 0.92 });
-      gsap.set([supportingLeftRef.current, supportingRightRef.current], { opacity: 0, y: 25 });
-      gsap.set(annotationRef.current, { opacity: 0, scale: 0.95 });
+      gsap.set(leftColRef.current, { opacity: 0, y: 24 });
+      gsap.set(rightColRef.current, { opacity: 0, scale: 0.96 });
       gsap.set(filterBarRef.current, { opacity: 0, y: 15 });
 
       const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
 
-      tl.to(coraTypeRef.current, { opacity: 1, y: 0, duration: 1.1 }, 0.1)
-        .to(travelsTypeRef.current, { opacity: 1, y: 0, duration: 1.1 }, 0.2)
-        .to(centerpieceRef.current, { opacity: 1, scale: 1, duration: 1.2, ease: 'power2.out' }, 0.3)
-        .to(supportingLeftRef.current, { opacity: 1, y: 0, duration: 0.8 }, 0.5)
-        .to(supportingRightRef.current, { opacity: 1, y: 0, duration: 0.8 }, 0.6)
-        .to(annotationRef.current, { opacity: 1, scale: 1, duration: 0.7 }, 0.75)
-        .to(filterBarRef.current, { opacity: 1, y: 0, duration: 0.6 }, 0.9);
-
-      // Monumental parallax scrub
-      gsap.to(coraTypeRef.current, {
-        y: -45,
-        opacity: 0.8,
-        scrollTrigger: {
-          trigger: heroRef.current,
-          start: 'top top',
-          end: 'bottom top',
-          scrub: 1.2,
-        }
-      });
-
-      gsap.to(travelsTypeRef.current, {
-        y: 45,
-        opacity: 0.8,
-        scrollTrigger: {
-          trigger: heroRef.current,
-          start: 'top top',
-          end: 'bottom top',
-          scrub: 1.2,
-        }
-      });
-
-      gsap.to(centerpieceRef.current, {
-        y: 70,
-        scale: 0.96,
-        scrollTrigger: {
-          trigger: heroRef.current,
-          start: 'top top',
-          end: 'bottom top',
-          scrub: 1.4,
-        }
-      });
+      tl.to(leftColRef.current, { opacity: 1, y: 0, duration: 1.0 }, 0.15)
+        .to(rightColRef.current, { opacity: 1, scale: 1, duration: 1.1, ease: 'power2.out' }, 0.25)
+        .to(filterBarRef.current, { opacity: 1, y: 0, duration: 0.7 }, 0.6);
     }, heroRef);
 
     return () => ctx.revert();
@@ -147,260 +102,229 @@ export default function Hero({ onExploreClick, onSelectPiece, onFilterSelect, on
   return (
     <section
       ref={heroRef}
-      className="relative min-h-[96svh] lg:min-h-[100svh] w-full bg-[#F9F8F5] dark:bg-[#0A0A0A] text-[#111111] dark:text-[#FAF9F5] pt-24 sm:pt-28 pb-6 px-6 sm:px-10 lg:px-14 flex flex-col justify-between overflow-hidden transition-colors duration-500"
+      className="relative w-full bg-[#FAF8F5] dark:bg-[#0C0B0A] text-[#1C1B19] dark:text-[#F8F6F2] pt-24 sm:pt-28 pb-12 sm:pb-16 px-6 sm:px-10 lg:px-16 transition-colors duration-500 overflow-hidden font-sans"
     >
-      {/* Top Header Row with Client Theme */}
-      <div className="w-full flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 text-[11px] font-editorial-mono text-[#73716B] dark:text-[#9E9A90] uppercase tracking-[0.16em] pt-1">
-        <div className="flex items-center gap-2">
-          <span className="w-2 h-2 rounded-full bg-[#A88B58]"></span>
-          <span className="text-[#111111] dark:text-[#FAF9F5] font-semibold">
-            CORA HORNBY JEWELRY · TRAVELING THE WORLD FOR INSPIRATION AND MATERIALS
-          </span>
-        </div>
-        <div className="hidden sm:flex items-center gap-6">
-          <span className="text-[#8A867E] dark:text-[#7E7A70]">CAPE ELIZABETH, MAINE BENCH</span>
-          <span className="text-[#111111] dark:text-[#FAF9F5]">ONE-OF-A-KIND CREATIONS</span>
-        </div>
-      </div>
-
-      {/* Main Compositional Viewport with Monumental [CORA HORNBY] & [TRAVELS] + 3D Centerpiece */}
-      <div className="relative w-full flex-1 flex flex-col items-center justify-center my-3 min-h-[520px] lg:min-h-[640px]">
+      <div className="max-w-[1600px] mx-auto space-y-12 sm:space-y-16">
         
-        {/* 1A. MONUMENTAL TYPOGRAPHY: [CORA HORNBY] - Matches High-Gloss Editorial Mockup */}
-        <div
-          ref={coraTypeRef}
-          className="w-full text-center select-none pointer-events-none z-0 tracking-[-0.04em] uppercase font-display-grotesk font-black text-[#111111] dark:text-[#FAF9F5] text-fluid-monumental leading-[0.8] opacity-[0.96] transition-colors duration-500"
-        >
-          CORA HORNBY
-        </div>
-
-        {/* 2. THE 3D JEWELRY CENTERPIECE WITH INTERACTIVE WEBGL THREE.JS & PHOTO MODE SWITCHER */}
-        <div
-          ref={centerpieceRef}
-          className="relative z-10 w-full max-w-[320px] xs:max-w-[380px] sm:max-w-[460px] md:max-w-[540px] lg:max-w-[620px] -my-10 sm:-my-14 lg:-my-20 flex flex-col items-center"
-        >
-          {/* Mode Switcher Pill */}
-          <div className="mb-2 z-30 flex items-center gap-1.5 p-1 bg-[#FAF9F5]/90 dark:bg-[#161514]/90 backdrop-blur-md border border-[#111111]/12 dark:border-white/15 rounded-full shadow-xs">
-            <button
-              onClick={() => setCenterpieceMode('3d')}
-              className={`flex items-center gap-1.5 px-3 py-1 rounded-full text-[9px] font-editorial-mono uppercase tracking-[0.12em] transition-all ${
-                centerpieceMode === '3d'
-                  ? 'bg-[#111111] text-[#FAF9F5] dark:bg-[#FAF9F5] dark:text-[#111111] font-bold shadow-xs'
-                  : 'text-[#73716B] hover:text-[#111111] dark:hover:text-[#FAF9F5]'
-              }`}
-            >
-              <Sparkles className="w-2.5 h-2.5 text-[#A88B58]" />
-              <span>3D TALISMAN (WEBGL)</span>
-            </button>
-            <button
-              onClick={() => setCenterpieceMode('photo')}
-              className={`flex items-center gap-1.5 px-3 py-1 rounded-full text-[9px] font-editorial-mono uppercase tracking-[0.12em] transition-all ${
-                centerpieceMode === 'photo'
-                  ? 'bg-[#111111] text-[#FAF9F5] dark:bg-[#FAF9F5] dark:text-[#111111] font-bold shadow-xs'
-                  : 'text-[#73716B] hover:text-[#111111] dark:hover:text-[#FAF9F5]'
-              }`}
-            >
-              <Box className="w-2.5 h-2.5 text-[#A88B58]" />
-              <span>ZEBRA JASPER (ATELIER)</span>
-            </button>
+        {/* Top Header Brow with Client Theme */}
+        <div className="w-full flex flex-col sm:flex-row items-start sm:items-center justify-between pb-6 border-b border-[#E8E4DA] dark:border-[#262421] gap-3 text-xs tracking-[0.2em] text-[#7A766E] dark:text-[#9A968E] uppercase font-semibold">
+          <div className="flex items-center gap-3">
+            <span className="w-2 h-2 rounded-full bg-[#A88B58]"></span>
+            <span className="text-[#1C1B19] dark:text-[#F8F6F2]">
+              CORA HORNBY JEWELRY · TRAVELING THE WORLD FOR INSPIRATION &amp; MATERIALS
+            </span>
           </div>
-
-          {/* Interactive Centerpiece Container */}
-          <div
-            className="relative w-full aspect-square max-h-[460px] flex items-center justify-center cursor-pointer group"
-            onMouseMove={handleCenterpieceMouseMove}
-            onMouseLeave={handleCenterpieceMouseLeave}
-            onClick={() => onSelectPiece && onSelectPiece({
-              name: "African Zebra Jasper & Silver Cube Bracelet",
-              category: "Bracelets / Stone & Silver",
-              material: "Natural African zebra jasper cubes, solid sterling silver architectural spacers, magnetic clasp",
-              price: "$145.00",
-              origin: "Cape Elizabeth, Maine Studio",
-              description: "A sculptural studio masterpiece. Individually cut cubic black and white African zebra jasper stones separated by mirror-polished sterling silver square spacers. Fastened with a high-strength magnetic closure.",
-              image: "/hero-zebra-jasper-3d.png"
-            })}
-          >
-            {/* Subtle Archival Exhibition Crosshairs on Hover */}
-            <div className="absolute inset-0 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-0">
-              <span className="absolute top-1 left-1 text-[11px] font-editorial-mono text-[#A88B58] select-none leading-none">+</span>
-              <span className="absolute top-1 right-1 text-[11px] font-editorial-mono text-[#A88B58] select-none leading-none">+</span>
-              <span className="absolute bottom-1 left-1 text-[11px] font-editorial-mono text-[#A88B58] select-none leading-none">+</span>
-              <span className="absolute bottom-1 right-1 text-[11px] font-editorial-mono text-[#A88B58] select-none leading-none">+</span>
-            </div>
-
-            {/* Environmental Mineral Backlight Aura that blooms on hover */}
-            <div
-              className={`absolute inset-4 rounded-full blur-3xl pointer-events-none transition-all duration-700 ease-out ${
-                tilt.active ? 'opacity-100 scale-110' : 'opacity-60 scale-95'
-              }`}
-              style={{
-                background: 'radial-gradient(circle, rgba(168, 139, 88, 0.28) 0%, rgba(168, 139, 88, 0.08) 50%, transparent 75%)',
-              }}
-            />
-
-            {/* Render 3D Canvas or Photo */}
-            {centerpieceMode === '3d' ? (
-              <div className="relative w-full h-full flex items-center justify-center">
-                <Hero3DCanvas className="w-full h-full" />
-                <div className="absolute bottom-2 font-editorial-mono text-[9px] uppercase tracking-[0.16em] text-[#A88B58] pointer-events-none bg-[#FAF9F5]/80 dark:bg-[#0A0A0A]/80 px-2.5 py-0.5 rounded-full border border-[#A88B58]/30 backdrop-blur-xs">
-                  INTERACTIVE 3D SHADER · ROTATE WITH CURSOR
-                </div>
-              </div>
-            ) : (
-              <div
-                className="relative aspect-square flex items-center justify-center will-change-transform w-full h-full"
-                style={{
-                  transform: tilt.active
-                    ? `perspective(850px) rotateY(${tilt.x}deg) rotateX(${tilt.y}deg) scale3d(1.04, 1.04, 1.04)`
-                    : 'perspective(850px) rotateY(0deg) rotateX(0deg) scale3d(1, 1, 1)',
-                  transition: tilt.active ? 'transform 0.12s ease-out' : 'transform 0.6s cubic-bezier(0.16, 1, 0.3, 1)',
-                }}
-              >
-                {/* Dynamic Contact Floor Shadow */}
-                <div
-                  className="absolute bottom-5 w-[65%] h-5 bg-[#111111]/15 dark:bg-black/60 blur-xl rounded-full transform scale-y-50 pointer-events-none transition-transform duration-200"
-                  style={{
-                    transform: `scaleY(0.5) translateX(${-tilt.x * 1.5}px)`,
-                  }}
-                />
-
-                {/* 3D Render Image */}
-                <img
-                  src="/hero-zebra-jasper-3d.png"
-                  alt="Cora Hornby African Zebra Jasper Bracelet"
-                  className="relative z-10 w-full h-full object-contain filter drop-shadow-[0_20px_40px_rgba(0,0,0,0.16)] dark:drop-shadow-[0_25px_45px_rgba(0,0,0,0.45)] transition-all duration-700 ease-out"
-                  loading="eager"
-                />
-              </div>
-            )}
-
-            {/* CURVED LEADER CALLOUT (Matching Mockup with Curved Vector Pointer Line) */}
-            <div
-              ref={annotationRef}
-              className="mt-3 sm:mt-0 sm:absolute sm:top-8 sm:-right-10 md:-right-24 z-30 pointer-events-auto"
-            >
-              <div className="relative flex items-center sm:items-start justify-center sm:justify-start gap-2.5">
-                <svg 
-                  className="hidden sm:block w-20 sm:w-28 h-14 stroke-[#A88B58] fill-none overflow-visible" 
-                  viewBox="0 0 120 60"
-                >
-                  <circle cx="2" cy="52" r="3" className="fill-[#A88B58]" />
-                  <path d="M 2 52 Q 45 20, 118 12" strokeWidth="1.2" strokeDasharray="3 3" />
-                  <circle cx="118" cy="12" r="2.5" className="fill-[#A88B58]" />
-                </svg>
-
-                <div className="bg-[#FAF9F5]/95 dark:bg-[#161514]/95 backdrop-blur-md px-3.5 py-2.5 border border-[#111111]/12 dark:border-white/15 shadow-md max-w-[280px] sm:max-w-[220px] transition-all duration-300 group-hover:border-[#A88B58] group-hover:shadow-lg">
-                  <div className="text-left">
-                    <div className="font-editorial-mono text-[9px] uppercase tracking-[0.16em] text-[#A88B58] font-bold">
-                      ZEBRA JASPER · STERLING
-                    </div>
-                    <div className="font-editorial-mono text-[10px] text-[#111111] dark:text-[#FAF9F5] font-semibold mt-0.5">
-                      HANDCRAFTED IN MAINE
-                    </div>
-                    <div className="font-editorial-mono text-[9px] text-[#73716B] dark:text-[#9E9A90] mt-0.5">
-                      43°33'56"N · 70°12'01"W
-                    </div>
-                  </div>
-                  <div className="font-editorial-mono text-[11px] text-[#A88B58] dark:text-[#B09462] font-bold mt-1 text-right">
-                    $145.00
-                  </div>
-                </div>
-              </div>
-            </div>
-
+          <div className="hidden sm:flex items-center gap-6">
+            <span>CAPE ELIZABETH, MAINE BENCH</span>
+            <span className="text-[#A88B58]">ONE-OF-A-KIND CREATIONS</span>
           </div>
         </div>
 
-        {/* 1B. MONUMENTAL TYPOGRAPHY: [TRAVELS] - Layered underneath/with centerpiece */}
-        <div
-          ref={travelsTypeRef}
-          className="w-full text-center select-none pointer-events-none z-0 tracking-[-0.04em] uppercase font-display-grotesk font-black text-[#111111] dark:text-[#FAF9F5] text-fluid-monumental leading-[0.8] opacity-[0.96] transition-colors duration-500"
-        >
-          TRAVELS
-        </div>
-
-        {/* ASYMMETRIC SUPPORTING IMAGE 1: Bottom-Left Studio Atelier */}
-        <div
-          ref={supportingLeftRef}
-          data-cursor="view"
-          data-cursor-text="ATELIER"
-          onClick={() => onNavigate && onNavigate('craftsmanship')}
-          className="absolute left-0 bottom-4 sm:bottom-8 lg:bottom-12 z-20 hidden sm:block w-32 sm:w-40 lg:w-48 group/left cursor-pointer"
-        >
-          <div className="p-2 bg-[#FAF9F5] dark:bg-[#161514] border border-[#111111]/10 dark:border-white/10 shadow-[0_8px_25px_rgba(0,0,0,0.05)] transition-all duration-500 group-hover/left:border-[#A88B58]/50 group-hover/left:shadow-[0_12px_30px_rgba(0,0,0,0.12)]">
-            <div className="aspect-[3/4] overflow-hidden bg-[#E5E2DA] dark:bg-[#24221F] relative">
-              <img
-                src="https://images.squarespace-cdn.com/content/v1/5b882c0b365f0225b70e3aa1/1786657287352-1BZW6UYBIRV3EN9HT7A5/https%3A%2F%2Fi.etsystatic.com%2F24076881%2Fr%2Fil%2F30c173%2F3451524516%2Fil_fullxfull.3451524516_pvxa.jpg"
-                alt="Studio handcraft styling"
-                className="w-full h-full object-cover filter contrast-[1.05] transition-transform duration-700 ease-out group-hover/left:scale-105"
-              />
-            </div>
-            <div className="mt-1.5 flex items-center justify-between text-[8px] font-editorial-mono uppercase text-[#73716B] dark:text-[#9E9A90] group-hover/left:text-[#111111] dark:group-hover/left:text-[#FAF9F5] transition-colors">
-              <span>STUDIO ATELIER</span>
-              <span>MAINE BENCH →</span>
-            </div>
-          </div>
-        </div>
-
-        {/* ASYMMETRIC SUPPORTING IMAGE 2: Top-Right Coastal Detail */}
-        <div
-          ref={supportingRightRef}
-          data-cursor="view"
-          data-cursor-text="DETAIL"
-          onClick={() => onNavigate && onNavigate('travels')}
-          className="absolute right-0 top-4 sm:top-8 lg:top-12 z-20 hidden md:block w-28 sm:w-36 lg:w-40 group/right cursor-pointer"
-        >
-          <div className="p-2 bg-[#FAF9F5] dark:bg-[#161514] border border-[#111111]/10 dark:border-white/10 shadow-[0_8px_25px_rgba(0,0,0,0.05)] transition-all duration-500 group-hover/right:border-[#A88B58]/50 group-hover/right:shadow-[0_12px_30px_rgba(0,0,0,0.12)]">
-            <div className="aspect-square overflow-hidden bg-[#E5E2DA] dark:bg-[#24221F] relative">
-              <img
-                src="https://images.squarespace-cdn.com/content/v1/5b882c0b365f0225b70e3aa1/1593920126047-TJDE8V45MWZW4M0KCUIF/Model+look+right.jpg"
-                alt="Ear styling detail"
-                className="w-full h-full object-cover filter contrast-[1.05] transition-transform duration-700 ease-out group-hover/right:scale-105"
-              />
-            </div>
-            <div className="mt-1 text-[8px] font-editorial-mono uppercase text-[#73716B] dark:text-[#9E9A90] text-center group-hover/right:text-[#111111] dark:group-hover/right:text-[#FAF9F5] transition-colors">
-              COASTAL DETAIL →
-            </div>
-          </div>
-        </div>
-
-      </div>
-
-      {/* 3. INTERACTIVE BOTTOM FILTER & EXPLORATION DOCK (Directly from Mockup Board) */}
-      <div
-        ref={filterBarRef}
-        className="relative z-30 w-full pt-3 pb-1 border-t border-[#111111]/10 dark:border-white/10"
-      >
-        <div className="flex flex-wrap items-center justify-between gap-3 text-xs font-editorial-mono">
+        {/* Expansive 2-Column Architectural Hero Grid (Zero Text Overlap, Generous Breathing Room) */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-center py-6 sm:py-12">
           
-          {/* Dropdown Filters matching mockup: All Regions ▾, Materials ▾, Aesthetics ▾, Sort By ▾ */}
-          <div className="flex flex-wrap items-center gap-2">
+          {/* Left Column: Architectural Montserrat Content */}
+          <div ref={leftColRef} className="lg:col-span-7 space-y-7">
             
-            {/* 1. All Regions ▾ */}
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 bg-[#F2EFE7] dark:bg-[#1A1816] border border-[#DDD8CD] dark:border-[#2D2A26] rounded-full text-[11px] font-bold tracking-[0.2em] text-[#A88B58] uppercase">
+              <span>ATELIER ARCHIVE</span>
+            </div>
+
+            <h1 className="text-3xl xs:text-4xl sm:text-5xl lg:text-[3.5rem] font-extrabold text-[#1C1B19] dark:text-[#F8F6F2] leading-[1.12] tracking-tight uppercase">
+              Traveling the World for Inspiration <br className="hidden sm:inline" />
+              <span className="text-[#A88B58] font-light">&amp; Materials.</span>
+            </h1>
+
+            <p className="text-sm sm:text-base text-[#524F48] dark:text-[#ACA79D] leading-[1.8] max-w-2xl font-normal">
+              Hand-crafted at our studio bench on the rocky coast of Maine using hammered metals, supple leather, freshwater pearls, semi-precious stones, and crystalline druzies. Directly sourcing raw materials like imperial jade in Guatemala and amethyst &amp; citrine in Brazil, informed by architectural motifs from Greece to Germany.
+            </p>
+
+            {/* The 3 Ways of Browsing (Client's Core Taxonomy) */}
+            <div className="pt-3 space-y-3">
+              <div className="text-xs font-bold uppercase tracking-[0.18em] text-[#7A766E] dark:text-[#9A968E]">
+                Explore The Collection 3 Ways:
+              </div>
+              <div className="flex flex-wrap items-center gap-3">
+                <button
+                  onClick={() => onNavigate ? onNavigate('travels') : onExploreClick && onExploreClick()}
+                  className="px-4 py-2.5 rounded-xl bg-[#F4F1E9] dark:bg-[#181614] border border-[#DCD6C9] dark:border-[#2E2B27] text-xs font-semibold text-[#1C1B19] dark:text-[#F8F6F2] hover:border-[#A88B58] hover:text-[#A88B58] transition-all flex items-center gap-2 shadow-2xs"
+                >
+                  <span className="text-[#A88B58] font-bold">01</span>
+                  <span>Travel Inspiration (8 Countries)</span>
+                </button>
+                <button
+                  onClick={() => onNavigate ? onNavigate('collections') : onExploreClick && onExploreClick()}
+                  className="px-4 py-2.5 rounded-xl bg-[#F4F1E9] dark:bg-[#181614] border border-[#DCD6C9] dark:border-[#2E2B27] text-xs font-semibold text-[#1C1B19] dark:text-[#F8F6F2] hover:border-[#A88B58] hover:text-[#A88B58] transition-all flex items-center gap-2 shadow-2xs"
+                >
+                  <span className="text-[#A88B58] font-bold">02</span>
+                  <span>Collections (5 Lines)</span>
+                </button>
+                <button
+                  onClick={() => onNavigate ? onNavigate('shop') : onExploreClick && onExploreClick()}
+                  className="px-4 py-2.5 rounded-xl bg-[#F4F1E9] dark:bg-[#181614] border border-[#DCD6C9] dark:border-[#2E2B27] text-xs font-semibold text-[#1C1B19] dark:text-[#F8F6F2] hover:border-[#A88B58] hover:text-[#A88B58] transition-all flex items-center gap-2 shadow-2xs"
+                >
+                  <span className="text-[#A88B58] font-bold">03</span>
+                  <span>Product Types (5 Archetypes)</span>
+                </button>
+              </div>
+            </div>
+
+            {/* CTAs with Generous Margins */}
+            <div className="pt-4 flex flex-wrap items-center gap-4">
+              <button
+                onClick={() => onNavigate ? onNavigate('shop') : onExploreClick && onExploreClick()}
+                className="px-8 py-3.5 rounded-xl bg-[#1C1B19] dark:bg-[#F8F6F2] text-white dark:text-[#1C1B19] text-xs font-bold uppercase tracking-[0.16em] hover:bg-[#A88B58] dark:hover:bg-[#A88B58] dark:hover:text-white transition-all shadow-sm flex items-center gap-2 group"
+              >
+                <span>Discover Archive</span>
+                <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
+              </button>
+              <button
+                onClick={() => onNavigate && onNavigate('craftsmanship')}
+                className="px-8 py-3.5 rounded-xl border border-[#D5D0C5] dark:border-[#38342F] text-xs font-semibold uppercase tracking-[0.16em] text-[#1C1B19] dark:text-[#F8F6F2] hover:border-[#A88B58] transition-all"
+              >
+                Atelier Craftsmanship
+              </button>
+            </div>
+
+          </div>
+
+          {/* Right Column: Dedicated Jewelry Showcase (Zero Overlap, Warm Ambient Glow) */}
+          <div ref={rightColRef} className="lg:col-span-5 flex flex-col items-center">
+            
+            {/* Mode Switcher Pill */}
+            <div className="mb-4 flex items-center gap-1.5 p-1 bg-[#F4F1E9] dark:bg-[#181614] border border-[#DCD6C9] dark:border-[#2E2B27] rounded-full shadow-2xs">
+              <button
+                onClick={() => setCenterpieceMode('3d')}
+                className={`flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-[0.14em] transition-all ${
+                  centerpieceMode === '3d'
+                    ? 'bg-[#1C1B19] text-[#FAF8F5] dark:bg-[#FAF8F5] dark:text-[#1C1B19] shadow-xs'
+                    : 'text-[#7A766E] hover:text-[#1C1B19] dark:hover:text-[#FAF8F5]'
+                }`}
+              >
+                <Sparkles className="w-3 h-3 text-[#A88B58]" />
+                <span>3D Shader Talisman</span>
+              </button>
+              <button
+                onClick={() => setCenterpieceMode('photo')}
+                className={`flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-[0.14em] transition-all ${
+                  centerpieceMode === 'photo'
+                    ? 'bg-[#1C1B19] text-[#FAF8F5] dark:bg-[#FAF8F5] dark:text-[#1C1B19] shadow-xs'
+                    : 'text-[#7A766E] hover:text-[#1C1B19] dark:hover:text-[#FAF8F5]'
+                }`}
+              >
+                <Box className="w-3 h-3 text-[#A88B58]" />
+                <span>Zebra Jasper Piece</span>
+              </button>
+            </div>
+
+            {/* Dedicated Exhibition Frame with Expansive Whitespace */}
+            <div
+              className="relative w-full max-w-lg aspect-square bg-[#F5F2EA] dark:bg-[#161412] border border-[#E2DDD2] dark:border-[#2B2824] rounded-3xl p-8 sm:p-10 flex items-center justify-center shadow-xs cursor-pointer group"
+              onMouseMove={handleCenterpieceMouseMove}
+              onMouseLeave={handleCenterpieceMouseLeave}
+              onClick={() => onSelectPiece && onSelectPiece({
+                name: "African Zebra Jasper & Silver Cube Bracelet",
+                category: "Bracelets / Stone & Silver",
+                material: "Natural African zebra jasper cubes, solid sterling silver architectural spacers, magnetic clasp",
+                price: "$145.00",
+                origin: "Cape Elizabeth, Maine Studio",
+                description: "A sculptural studio masterpiece. Individually cut cubic black and white African zebra jasper stones separated by mirror-polished sterling silver square spacers. Fastened with a high-strength magnetic closure.",
+                image: "/hero-zebra-jasper-3d.png"
+              })}
+            >
+              {/* Warm Ambient Backlight Aura */}
+              <div
+                className={`absolute inset-8 rounded-full blur-3xl pointer-events-none transition-all duration-700 ease-out ${
+                  tilt.active ? 'opacity-100 scale-105' : 'opacity-70 scale-95'
+                }`}
+                style={{
+                  background: 'radial-gradient(circle, rgba(168, 139, 88, 0.24) 0%, rgba(168, 139, 88, 0.06) 60%, transparent 80%)',
+                }}
+              />
+
+              {/* Render 3D Canvas or Photo */}
+              {centerpieceMode === '3d' ? (
+                <div className="relative w-full h-full flex items-center justify-center">
+                  <Hero3DCanvas className="w-full h-full" />
+                  <div className="absolute top-2 right-2 text-[9px] font-bold uppercase tracking-[0.16em] text-[#A88B58] pointer-events-none bg-white/80 dark:bg-black/80 px-2.5 py-1 rounded-full border border-[#A88B58]/30 backdrop-blur-xs">
+                    Rotate With Cursor
+                  </div>
+                </div>
+              ) : (
+                <div
+                  className="relative aspect-square flex items-center justify-center will-change-transform w-full h-full"
+                  style={{
+                    transform: tilt.active
+                      ? `perspective(850px) rotateY(${tilt.x}deg) rotateX(${tilt.y}deg) scale3d(1.03, 1.03, 1.03)`
+                      : 'perspective(850px) rotateY(0deg) rotateX(0deg) scale3d(1, 1, 1)',
+                    transition: tilt.active ? 'transform 0.12s ease-out' : 'transform 0.6s cubic-bezier(0.16, 1, 0.3, 1)',
+                  }}
+                >
+                  <img
+                    src="/hero-zebra-jasper-3d.png"
+                    alt="Cora Hornby African Zebra Jasper Bracelet"
+                    className="relative z-10 max-h-[85%] object-contain filter drop-shadow-[0_20px_40px_rgba(0,0,0,0.16)] dark:drop-shadow-[0_25px_45px_rgba(0,0,0,0.45)] transition-all duration-700 ease-out"
+                    loading="eager"
+                  />
+                </div>
+              )}
+
+              {/* Clean Bottom Specification Card (Disciplined, Zero Overlap) */}
+              <div className="absolute bottom-4 left-4 right-4 bg-white/95 dark:bg-[#1E1C1A]/95 backdrop-blur-md border border-[#E0DCD2] dark:border-[#35312C] rounded-2xl p-4 flex items-center justify-between shadow-md group-hover:border-[#A88B58] transition-all">
+                <div className="space-y-0.5 text-left">
+                  <div className="text-[10px] uppercase tracking-[0.2em] text-[#A88B58] font-bold">
+                    Featured Masterpiece · Namibia
+                  </div>
+                  <div className="text-xs font-bold text-[#1C1B19] dark:text-[#F8F6F2]">
+                    African Zebra Jasper &amp; Silver Cube Bracelet
+                  </div>
+                </div>
+                <div className="text-sm font-extrabold text-[#A88B58] pl-4 border-l border-[#ECE8DF] dark:border-[#35312C]">
+                  $145.00
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+
+        {/* Structured Bottom Filter & Assurance Strip */}
+        <div
+          ref={filterBarRef}
+          className="w-full pt-6 border-t border-[#E8E4DA] dark:border-[#262421] flex flex-wrap items-center justify-between gap-4 text-xs font-medium"
+        >
+          {/* Dropdown Filters */}
+          <div className="flex flex-wrap items-center gap-3">
+            <span className="text-[11px] font-bold uppercase tracking-wider text-[#7A766E] dark:text-[#9A968E]">
+              Quick Filter:
+            </span>
+
+            {/* 1. Regions */}
             <div className="relative">
               <button
                 onClick={() => setActiveDropdown(activeDropdown === 'region' ? null : 'region')}
-                className={`px-3.5 py-1.5 border flex items-center gap-2 uppercase tracking-[0.12em] transition-all ${
+                className={`px-3.5 py-1.5 rounded-lg border flex items-center gap-2 uppercase tracking-[0.12em] transition-all font-semibold ${
                   activeDropdown === 'region'
-                    ? 'border-[#A88B58] bg-[#FAF9F5] dark:bg-[#161514] text-[#A88B58]'
-                    : 'border-[#111111]/15 dark:border-white/15 bg-white/40 dark:bg-black/40 text-[#111111] dark:text-[#FAF9F5] hover:border-[#A88B58]'
+                    ? 'border-[#A88B58] bg-white dark:bg-[#181614] text-[#A88B58]'
+                    : 'border-[#DCD6C9] dark:border-[#2E2B27] bg-[#F7F5EE] dark:bg-[#161412] text-[#1C1B19] dark:text-[#F8F6F2] hover:border-[#A88B58]'
                 }`}
               >
                 <Compass className="w-3 h-3 text-[#A88B58]" />
-                <span>All Regions</span>
+                <span>All 8 Regions</span>
                 <ChevronDown className="w-3 h-3 opacity-60" />
               </button>
 
               {activeDropdown === 'region' && (
-                <div className="absolute bottom-full mb-1 left-0 w-64 bg-[#FAF9F5] dark:bg-[#161514] border border-[#111111]/15 dark:border-white/20 shadow-xl py-2 z-50 text-[11px] max-h-72 overflow-y-auto">
-                  <div className="px-3 py-1 text-[9px] uppercase tracking-widest text-[#73716B] border-b border-[#111111]/10 dark:border-white/10 mb-1">
-                    Select Travel Destination
+                <div className="absolute bottom-full mb-2 left-0 w-64 bg-white dark:bg-[#161514] border border-[#DCD6C9] dark:border-[#33302B] rounded-xl shadow-xl py-2 z-50 text-xs max-h-72 overflow-y-auto">
+                  <div className="px-3.5 py-1.5 text-[10px] uppercase tracking-widest text-[#7A766E] border-b border-[#ECE8DF] dark:border-[#2D2A26] mb-1 font-bold">
+                    Select Destination
                   </div>
                   {regions.map((r) => (
                     <button
                       key={r.id}
                       onClick={() => handleSelectOption('region', r.id)}
-                      className="w-full text-left px-3 py-1.5 hover:bg-[#A88B58]/15 hover:text-[#A88B58] transition-colors truncate"
+                      className="w-full text-left px-3.5 py-2 hover:bg-[#A88B58]/10 hover:text-[#A88B58] transition-colors truncate font-medium"
                     >
                       {r.name}
                     </button>
@@ -409,14 +333,14 @@ export default function Hero({ onExploreClick, onSelectPiece, onFilterSelect, on
               )}
             </div>
 
-            {/* 2. Materials ▾ */}
+            {/* 2. Materials */}
             <div className="relative">
               <button
                 onClick={() => setActiveDropdown(activeDropdown === 'material' ? null : 'material')}
-                className={`px-3.5 py-1.5 border flex items-center gap-2 uppercase tracking-[0.12em] transition-all ${
+                className={`px-3.5 py-1.5 rounded-lg border flex items-center gap-2 uppercase tracking-[0.12em] transition-all font-semibold ${
                   activeDropdown === 'material'
-                    ? 'border-[#A88B58] bg-[#FAF9F5] dark:bg-[#161514] text-[#A88B58]'
-                    : 'border-[#111111]/15 dark:border-white/15 bg-white/40 dark:bg-black/40 text-[#111111] dark:text-[#FAF9F5] hover:border-[#A88B58]'
+                    ? 'border-[#A88B58] bg-white dark:bg-[#181614] text-[#A88B58]'
+                    : 'border-[#DCD6C9] dark:border-[#2E2B27] bg-[#F7F5EE] dark:bg-[#161412] text-[#1C1B19] dark:text-[#F8F6F2] hover:border-[#A88B58]'
                 }`}
               >
                 <span>Materials</span>
@@ -424,15 +348,15 @@ export default function Hero({ onExploreClick, onSelectPiece, onFilterSelect, on
               </button>
 
               {activeDropdown === 'material' && (
-                <div className="absolute bottom-full mb-1 left-0 w-60 bg-[#FAF9F5] dark:bg-[#161514] border border-[#111111]/15 dark:border-white/20 shadow-xl py-2 z-50 text-[11px] max-h-72 overflow-y-auto">
-                  <div className="px-3 py-1 text-[9px] uppercase tracking-widest text-[#73716B] border-b border-[#111111]/10 dark:border-white/10 mb-1">
+                <div className="absolute bottom-full mb-2 left-0 w-60 bg-white dark:bg-[#161514] border border-[#DCD6C9] dark:border-[#33302B] rounded-xl shadow-xl py-2 z-50 text-xs max-h-72 overflow-y-auto">
+                  <div className="px-3.5 py-1.5 text-[10px] uppercase tracking-widest text-[#7A766E] border-b border-[#ECE8DF] dark:border-[#2D2A26] mb-1 font-bold">
                     Select Material
                   </div>
                   {materials.map((m) => (
                     <button
                       key={m.id}
                       onClick={() => handleSelectOption('material', m.id)}
-                      className="w-full text-left px-3 py-1.5 hover:bg-[#A88B58]/15 hover:text-[#A88B58] transition-colors"
+                      className="w-full text-left px-3.5 py-2 hover:bg-[#A88B58]/10 hover:text-[#A88B58] transition-colors font-medium"
                     >
                       {m.name}
                     </button>
@@ -441,30 +365,30 @@ export default function Hero({ onExploreClick, onSelectPiece, onFilterSelect, on
               )}
             </div>
 
-            {/* 3. Aesthetics / Collections ▾ */}
+            {/* 3. Collections */}
             <div className="relative">
               <button
                 onClick={() => setActiveDropdown(activeDropdown === 'aesthetic' ? null : 'aesthetic')}
-                className={`px-3.5 py-1.5 border flex items-center gap-2 uppercase tracking-[0.12em] transition-all ${
+                className={`px-3.5 py-1.5 rounded-lg border flex items-center gap-2 uppercase tracking-[0.12em] transition-all font-semibold ${
                   activeDropdown === 'aesthetic'
-                    ? 'border-[#A88B58] bg-[#FAF9F5] dark:bg-[#161514] text-[#A88B58]'
-                    : 'border-[#111111]/15 dark:border-white/15 bg-white/40 dark:bg-black/40 text-[#111111] dark:text-[#FAF9F5] hover:border-[#A88B58]'
+                    ? 'border-[#A88B58] bg-white dark:bg-[#181614] text-[#A88B58]'
+                    : 'border-[#DCD6C9] dark:border-[#2E2B27] bg-[#F7F5EE] dark:bg-[#161412] text-[#1C1B19] dark:text-[#F8F6F2] hover:border-[#A88B58]'
                 }`}
               >
-                <span>Aesthetics</span>
+                <span>Collections</span>
                 <ChevronDown className="w-3 h-3 opacity-60" />
               </button>
 
               {activeDropdown === 'aesthetic' && (
-                <div className="absolute bottom-full mb-1 left-0 w-56 bg-[#FAF9F5] dark:bg-[#161514] border border-[#111111]/15 dark:border-white/20 shadow-xl py-2 z-50 text-[11px] max-h-72 overflow-y-auto">
-                  <div className="px-3 py-1 text-[9px] uppercase tracking-widest text-[#73716B] border-b border-[#111111]/10 dark:border-white/10 mb-1">
-                    Select Collection Aesthetic
+                <div className="absolute bottom-full mb-2 left-0 w-56 bg-white dark:bg-[#161514] border border-[#DCD6C9] dark:border-[#33302B] rounded-xl shadow-xl py-2 z-50 text-xs max-h-72 overflow-y-auto">
+                  <div className="px-3.5 py-1.5 text-[10px] uppercase tracking-widest text-[#7A766E] border-b border-[#ECE8DF] dark:border-[#2D2A26] mb-1 font-bold">
+                    Select Collection
                   </div>
                   {aesthetics.map((a) => (
                     <button
                       key={a.id}
                       onClick={() => handleSelectOption('aesthetic', a.id)}
-                      className="w-full text-left px-3 py-1.5 hover:bg-[#A88B58]/15 hover:text-[#A88B58] transition-colors"
+                      className="w-full text-left px-3.5 py-2 hover:bg-[#A88B58]/10 hover:text-[#A88B58] transition-colors font-medium"
                     >
                       {a.name}
                     </button>
@@ -473,57 +397,26 @@ export default function Hero({ onExploreClick, onSelectPiece, onFilterSelect, on
               )}
             </div>
 
-            {/* 4. Sort By ▾ */}
-            <div className="relative">
-              <button
-                onClick={() => setActiveDropdown(activeDropdown === 'sort' ? null : 'sort')}
-                className={`px-3.5 py-1.5 border flex items-center gap-2 uppercase tracking-[0.12em] transition-all ${
-                  activeDropdown === 'sort'
-                    ? 'border-[#A88B58] bg-[#FAF9F5] dark:bg-[#161514] text-[#A88B58]'
-                    : 'border-[#111111]/15 dark:border-white/15 bg-white/40 dark:bg-black/40 text-[#111111] dark:text-[#FAF9F5] hover:border-[#A88B58]'
-                }`}
-              >
-                <span>Sort By</span>
-                <ChevronDown className="w-3 h-3 opacity-60" />
-              </button>
-
-              {activeDropdown === 'sort' && (
-                <div className="absolute bottom-full mb-1 left-0 w-56 bg-[#FAF9F5] dark:bg-[#161514] border border-[#111111]/15 dark:border-white/20 shadow-xl py-2 z-50 text-[11px]">
-                  <div className="px-3 py-1 text-[9px] uppercase tracking-widest text-[#73716B] border-b border-[#111111]/10 dark:border-white/10 mb-1">
-                    Sort Atelier Pieces
-                  </div>
-                  {sortOptions.map((s) => (
-                    <button
-                      key={s.id}
-                      onClick={() => handleSelectOption('sort', s.id)}
-                      className="w-full text-left px-3 py-1.5 hover:bg-[#A88B58]/15 hover:text-[#A88B58] transition-colors"
-                    >
-                      {s.name}
-                    </button>
-                  ))}
-                </div>
-              )}
-            </div>
-
           </div>
 
-          {/* Right Action: Explore Complete Archive */}
+          {/* Status & Assurances */}
           <div className="flex items-center gap-4">
-            <span className="text-[11px] text-[#73716B] dark:text-[#9E9A90] hidden sm:inline">
-              100% HANDCRAFTED IN MAINE
+            <span className="text-[11px] text-[#7A766E] dark:text-[#9A968E] flex items-center gap-2">
+              <span className="w-2 h-2 rounded-full bg-emerald-500"></span>
+              <span>100% Handcrafted at Maine Bench · Insured Dispatch</span>
             </span>
             <button
               onClick={() => onNavigate ? onNavigate('shop') : onExploreClick && onExploreClick()}
-              className="inline-flex items-center gap-2 px-4 py-1.5 bg-[#111111] dark:bg-[#FAF9F5] text-[#FAF9F5] dark:text-[#111111] hover:bg-[#A88B58] dark:hover:bg-[#A88B58] dark:hover:text-[#FAF9F5] uppercase tracking-[0.14em] font-semibold transition-all group shadow-sm"
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-[#1C1B19] dark:bg-[#F8F6F2] text-[#FAF8F5] dark:text-[#1C1B19] hover:bg-[#A88B58] dark:hover:bg-[#A88B58] dark:hover:text-[#FAF8F5] uppercase tracking-[0.14em] font-bold text-xs transition-all shadow-xs"
             >
-              <span>EXPLORE ARCHIVE</span>
-              <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
+              <span>Explore All</span>
+              <ArrowRight className="w-3.5 h-3.5" />
             </button>
           </div>
 
         </div>
-      </div>
 
+      </div>
     </section>
   );
 }

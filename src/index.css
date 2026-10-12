@@ -22,30 +22,36 @@
   }
 }
 
-/* Custom editorial typography utility classes */
+/* Unified Modern Architectural Montserrat typography classes */
 .font-display-grotesk {
-  font-family: 'Syne', 'Montserrat', sans-serif;
-  letter-spacing: -0.04em;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  letter-spacing: -0.02em;
 }
 
 .font-editorial-body {
   font-family: 'Montserrat', sans-serif;
+  font-weight: 400;
 }
 
 .font-editorial-mono {
-  font-family: 'JetBrains Mono', monospace;
+  font-family: 'Montserrat', sans-serif;
+  letter-spacing: 0.12em;
 }
 
 .font-editorial-serif {
-  font-family: 'Playfair Display', Georgia, serif;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
 }
 
 .font-editorial-italiana {
-  font-family: 'Italiana', 'Playfair Display', serif;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 500;
 }
 
 .font-editorial-space {
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: 'Montserrat', sans-serif;
+  letter-spacing: 0.04em;
 }
 
 /* Fluid clamp scaling for anti-AI, non-standardized typography */

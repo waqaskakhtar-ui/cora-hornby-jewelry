@@ -26,13 +26,13 @@ export default function CollectionEditorial({ onSelectProduct, onQuickAdd }) {
   const gridPieces = filteredProducts.slice(1);
 
   return (
-    <section id="collection" className="py-16 lg:py-20 px-6 sm:px-10 lg:px-14 bg-[#F9F8F5] dark:bg-[#121110] text-[#111111] dark:text-[#FAF9F5] border-t border-[#111111]/8 dark:border-white/10 transition-colors duration-500">
-      <div className="max-w-[1720px] mx-auto">
+    <section id="collection" className="py-24 sm:py-32 lg:py-36 px-6 sm:px-10 lg:px-16 bg-[#F9F8F5] dark:bg-[#0C0B0A] text-[#1C1B19] dark:text-[#F8F6F2] border-t border-[#E8E4DA] dark:border-[#262421] transition-colors duration-500 font-sans">
+      <div className="max-w-[1600px] mx-auto space-y-12">
         
         {/* Heritage Credential Bar */}
-        <div className="flex flex-wrap items-center justify-between gap-4 py-2.5 px-4 mb-8 bg-[#F0EEE6] dark:bg-[#181715] border border-[#111111]/8 dark:border-white/10 font-editorial-mono text-[10px] uppercase tracking-[0.16em] text-[#73716B] dark:text-[#9E9A90]">
-          <div className="flex items-center gap-2 text-[#111111] dark:text-[#FAF9F5] font-semibold">
-            <Award className="w-3.5 h-3.5 text-[#B09462]" />
+        <div className="flex flex-wrap items-center justify-between gap-4 py-3 px-6 bg-[#F2EFE7] dark:bg-[#161412] rounded-xl border border-[#DCD6C9] dark:border-[#2B2824] text-xs uppercase tracking-[0.16em] text-[#7A766E] dark:text-[#9A968E] font-medium">
+          <div className="flex items-center gap-2.5 text-[#1C1B19] dark:text-[#F8F6F2] font-bold">
+            <Award className="w-4 h-4 text-[#A88B58]" />
             <span>THE CORA HORNBY STUDIO ARCHIVE</span>
           </div>
           <div className="flex items-center gap-6">
@@ -43,30 +43,30 @@ export default function CollectionEditorial({ onSelectProduct, onQuickAdd }) {
         </div>
 
         {/* Section Header with Category Switcher */}
-        <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 pb-8 border-b border-[#111111]/10 dark:border-white/10">
-          <div>
-            <div className="font-editorial-mono text-[10px] uppercase tracking-[0.22em] text-[#8A867E] dark:text-[#9E9A90]">
-              THE 5 SIGNATURE COLLECTIONS · MAINE BENCH ARCHIVE
+        <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-8 pb-8 border-b border-[#E5E1D6] dark:border-[#262421]">
+          <div className="space-y-3">
+            <div className="text-xs uppercase tracking-[0.22em] text-[#A88B58] font-bold">
+              WAY 02 · THE 5 SIGNATURE COLLECTIONS
             </div>
-            <h2 className="font-display-grotesk text-3xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-[#111111] dark:text-[#FAF9F5] leading-none mt-1">
+            <h2 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold uppercase tracking-tight text-[#1C1B19] dark:text-[#F8F6F2] leading-tight">
               CURATED COLLECTIONS
             </h2>
           </div>
 
           {/* Category Tabs */}
-          <div className="flex flex-wrap items-center gap-1.5 p-1 bg-[#EBE9DF]/70 dark:bg-[#1F1E1B] border border-[#111111]/10 dark:border-white/10 rounded-sm">
+          <div className="flex flex-wrap items-center gap-2 p-1.5 bg-[#EDEAE1] dark:bg-[#181614] border border-[#DDD8CD] dark:border-[#2D2A26] rounded-xl">
             {categories.map((cat) => (
               <button
                 key={cat.key}
                 onClick={() => setSelectedFilter(cat.key)}
-                className={`text-[10px] font-editorial-mono uppercase tracking-[0.12em] px-3.5 py-1.5 transition-all flex items-center gap-1.5 ${
+                className={`text-xs uppercase tracking-[0.12em] px-4 py-2 rounded-lg transition-all flex items-center gap-2 ${
                   selectedFilter === cat.key
-                    ? 'bg-[#111111] dark:bg-[#FAF9F5] text-[#FAF9F5] dark:text-[#111111] shadow-xs font-semibold'
-                    : 'text-[#73716B] dark:text-[#9E9A90] hover:text-[#111111] dark:hover:text-[#FAF9F5]'
+                    ? 'bg-[#1C1B19] dark:bg-[#F8F6F2] text-[#FAF8F5] dark:text-[#1C1B19] shadow-xs font-bold'
+                    : 'text-[#7A766E] dark:text-[#9A968E] hover:text-[#1C1B19] dark:hover:text-[#FAF8F5] font-semibold'
                 }`}
               >
                 <span>{cat.label}</span>
-                <span className={`text-[8px] opacity-60`}>
+                <span className="text-[10px] opacity-70">
                   ({cat.count})
                 </span>
               </button>

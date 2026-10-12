@@ -4,19 +4,19 @@ import { BRAND_INFO } from '../data/coraData';
 
 export default function BrandStory() {
   return (
-    <section id="story" className="py-16 lg:py-24 bg-[#F7F5EF] dark:bg-[#0F0E0D] text-[#111111] dark:text-[#FAF9F5] border-t border-[#111111]/8 dark:border-white/10 overflow-hidden transition-colors duration-500">
-      <div className="max-w-[1720px] mx-auto px-6 sm:px-10 lg:px-14">
+    <section id="story" className="py-24 sm:py-32 lg:py-36 bg-[#F6F4EE] dark:bg-[#0E0D0C] text-[#1C1B19] dark:text-[#F8F6F2] border-t border-[#E8E4DA] dark:border-[#262421] overflow-hidden transition-colors duration-500 font-sans">
+      <div className="max-w-[1600px] mx-auto px-6 sm:px-10 lg:px-16 space-y-12">
         
-        {/* Top Tag & Oversized Headline */}
-        <div className="space-y-3">
-          <div className="font-editorial-mono text-[10px] uppercase tracking-[0.25em] text-[#8A867E] dark:text-[#9E9A90] flex items-center gap-2">
-            <span className="w-1.5 h-1.5 bg-[#111111] dark:bg-[#FAF9F5]"></span>
+        {/* Top Tag & Headline */}
+        <div className="space-y-4">
+          <div className="text-xs uppercase tracking-[0.22em] text-[#A88B58] flex items-center gap-2 font-bold">
+            <span className="w-2 h-2 rounded-full bg-[#A88B58]"></span>
             <span>ATELIER LEGACY · 25 YEARS OF MAINE BENCH CRAFT</span>
           </div>
 
-          <h2 className="font-display-grotesk text-4xl sm:text-6xl lg:text-7xl font-black tracking-tight text-[#111111] dark:text-[#FAF9F5] leading-[0.94] max-w-5xl">
+          <h2 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold uppercase tracking-tight text-[#1C1B19] dark:text-[#F8F6F2] leading-[1.05] max-w-5xl">
             I TRAVEL TO GATHER. <br />
-            <span className="font-editorial-serif font-normal italic text-[#5E5C57] dark:text-[#A88B58]">I return to compose.</span>
+            <span className="text-[#A88B58] font-light">I RETURN TO COMPOSE.</span>
           </h2>
         </div>
 

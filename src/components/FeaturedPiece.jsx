@@ -54,26 +54,26 @@ export default function FeaturedPiece({ onSelectPiece }) {
     <section
       id="featured"
       ref={containerRef}
-      className="py-16 lg:py-24 bg-[#F9F8F5] dark:bg-[#121110] text-[#111111] dark:text-[#FAF9F5] border-t border-[#111111]/8 dark:border-white/10 overflow-hidden relative transition-colors duration-500"
+      className="py-24 sm:py-32 lg:py-36 bg-[#FAF8F5] dark:bg-[#0C0B0A] text-[#1C1B19] dark:text-[#F8F6F2] border-t border-[#E8E4DA] dark:border-[#262421] overflow-hidden relative transition-colors duration-500 font-sans"
     >
-      <div className="max-w-[1720px] mx-auto px-6 sm:px-10 lg:px-14">
+      <div className="max-w-[1600px] mx-auto px-6 sm:px-10 lg:px-16 space-y-12">
         
         {/* Editorial Section Header */}
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 pb-8 border-b border-[#111111]/10 dark:border-white/10">
-          <div>
-            <div className="font-editorial-mono text-[10px] uppercase tracking-[0.24em] text-[#8A867E] dark:text-[#9E9A90]">
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 pb-8 border-b border-[#E5E1D6] dark:border-[#262421]">
+          <div className="space-y-3">
+            <div className="text-xs uppercase tracking-[0.22em] text-[#A88B58] font-bold">
               TECHNICAL ANATOMY · ATELIER PIECE OF DISTINCTION
             </div>
-            <h2 className="font-display-grotesk text-3xl sm:text-5xl font-bold tracking-tight text-[#111111] dark:text-[#FAF9F5] mt-1">
+            <h2 className="text-3xl sm:text-5xl font-extrabold uppercase tracking-tight text-[#1C1B19] dark:text-[#F8F6F2]">
               The Cleo Architectural Pendant
             </h2>
           </div>
 
-          <div className="text-right">
-            <span className="font-editorial-mono text-sm sm:text-base font-semibold text-[#111111] dark:text-[#FAF9F5] block">
+          <div className="text-left sm:text-right">
+            <span className="text-base sm:text-lg font-bold text-[#1C1B19] dark:text-[#F8F6F2] block">
               $150.00 USD
             </span>
-            <span className="font-editorial-mono text-[10px] uppercase text-[#8A867E] dark:text-[#9E9A90] tracking-widest">
+            <span className="text-xs uppercase text-[#7A766E] dark:text-[#9A968E] tracking-widest font-semibold">
               EDITION: ONE OF ONE
             </span>
           </div>

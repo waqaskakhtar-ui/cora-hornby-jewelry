@@ -36,13 +36,11 @@ export default {
         }
       },
       fontFamily: {
-        sans: ['"Montserrat"', '"Plus Jakarta Sans"', 'system-ui', '-apple-system', 'sans-serif'],
+        sans: ['"Montserrat"', 'system-ui', '-apple-system', 'sans-serif'],
+        display: ['"Montserrat"', 'sans-serif'],
+        body: ['"Montserrat"', 'sans-serif'],
+        mono: ['"Montserrat"', 'sans-serif'],
         content: ['"Montserrat"', 'sans-serif'],
-        display: ['"Syne"', '"Montserrat"', 'sans-serif'],
-        mono: ['"JetBrains Mono"', 'ui-monospace', 'monospace'],
-        serif: ['"Playfair Display"', 'Georgia', 'serif'],
-        italiana: ['"Italiana"', '"Playfair Display"', 'Georgia', 'serif'],
-        space: ['"Space Grotesk"', 'sans-serif']
       },
       letterSpacing: {
         'ultra-tight': '-0.06em',
