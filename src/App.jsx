@@ -1,40 +1,31 @@
 import React, { useState, useEffect } from 'react';
-import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import Navbar from './components/Navbar';
+import Hero from './components/Hero';
+import CollectionEditorial from './components/CollectionEditorial';
+import MaterialFragments from './components/MaterialFragments';
+import TravelInspirationSection from './components/TravelInspirationSection';
+import CustomerStories from './components/CustomerStories';
+import StudioAssurances from './components/StudioAssurances';
+import ExploreIndex from './components/ExploreIndex';
+import BrandStory from './components/BrandStory';
+import FeaturedPiece from './components/FeaturedPiece';
+import Newsletter from './components/Newsletter';
 import Footer from './components/Footer';
+import ProductModal from './components/ProductModal';
 import CartDrawer from './components/CartDrawer';
 import SearchModal from './components/SearchModal';
 import EnvironmentalCursor from './components/EnvironmentalCursor';
-import PageTransition from './components/PageTransition';
-
-// Dedicated Luxury SPA Pages
-import HomePage from './pages/HomePage';
-import TravelsHubPage from './pages/TravelsHubPage';
-import TravelCountryPage from './pages/TravelCountryPage';
-import CollectionsHubPage from './pages/CollectionsHubPage';
-import CollectionDetailPage from './pages/CollectionDetailPage';
-import ShopAllPage from './pages/ShopAllPage';
-import ProductDetailPage from './pages/ProductDetailPage';
-import CustomersPage from './pages/CustomersPage';
-import StoryPage from './pages/StoryPage';
-import ShippingPackagingPage from './pages/ShippingPackagingPage';
-import GuaranteesPage from './pages/GuaranteesPage';
-
-import { PRODUCTS } from './data/coraData';
+import { PRODUCTS, FEATURED_MASTERPIECE } from './data/coraData';
 
 export default function App() {
-  const location = useLocation();
-
-  // Cart State (Preloaded with 1 authentic piece)
+  const [selectedProduct, setSelectedProduct] = useState(null);
   const [cartItems, setCartItems] = useState([
-    PRODUCTS[0]
+    PRODUCTS[0] // preloaded with 1 authentic piece for instant tactile feel
   ]);
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
 
-  // Responsive Dark Mode State with strict hex theming
-  // Light: #f8f4e7 (bg), #4e342e (text/border), #cc5500 (accent)
-  // Dark:  #000000 (bg), #ffffff (text/border), #2c3480 (accent)
+  // Responsive Dark Mode State with persistence & system preference detection
   const [isDark, setIsDark] = useState(() => {
     if (typeof window !== 'undefined') {
       const saved = localStorage.getItem('cora_theme');
@@ -46,14 +37,11 @@ export default function App() {
 
   useEffect(() => {
     const root = document.documentElement;
-    const body = document.body;
     if (isDark) {
       root.classList.add('dark');
-      body.classList.add('dark');
       localStorage.setItem('cora_theme', 'dark');
     } else {
       root.classList.remove('dark');
-      body.classList.remove('dark');
       localStorage.setItem('cora_theme', 'light');
     }
   }, [isDark]);
@@ -64,20 +52,59 @@ export default function App() {
 
   const handleAddToCart = (product) => {
     setCartItems((prev) => [...prev, product]);
-    setIsCartOpen(true);
   };
 
   const handleRemoveFromCart = (index) => {
     setCartItems((prev) => prev.filter((_, i) => i !== index));
   };
 
+  const handleExploreClick = (e) => {
+    e.preventDefault();
+    const elem = document.getElementById('collection');
+    if (elem) {
+      elem.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
+  const handleHeroPieceSelect = (piece) => {
+    // Map hero piece to product modal
+    const matched = PRODUCTS.find((p) => p.name.includes(piece.name) || piece.name.includes(p.name)) || {
+      id: piece.id,
+      name: piece.name,
+      category: piece.category,
+      material: piece.material,
+      price: piece.price,
+      origin: piece.origin,
+      description: `Signature work by Cora Hornby. ${piece.annotation}. Produced in Cape Elizabeth, Maine.`,
+      image: piece.mainImage,
+      altImage: piece.supportingImage1,
+      modelImage: piece.supportingImage2
+    };
+    setSelectedProduct(matched);
+  };
+
+  const handleMasterpieceSelect = () => {
+    setSelectedProduct({
+      id: 'cleo-masterpiece',
+      name: FEATURED_MASTERPIECE.name,
+      category: 'Masterpiece · Edition of One',
+      material: 'Cold-forged hammered brass, precision pierced geometry',
+      price: FEATURED_MASTERPIECE.price,
+      origin: 'Cape Elizabeth, Maine Studio',
+      description: 'The Cleo Architectural Pendant explores tension between negative space and solid hammered metal. Individually cold-worked on an antique anvil.',
+      image: FEATURED_MASTERPIECE.mainImage,
+      altImage: PRODUCTS[0].altImage,
+      modelImage: PRODUCTS[0].modelImage
+    });
+  };
+
   return (
-    <div className={`min-h-screen ${isDark ? 'dark bg-[#000000] text-[#ffffff]' : 'bg-[#f8f4e7] text-[#4e342e]'} font-sans selection:bg-[#cc5500] dark:selection:bg-[#2c3480] selection:text-white transition-colors duration-400`}>
+    <div className={`min-h-screen ${isDark ? 'dark bg-[#0A0909] text-[#FAF9F5]' : 'bg-[#F9F8F5] text-[#111111]'} font-sans selection:bg-[#111111] selection:text-[#FAF9F5] transition-colors duration-300`}>
       
-      {/* Ambient Luxury Environmental Cursor & Follower */}
+      {/* Ambient Environmental Cursor & Lighting Follower */}
       <EnvironmentalCursor />
 
-      {/* 1. Global Sticky Minimal Navbar */}
+      {/* 1. Sticky Minimal Navbar */}
       <Navbar
         cartCount={cartItems.length}
         onOpenCart={() => setIsCartOpen(true)}
@@ -86,45 +113,72 @@ export default function App() {
         onToggleTheme={toggleTheme}
       />
 
-      {/* 2. Fluid SPA Page Transition Wrapper (0.8s exit/enter + staggered typography & clip-path reveal) */}
-      <main className="min-h-screen">
-        <PageTransition key={location.pathname}>
-          <Routes location={location}>
-            {/* Landing / Home Page */}
-            <Route path="/" element={<HomePage onAddToCart={handleAddToCart} />} />
-            
-            {/* Travel Inspiration Hub & 8 Country Lookbooks */}
-            <Route path="/travels" element={<TravelsHubPage />} />
-            <Route path="/travels/:countryId" element={<TravelCountryPage onAddToCart={handleAddToCart} />} />
+      <main>
+        {/* 2. Hero Section with Giant Typography + Jewelry Overlap */}
+        <Hero
+          onExploreClick={handleExploreClick}
+          onSelectPiece={handleHeroPieceSelect}
+        />
 
-            {/* Curated Collections Hub & 5 Floating Minimalist Grids */}
-            <Route path="/collections" element={<CollectionsHubPage />} />
-            <Route path="/collections/:collectionSlug" element={<CollectionDetailPage onAddToCart={handleAddToCart} />} />
+        {/* 3. Section 2: Travel Inspiration Archive (8 Countries & 3 Pairs Each) */}
+        <TravelInspirationSection
+          onSelectProduct={(product) => setSelectedProduct(product)}
+          onQuickAdd={handleAddToCart}
+        />
 
-            {/* Complete Shop All Catalog */}
-            <Route path="/shop" element={<ShopAllPage onAddToCart={handleAddToCart} />} />
+        {/* 4. Section 3: Curated Collections (5 Official Lines) */}
+        <CollectionEditorial
+          onSelectProduct={(product) => setSelectedProduct(product)}
+          onQuickAdd={handleAddToCart}
+        />
 
-            {/* Individual Product Page with Sticky Purchasing Zone */}
-            <Route path="/product/:productId" element={<ProductDetailPage onAddToCart={handleAddToCart} />} />
+        {/* 5. Section 4: Material Fragments Typographic Section */}
+        <MaterialFragments
+          onSelectMaterial={(mat) => {
+            setIsSearchOpen(true);
+          }}
+        />
 
-            {/* Cora's Customers (Masonry Gallery & Etsy Quotes) */}
-            <Route path="/customers" element={<CustomersPage />} />
+        {/* 6. Section 5: 3-Way Taxonomy Browsing Index */}
+        <ExploreIndex
+          onCategorySelect={(cat) => {
+            const elem = document.getElementById('collection');
+            if (elem) elem.scrollIntoView({ behavior: 'smooth' });
+          }}
+          onSelectCountry={(countryId) => {
+            const elem = document.getElementById('travels');
+            if (elem) elem.scrollIntoView({ behavior: 'smooth' });
+          }}
+        />
 
-            {/* Dedicated Brand & Support Pages */}
-            <Route path="/story" element={<StoryPage />} />
-            <Route path="/shipping" element={<ShippingPackagingPage />} />
-            <Route path="/guarantees" element={<GuaranteesPage />} />
+        {/* 7. Section 6: Cora's Customers (Real Etsy Reviews & Photos) */}
+        <CustomerStories />
 
-            {/* Fallback */}
-            <Route path="*" element={<Navigate to="/" replace />} />
-          </Routes>
-        </PageTransition>
+        {/* 8. Section 7: Studio Assurances (Packaging, Shipping, Guarantees) */}
+        <StudioAssurances />
+
+        {/* 9. Section 8: The Story of Cora Hornby */}
+        <BrandStory />
+
+        {/* 10. Section 9: Featured Piece Technical Anatomy */}
+        <FeaturedPiece
+          onSelectPiece={handleMasterpieceSelect}
+        />
+
+        {/* 11. Section 10: Newsletter & Private Collections */}
+        <Newsletter />
       </main>
 
-      {/* 3. Global Luxury Signature Footer */}
+      {/* 10. Section 9: Footer with Oversized Bottom Signature Wordmark */}
       <Footer />
 
-      {/* 4. Global Interactive Drawers */}
+      {/* Interactive Drawers & Modals */}
+      <ProductModal
+        product={selectedProduct}
+        onClose={() => setSelectedProduct(null)}
+        onAddToCart={handleAddToCart}
+      />
+
       <CartDrawer
         isOpen={isCartOpen}
         onClose={() => setIsCartOpen(false)}
@@ -136,6 +190,7 @@ export default function App() {
       <SearchModal
         isOpen={isSearchOpen}
         onClose={() => setIsSearchOpen(false)}
+        onSelectProduct={(p) => setSelectedProduct(p)}
       />
 
     </div>
